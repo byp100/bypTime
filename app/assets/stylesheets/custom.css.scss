@@ -1,0 +1,30 @@
+$gray-medium-light: #eaeaea;
+
+/* footer */
+
+footer, header {
+  padding-top: 5px;
+  color: $gray-medium-light;
+  a {
+    color: $gray-medium-light;
+    &:hover {
+      color: $gray-medium-light;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+
+footer{
+  margin-top: 45px;
+  border-top: 1px solid $gray-medium-light;
+}
