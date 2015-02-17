@@ -1,0 +1,8 @@
+- provide(:title, @user.username.capitalize)
+%h1
+  = gravatar_for @user
+  = @user.username.capitalize
+%h5
+  = @user.email
+
+= link_to 'Create Event', new_event_path
