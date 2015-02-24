@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  devise_for :members
+  resources :members
   root 'static_pages#home'
 
-  devise_for :users
-  resources :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

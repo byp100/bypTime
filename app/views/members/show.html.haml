@@ -1,0 +1,11 @@
+- provide(:title, @member.name.capitalize)
+%p#notice= notice
+%h1
+  = gravatar_for @member
+  = @member.name.capitalize
+%h5
+  = @member.email
+
+= link_to 'Edit Profile', edit_member_path(@member)
+= link_to 'Create Event', new_event_path
+

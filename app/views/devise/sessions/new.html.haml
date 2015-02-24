@@ -1,9 +1,9 @@
 %h2 Log In
 = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
   .field
-    = f.label :username
+    = f.label :phone
     %br/
-    = f.text_field :username, autofocus: true
+    = f.text_field :phone, autofocus: true
   .field
     = f.label :password
     %br/
