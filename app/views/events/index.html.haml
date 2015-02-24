@@ -4,12 +4,37 @@
   %tr
     %th Title
     %th Description
+    %th When
+    %th Where
   - @events.each do |event|
     %tr
       %td= event.title
       %td= event.description
+      %td= event.start_time
+      %td= event.address
       %td= link_to 'Show', event_path(event)
       %td= link_to 'Edit', edit_event_path(event)
       %td= link_to 'Destroy', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }
 
 = link_to "Back", root_path
+
+
+/ %h1 Listing events
+
+/ %table
+/   %thead
+/     %tr
+/       %th
+/       %th
+/       %th
+
+/   %tbody
+/     - @events.each do |event|
+/       %tr
+/         %td= link_to 'Show', event
+/         %td= link_to 'Edit', edit_event_path(event)
+/         %td= link_to 'Destroy', event, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+/ %br
+
+/ = link_to 'New Event', new_event_path
