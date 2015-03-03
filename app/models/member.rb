@@ -5,6 +5,8 @@ class Member < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
 
+  has_many :events
+
   def email_required?
     false
   end

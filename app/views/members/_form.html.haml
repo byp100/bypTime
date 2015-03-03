@@ -21,6 +21,16 @@
     = f.text_field :phone
 
   .field
+    = f.label :birthdate
+    %br/
+    = f.date_field :birthdate
+
+  .field
+    = f.label :occupation
+    %br/
+    = f.text_field :occupation
+
+  .field
     = f.label :password
     %br/
     = f.password_field :password, autocomplete: "off"

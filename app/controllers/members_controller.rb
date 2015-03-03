@@ -37,6 +37,24 @@ class MembersController < ApplicationController
     end
   end
 
+  def create_attendee
+    @event = Event.last
+    redirect_to root_path and return unless @event
+    @attendance = Attendance.new
+    if current_member?
+      @member = current_member
+      if Attendance.where(member: @member, event: @event).empty?
+        Attendance.create(member: @member, event: @event)
+        flash[:notice] = 'Thanks for signing up!'
+      else
+        flash[:notice] = 'Member already signed up'
+      end
+      redirect_to event_path @event
+    else
+      redirect_to new_member_session_path
+    end
+  end
+
   # PATCH/PUT /members/1
   # PATCH/PUT /members/1.json
   def update
@@ -69,6 +87,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:name, :phone, :email, :password, :password_confirmation)
+      params.require(:member).permit(:name, :phone, :email, :birthdate, :occupation, :password, :password_confirmation)
     end
 end

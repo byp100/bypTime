@@ -19,8 +19,21 @@
   \|
   = @event.address
 
+= link_to "RSVP", new_attendee_path, method: :post
+
 
 
 = link_to "Edit", edit_event_path(@event)
 \|
 = link_to "Back", events_path
+
+%p
+  %strong Attendees:
+  %table
+    %tr
+      %th Name
+      %th Phone
+    - @event.attendees.each do |attendee|
+      %tr
+        %td=attendee.name
+        %td=attendee.phone
