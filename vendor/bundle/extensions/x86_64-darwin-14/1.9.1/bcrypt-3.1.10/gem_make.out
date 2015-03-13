@@ -1,0 +1,22 @@
+/Users/ThoughtWorker/.rvm/rubies/ruby-1.9.3-p547/bin/ruby extconf.rb 
+creating Makefile
+
+make  clean
+
+make
+compiling bcrypt_ext.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+compiling crypt.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+compiling crypt_blowfish.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+compiling crypt_gensalt.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+compiling wrapper.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+linking shared-object bcrypt_ext.bundle
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+
+make  install
+/usr/bin/install -c -m 0755 bcrypt_ext.bundle /Users/ThoughtWorker/ThoughtWorks/Projects/bypTime/vendor/bundle/gems/bcrypt-3.1.10/ext/mri/.gem.20150312-33753-wmv7z3
+installing default bcrypt_ext libraries

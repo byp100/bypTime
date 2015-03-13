@@ -1,4 +1,24 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
 $gray-medium-light: #eaeaea;
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  padding-top: 9px;
+  font-weight: bold;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+}
 
 /* footer */
 
@@ -27,4 +47,98 @@ footer, header {
 footer{
   margin-top: 45px;
   border-top: 1px solid $gray-medium-light;
+}
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+#welcome {
+  margin-top: 6em;
+}
+
+#welcome li {
+  font-size: 1.5em;
+}
+
+.register, .login, .dashboard {
+  margin-top: 6em;
+}
+
+.register-fail, .login-fail {
+  margin-bottom: 1em;
+}
+
+.login .last-p {
+  margin-bottom: 2em;
+}
+
+.dashboard h2 {
+  font-weight: bold;
+}
+
+.dashboard .data {
+  color: #DF691A;
+  font-weight: bold;
+}
+
+.jumbotron h1 {
+  text-align: center;
+}
+
+.bigbutton {
+  text-align: center;
+  padding: 24px 48px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 0;
+}
+
+footer p {
+  margin: 0em;
+  padding: 0em;
+  text-align: right !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !important;
+  font-size: 13px !important;
+  color: #fff !important;
+}
+
+footer p span {
+  vertical-align: bottom !important;
+}
+
+footer p img {
+  align: top !important;
+  vertical-align: top !important;
+}
+
+footer p img.lock {
+  align: bottom !important;
+  vertical-align: middle !important;
 }

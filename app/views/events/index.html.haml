@@ -1,17 +1,18 @@
 - provide(:title, "Events")
-%h1 Events
-%table
-  %tr
-    %th Title
-    %th Description
-    %th When
-    %th Where
-  - @events.each do |event|
+%div.center.jumbotron
+  %h1 Events
+  %table
     %tr
-      %td= event.title
-      %td= event.description
-      %td= event.start_time
-      %td= event.address
-      %td= link_to 'Show', event_path(event)
-      %td= link_to 'Edit', edit_event_path(event)
-      %td= link_to 'Destroy', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }
+      %th Title
+      %th Description
+      %th When
+      %th Where
+    - @events.each do |event|
+      %tr
+        %td= event.title
+        %td= event.description
+        %td= event.start_time
+        %td= event.address
+        %td= link_to 'Show', event_path(event)
+        %td= link_to 'Edit', edit_event_path(event)
+        %td= link_to 'Destroy', event_path(event), method: :delete, data: { confirm: 'Are you sure?' }

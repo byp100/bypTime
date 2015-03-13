@@ -1,0 +1,12 @@
+/Users/ThoughtWorker/.rvm/rubies/ruby-1.9.3-p547/bin/ruby extconf.rb 
+creating Makefile
+
+make  clean
+
+make
+compiling binding_of_caller.c
+gcc-4.8: warning: couldn't understand kern.osversion '14.1.0
+
+make  install
+/usr/bin/install -c -m 0755 binding_of_caller.bundle /Users/ThoughtWorker/ThoughtWorks/Projects/bypTime/vendor/bundle/gems/binding_of_caller-0.7.2/ext/binding_of_caller/.gem.20150312-34196-1bkvtqe
+installing default binding_of_caller libraries
