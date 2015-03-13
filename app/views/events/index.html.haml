@@ -1,12 +1,15 @@
 - provide(:title, "Events")
 %div.center.jumbotron
   %h1 Events
-  %table
+  %table.table.table-bordered.table-striped.table-hover.table-responsive
     %tr
       %th Title
       %th Description
       %th When
       %th Where
+      %th Show
+      %th Edit
+      %th Destroy
     - @events.each do |event|
       %tr
         %td= event.title

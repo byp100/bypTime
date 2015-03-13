@@ -106,8 +106,13 @@ p {
   font-weight: bold;
 }
 
-.jumbotron h1 {
-  text-align: center;
+.jumbotron {
+  background-color: white;
+
+  h1 {
+    text-align: left;
+    font-size: 40px;
+  }
 }
 
 .bigbutton {
