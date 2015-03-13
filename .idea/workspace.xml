@@ -2,22 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="caf2a2cd-492e-41aa-a728-d6952a80336d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/bypTime.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.css.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendor/bundle/gems/bcrypt-3.1.10/ext/mri/.RUBYARCHDIR.time" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/bundler/gems/activeadmin-3f916d6bee73" afterPath="$PROJECT_DIR$/vendor/bundle/bundler/gems/activeadmin-3f916d6bee73" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/bundle/gems/bcrypt-3.1.10/ext/mri/Makefile" afterPath="$PROJECT_DIR$/vendor/bundle/gems/bcrypt-3.1.10/ext/mri/Makefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/_header.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/_header.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/events/index.html.haml" afterPath="$PROJECT_DIR$/app/views/events/index.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="bypTime.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,21 +28,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="scaffolds.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="scaffolds.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.166667" vertical-offset="605" max-vertical-offset="1125">
+            <state vertical-scroll-proportion="0.65384614" vertical-offset="605" max-vertical-offset="1125">
               <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="custom.css.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="custom.css.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53846157" vertical-offset="410" max-vertical-offset="2235">
+            <state vertical-scroll-proportion="-11.666667" vertical-offset="410" max-vertical-offset="2235">
               <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.6" vertical-offset="150" max-vertical-offset="735">
+              <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -72,6 +68,7 @@
       <list>
         <option value="$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -79,8 +76,8 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="255" />
-    <option name="y" value="117" />
+    <option name="x" value="290" />
+    <option name="y" value="68" />
     <option name="width" value="1392" />
     <option name="height" value="896" />
   </component>
@@ -186,7 +183,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Friends of the Congo/ffstrike" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
   </component>
@@ -361,7 +358,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="255" y="117" width="1392" height="896" extended-state="0" />
+    <frame x="290" y="68" width="1392" height="896" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942554" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -407,18 +404,26 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss">
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.166667" vertical-offset="605" max-vertical-offset="1125">
-          <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
+        <state vertical-scroll-proportion="-11.666667" vertical-offset="410" max-vertical-offset="2235">
+          <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/custom.css.scss">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53846157" vertical-offset="410" max-vertical-offset="2235">
-          <caret line="46" column="7" selection-start-line="46" selection-start-column="7" selection-end-line="46" selection-end-column="7" />
+        <state vertical-scroll-proportion="-15.6" vertical-offset="150" max-vertical-offset="735">
+          <caret line="36" column="2" selection-start-line="36" selection-start-column="2" selection-end-line="36" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/scaffolds.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65384614" vertical-offset="605" max-vertical-offset="1125">
+          <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
           <folding />
         </state>
       </provider>
