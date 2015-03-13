@@ -38,7 +38,7 @@ class MembersController < ApplicationController
   end
 
   def create_attendee
-    @event = Event.last
+    @event = Event.find params[:event_id]
     redirect_to root_path and return unless @event
     @attendance = Attendance.new
     if current_member?

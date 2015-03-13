@@ -1,5 +1,13 @@
 class EventsController < InheritedResources::Base
 
+  def unattend
+    @event = Event.find params[:event_id]
+    @attendee = Member.find params[:attendee_id]
+    attendance = @attendee.attendances.find_by(event_id: @event.id)
+    attendance.destroy if attendance
+    redirect_to @event, notice: 'You are no longer attending this event'
+  end
+
   private
 
     def event_params

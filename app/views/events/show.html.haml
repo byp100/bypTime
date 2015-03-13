@@ -1,5 +1,5 @@
 - provide(:title, @event.title.capitalize)
-%div.container.jumbotron
+%div.container
   %p#notice= notice
   %h1
     = @event.title
@@ -24,8 +24,12 @@
           %td= @event.address
 
 
-  %button.btn.btn-default
-    = link_to "RSVP", new_attendee_path, method: :post
+  - if member_signed_in? && current_member.attending?(@event)
+    %button.btn.btn-default
+      = link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), method: :put
+  - else
+    %button.btn.btn-default
+      = link_to "RSVP", create_attendee_path(event_id: @event.id), method: :post
   %button.btn.btn-default
     = link_to "Edit", edit_event_path(@event)
   %button.btn.btn-default

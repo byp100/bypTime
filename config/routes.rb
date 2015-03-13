@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 
   resources :events
   root 'events#index'
+  put 'unattend' => 'events#unattend', as: 'unattend'
 
   devise_scope :member do
-    post 'new_attendee' => 'members#create_attendee'
+    post 'create_attendee' => 'members#create_attendee', as: 'create_attendee'
   end
 end
