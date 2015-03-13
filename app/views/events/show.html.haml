@@ -1,39 +1,44 @@
-%p#notice= notice
-%p
-  %strong Title:
-  = @event.title
-%p
-  %strong Description:
-  = @event.description
+- provide(:title, @event.title.capitalize)
+%div.container.jumbotron
+  %p#notice= notice
+  %h1
+    = @event.title
 
-%p
-  %strong When:
-  = @event.start_time
-  \|
-  = @event.end_time
+  .row
+    %span.col-md-4
+      %table
+        %tr
+          %th Description
+          %tr
+            %td= @event.description
 
-%p
-  %strong Location:
-  %strong
-    = @event.location
-  \|
-  = @event.address
+    %div.col-md-8
+      %table.table.table-bordered.table-hover.table-responsive
+        %tr
+          %th When
+          %td= @event.start_time
+          %td= @event.end_time
+          %tr
+          %th Where
+          %td= @event.location
+          %td= @event.address
 
-= link_to "RSVP", new_attendee_path, method: :post
 
+  %button.btn.btn-default
+    = link_to "RSVP", new_attendee_path, method: :post
+  %button.btn.btn-default
+    = link_to "Edit", edit_event_path(@event)
+  %button.btn.btn-default
+    = link_to "Back", events_path
 
-
-= link_to "Edit", edit_event_path(@event)
-\|
-= link_to "Back", events_path
-
-%p
-  %strong Attendees:
-  %table
-    %tr
-      %th Name
-      %th Phone
-    - @event.attendees.each do |attendee|
-      %tr
-        %td=attendee.name
-        %td=attendee.phone
+  - unless @event.attendees.empty?
+    %div
+      %h3 Attendees
+      %table.table.table-bordered.table-hover.table-responsive
+        %tr
+          %th Name
+          %th Phone
+        - @event.attendees.each do |attendee|
+          %tr
+            %td=attendee.name
+            %td=attendee.phone
