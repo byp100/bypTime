@@ -1,11 +1,20 @@
 - provide(:title, @member.name.capitalize)
-%p#notice= notice
-%h1
-  = gravatar_for @member
-  = @member.name.capitalize
-%h5
-  = @member.email
+%div.container.jumbotron
+  %p#notice= notice
+  %h1
+    = gravatar_for @member
+    = @member.name.capitalize
 
-= link_to 'Edit Profile', edit_member_path(@member)
-= link_to 'Create Event', new_event_path
+  %table.table.table-bordered.table-hover.table-responsive
+    %tr
+      %th Email
+      %td= @member.email
+      %tr
+      %th Phone Number
+      %td= @member.phone
+
+  %button.btn.btn-default
+    = link_to 'Edit Profile', edit_member_path(@member)
+  %button.btn.btn-default
+    = link_to 'Create Event', new_event_path
 

@@ -24,11 +24,8 @@ $gray-medium-light: #eaeaea;
 
 footer, header {
   padding-top: 5px;
-  color: $gray-medium-light;
   a {
-    color: $gray-medium-light;
     &:hover {
-      color: $gray-medium-light;
     }
   }
   small {
@@ -76,6 +73,9 @@ p {
   line-height: 1.7em;
 }
 
+a:hover {
+  text-decoration: none;
+}
 
 #welcome {
   margin-top: 6em;
