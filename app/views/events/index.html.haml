@@ -13,3 +13,7 @@
         %td= event.description
         %td= event.start_time
         %td= event.address
+
+  - if member_signed_in? && current_member.admin?
+    %button.btn.btn-default
+      = link_to 'Create Event', new_event_path

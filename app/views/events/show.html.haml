@@ -30,19 +30,25 @@
   - else
     %button.btn.btn-default
       = link_to "RSVP", create_attendee_path(event_id: @event.id), method: :post
-  %button.btn.btn-default
-    = link_to "Edit", edit_event_path(@event)
+  - if member_signed_in? && current_member.admin?
+    %button.btn.btn-default
+      = link_to "Edit", edit_event_path(@event)
   %button.btn.btn-default
     = link_to "Back", events_path
 
   - unless @event.attendees.empty?
     %div
-      %h3 Attendees
+      %h3 Attending
       %table.table.table-bordered.table-hover.table-responsive
         %tr
           %th Name
           %th Phone
+          -if member_signed_in? && current_member.admin?
+            %th In Attendance
         - @event.attendees.each do |attendee|
           %tr
             %td=attendee.name
             %td=attendee.phone
+            -if member_signed_in? && current_member.admin?
+              %td
+                %input{:type => "checkbox"}

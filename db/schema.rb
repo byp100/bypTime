@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228055324) do
+ActiveRecord::Schema.define(version: 20150314201052) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20150228055324) do
     t.boolean  "member"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "admin"
   end
 
   add_index "members", ["phone"], name: "index_members_on_phone", unique: true
