@@ -5,7 +5,7 @@ class EventsController < InheritedResources::Base
     @attendee = Member.find params[:attendee_id]
     attendance = @attendee.attendances.find_by(event_id: @event.id)
     attendance.destroy if attendance
-    redirect_to @event, notice: 'You are no longer attending this event'
+    redirect_to :back, notice: 'You are no longer attending this event'
   end
 
   private

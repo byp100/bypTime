@@ -1,9 +1,9 @@
-- provide(:title, @member.name.capitalize)
+- provide(:title, @member.name)
 %div.container
   %p#notice= notice
   %h1
     = gravatar_for @member
-    = @member.name.capitalize
+    = @member.name
 
   %table.table.table-bordered.table-hover.table-responsive
     %tr
@@ -12,6 +12,29 @@
       %tr
       %th Phone Number
       %td= @member.phone
+      %tr
+      %th Occupation
+      %td= @member.occupation
+
+  - unless @member.events.empty?
+    %h3 Events Attending
+    %table.table.table-bordered.table-hover.table-responsive
+      %tr
+        %th Event
+        %th Description
+        %th Date
+        %th Location
+        %th Unattend
+        %th Check-In
+      - @member.events.each do |event|
+        %tr
+          %td= link_to event.title, event_path(event)
+          %td= event.description
+          %td= event.start_time
+          %td= event.location
+          %td= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put
+          %td
+            %input{:type => "checkbox"}
 
   %button.btn.btn-default
     = link_to 'Edit Profile', edit_member_path(@member)
