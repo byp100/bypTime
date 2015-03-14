@@ -38,6 +38,7 @@
 
   %button.btn.btn-default
     = link_to 'Edit Profile', edit_member_path(@member)
-  %button.btn.btn-default
+  - if @member.admin?
+    %button.btn.btn-default
     = link_to 'Create Event', new_event_path
 
