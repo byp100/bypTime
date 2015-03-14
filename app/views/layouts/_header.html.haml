@@ -1,9 +1,10 @@
 %body
   %header.navbar.navbar-fixed-top.navbar-inverse
     .container
-      = link_to "BYP Time", '#', id: "logo"
+      = link_to "bypTIME", root_path, id: "logo"
       %nav
         %ul.nav.navbar-nav.navbar-right
+          %li= link_to "About", static_pages_about_path
           %li= link_to "Events", events_path
           - if member_signed_in?
             %li= link_to "Sign Out", destroy_member_session_path, method: 'delete'
