@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'starter_generators', :git => "git://github.com/rbetina/starter_generators.git", :branch => "kiei925"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -52,7 +51,7 @@ end
 
 group :production do
   #Use postgres as the database for Heroku deployment
-  # gem 'pg'
+  gem 'pg'
   gem 'rails_12factor'
 end
 
