@@ -5,10 +5,11 @@ ActiveAdmin.register Member do
     column :name
     column :email
     column :phone
-    column :address
     column :birthdate
     column :occupation
+    column :address
     column :member
+    column :admin
     actions
   end
 
@@ -16,12 +17,19 @@ ActiveAdmin.register Member do
   filter :email
   filter :name
   filter :birthdate
+  filter :member
+  filter :admin
 
   form do |f|
     f.inputs "Member Details" do
       f.input :name
       f.input :phone
       f.input :email
+      f.input :birthdate
+      f.input :occupation
+      f.input :address
+      f.input :member
+      f.input :admin
       f.input :password
       f.input :password_confirmation
     end
