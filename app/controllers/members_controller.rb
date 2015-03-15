@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_filter :verify_member, only: [:show, :edit, :update, :destroy]
 
   # GET /members
   # GET /members.json
@@ -83,6 +84,13 @@ class MembersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find(params[:id])
+    end
+
+    def verify_member
+      unless member_signed_in? && current_member == @member
+        # flash[:notice] = 'You are not authorized to view this page'
+        redirect_to new_member_session_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

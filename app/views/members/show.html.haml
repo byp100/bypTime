@@ -1,6 +1,8 @@
 - provide(:title, @member.name)
 %div.container
   %p#notice= notice
+  - if @member.admin?
+    %h3#notice= Admin
   %h1
     = gravatar_for @member
     = @member.name
@@ -40,5 +42,5 @@
     = link_to 'Edit Profile', edit_member_path(@member)
   - if @member.admin?
     %button.btn.btn-default
-    = link_to 'Create Event', new_event_path
+      = link_to 'Create Event', new_event_path
 
