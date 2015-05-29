@@ -27,7 +27,6 @@
         %th Date
         %th Location
         %th Unattend
-        %th Check-In
       - @member.events.each do |event|
         %tr
           %td= link_to event.title, event_path(event)
@@ -35,8 +34,6 @@
           %td= event.start_time
           %td= event.location
           %td= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put
-          %td
-            %input{:type => "checkbox"}
 
   %button.btn.btn-default
     = link_to 'Edit Profile', edit_member_path(@member)

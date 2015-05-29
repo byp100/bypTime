@@ -5,8 +5,10 @@ class Member < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
 
-  has_many :events, through: :attendances
+  attr_accessor :in_attendance
+
   has_many :attendances
+  has_many :events, through: :attendances
 
   def email_required?
     false
@@ -18,5 +20,10 @@ class Member < ActiveRecord::Base
 
   def attending?(event)
     events.include?(event)
+  end
+
+  def in_attendance? event
+    attendance = Attendance.find_by event.id
+    attendance.in_attendance?
   end
 end

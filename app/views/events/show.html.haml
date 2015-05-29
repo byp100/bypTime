@@ -52,4 +52,10 @@
               %td=attendee.phone
               -if member_signed_in? && current_member.admin?
                 %td
-                  %input{:type => "checkbox"}
+                  -unless attendee.in_attendance? @event
+                    %button.btn.btn-default
+                      = link_to "Check In", check_in_path(attendee_id: attendee.id, event_id: @event.id), method: :put
+                  -else
+                    %h5{style: 'display: inline-block'} Checked In
+                    %button.btn.btn-default
+                      = link_to "Undo", undo_check_in_path(attendee_id: attendee.id, event_id: @event.id), method: :put

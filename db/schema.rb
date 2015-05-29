@@ -49,12 +49,12 @@ ActiveRecord::Schema.define(version: 20150314201052) do
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id"
     t.integer  "event_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "in_attendance", default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
-  add_index "attendances", ["member_id", "event_id"], name: "index_attendances_on_member_id_and_event_id", unique: true
   add_index "attendances", ["member_id"], name: "index_attendances_on_member_id"
 
   create_table "events", force: :cascade do |t|

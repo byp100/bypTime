@@ -1,14 +1,10 @@
 class CreateAttendances < ActiveRecord::Migration
   def change
     create_table :attendances do |t|
-      t.integer :member_id
-      t.integer :event_id
-
+      t.belongs_to :member, index: true
+      t.belongs_to :event, index: true
+      t.boolean :in_attendance, default: false
       t.timestamps null: false
     end
-
-    add_index :attendances, :member_id
-    add_index :attendances, :event_id
-    add_index :attendances, [:member_id, :event_id], unique: true
   end
 end
