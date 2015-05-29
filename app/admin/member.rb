@@ -1,5 +1,5 @@
 ActiveAdmin.register Member do
-  permit_params :name, :email, :phone, :password, :password_confirmation
+  permit_params :name, :email, :phone, :birthdate, :occupation, :address, :member, :admin, :password, :password_confirmation
 
   index do
     column :name
