@@ -23,7 +23,7 @@ class Member < ActiveRecord::Base
   end
 
   def in_attendance? event
-    attendance = Attendance.find_by event.id
+    attendance = Attendance.where(event_id: event.id)
     attendance.in_attendance?
   end
 end
