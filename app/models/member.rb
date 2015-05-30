@@ -23,7 +23,8 @@ class Member < ActiveRecord::Base
   end
 
   def in_attendance? event
-    attendance = Attendance.where(event_id: event.id)
-    attendance.in_attendance?
+    attendance = Attendance.where(event_id: event.id).first
+    binding.pry
+    attendance.in_attendance
   end
 end
