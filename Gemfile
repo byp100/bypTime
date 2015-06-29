@@ -26,6 +26,7 @@ gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'pry'
 gem 'pry-doc'
+gem 'figaro'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
