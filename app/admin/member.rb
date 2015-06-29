@@ -36,4 +36,13 @@ ActiveAdmin.register Member do
     f.actions
   end
 
+  controller do
+    def update
+      if params[:member][:password].blank?
+        params[:member].delete("password")
+        params[:member].delete("password_confirmation")
+      end
+      super
+    end
+  end
 end
