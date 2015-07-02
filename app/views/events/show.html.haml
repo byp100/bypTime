@@ -16,8 +16,8 @@
       %table.table.table-bordered.table-hover.table-responsive
         %tr
           %th When
-          %td= @event.start_time
-          %td= @event.end_time
+          %td= @event.start_time.strftime("%A, %b %d, %Y %I:%M %p")
+          %td= @event.end_time.strftime("%A, %b %d, %Y %I:%M %p")
           %tr
           %th Where
           %td= @event.location
