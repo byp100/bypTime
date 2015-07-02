@@ -71,8 +71,13 @@ p {
   line-height: 1.7em;
 }
 
+a {
+  color: grey;
+}
+
 a:hover {
   text-decoration: none;
+  color: lightgrey;
 }
 
 #welcome {
