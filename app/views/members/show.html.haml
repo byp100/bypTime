@@ -13,7 +13,7 @@
       %td= @member.email
       %tr
       %th Phone Number
-      %td= @member.phone
+      %td= number_to_phone(@member.phone, area_code: true)
       %tr
       %th Occupation
       %td= @member.occupation
@@ -31,7 +31,7 @@
         %tr
           %td= link_to event.title, event_path(event)
           %td= event.description
-          %td= event.start_time.strftime("%A, %b %d, %Y %I:%M %p")
+          %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
           %td= event.location
           %td= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put
 

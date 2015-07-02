@@ -11,7 +11,7 @@
       %tr
         %td= link_to event.title, event_path(event)
         %td= event.description
-        %td= event.start_time.strftime("%A, %b %d, %Y %I:%M %p")
+        %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
         %td= event.address
 
   - if member_signed_in? && current_member.admin?
