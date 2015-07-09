@@ -20,4 +20,16 @@ ActiveAdmin.register Event do
       end
     end
   end
+
+  form do |f|
+    f.semantic_errors # shows errors on :base
+    f.inputs          # builds an input field for every attribute
+
+    f.has_many :attendees, heading: 'Attendees', new_record: false do |a|
+      a.input :name
+      a.input :in_attendance, as: :boolean
+    end
+    
+    f.actions
+  end
 end
