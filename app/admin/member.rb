@@ -25,7 +25,8 @@ ActiveAdmin.register Member do
       f.input :name
       f.input :phone
       f.input :email
-      f.input :birthdate
+      f.input :birthdate, :start_year => 1980,
+                          :end_year => Date.today.year
       f.input :occupation
       f.input :address
       f.input :member
