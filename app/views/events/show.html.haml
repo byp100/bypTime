@@ -41,15 +41,11 @@
             %th Name
             %th Phone
             -if member_signed_in? && current_member.admin?
-              %th In Attendance
+              %th Check In
           - @event.attendees.each do |attendee|
             %tr
               %td=attendee.name
               %td=number_to_phone(attendee.phone, area_code: true)
               -if member_signed_in? && current_member.admin?
                 %td
-                  -unless attendee.in_attendance? @event
-                    = link_to "Check In", check_in_path(attendee_id: attendee.id, event_id: @event.id), class: 'btn btn-default', method: :put
-                  -else
-                    %h5{style: 'display: inline-block'} Checked In
-                    = link_to "Undo", undo_check_in_path(attendee_id: attendee.id, event_id: @event.id), class: 'btn btn-default', method: :put
+                  = check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id

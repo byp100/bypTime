@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :members
-  resources :members
+  resources :members do
+    member do
+      post 'check_in'
+    end
+  end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

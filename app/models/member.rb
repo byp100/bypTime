@@ -5,8 +5,6 @@ class Member < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
 
-  attr_accessor :in_attendance
-
   has_many :attendances
   has_many :events, through: :attendances
 
@@ -18,12 +16,12 @@ class Member < ActiveRecord::Base
     false
   end
 
-  def attending?(event)
-    events.include?(event)
+  def attending? event
+    events.include? event
   end
 
   def in_attendance? event
-    attendance = Attendance.where(event_id: event.id).first
+    attendance = Attendance.find_by(member_id: self.id, event_id: event.id)
     attendance.in_attendance
   end
 end

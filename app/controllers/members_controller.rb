@@ -70,6 +70,14 @@ class MembersController < ApplicationController
     end
   end
 
+  def check_in
+    @event = Event.find params[:event_id]
+    @attendee = Member.find params[:id]
+    attendance = @attendee.attendances.find_by(event_id: @event.id)
+    attendance.update_attributes(in_attendance: params[:check_in])
+    redirect_to :back, notice: "#{@attendee.name} is in attendance"
+  end
+
   # DELETE /members/1
   # DELETE /members/1.json
   def destroy
