@@ -25,16 +25,12 @@
 
 
   - if member_signed_in? && current_member.attending?(@event)
-    %button.btn.btn-default
-      = link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), method: :put
+    = link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), class: 'btn btn-default', method: :put
   - else
-    %button.btn.btn-default
-      = link_to "RSVP", create_attendee_path(event_id: @event.id), method: :post
+    = link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post
   - if member_signed_in? && current_member.admin?
-    %button.btn.btn-default
-      = link_to "Edit", edit_event_path(@event)
-    %button.btn.btn-default
-      = link_to "Delete", event_path(@event), method: :delete, data: { confirm: 'Are you sure?' }
+    = link_to "Edit", edit_event_path(@event), class: 'btn btn-default'
+    = link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: { confirm: 'Are you sure?' }
 
   - unless @event.attendees.empty?
     - if member_signed_in?
@@ -53,9 +49,7 @@
               -if member_signed_in? && current_member.admin?
                 %td
                   -unless attendee.in_attendance? @event
-                    %button.btn.btn-default
-                      = link_to "Check In", check_in_path(attendee_id: attendee.id, event_id: @event.id), method: :put
+                    = link_to "Check In", check_in_path(attendee_id: attendee.id, event_id: @event.id), class: 'btn btn-default', method: :put
                   -else
                     %h5{style: 'display: inline-block'} Checked In
-                    %button.btn.btn-default
-                      = link_to "Undo", undo_check_in_path(attendee_id: attendee.id, event_id: @event.id), method: :put
+                    = link_to "Undo", undo_check_in_path(attendee_id: attendee.id, event_id: @event.id), class: 'btn btn-default', method: :put

@@ -35,9 +35,7 @@
           %td= event.location
           %td= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put
 
-  %button.btn.btn-default
-    = link_to 'Edit Profile', edit_member_path(@member)
+  = link_to 'Edit Profile', edit_member_path(@member), class: 'btn btn-default'
   - if @member.admin?
-    %button.btn.btn-default
-      = link_to 'Create Event', new_event_path
+    = link_to 'Create Event', new_event_path, class: 'btn btn-default'
 

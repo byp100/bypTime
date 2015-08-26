@@ -15,5 +15,4 @@
         %td= event.address
 
   - if member_signed_in? && current_member.admin?
-    %button.btn.btn-default
-      = link_to 'Create Event', new_event_path
+    = link_to 'Create Event', new_event_path, class: 'btn btn-default'
