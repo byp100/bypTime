@@ -7,6 +7,8 @@ class Member < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, through: :attendances
+  
+  attr_accessor :in_attendance
 
   def email_required?
     false
