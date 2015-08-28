@@ -4,12 +4,14 @@
   %table.table.table-bordered.table-striped.table-hover.table-responsive
     %tr
       %th Title
+      %th Type
       %th Description
       %th When
       %th Where
     - @events.each do |event|
       %tr
         %td= link_to event.title, event_path(event)
+        %td= event.event_type.titleize
         %td= event.description
         %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
         %td= event.address

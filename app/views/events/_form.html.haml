@@ -10,6 +10,10 @@
     %br/
     = f.text_field :title
   %p
+    = f.label :event_type
+    %br/
+    = f.select :event_type, options_for_select(Event.event_types.map { |k,v| [k.titleize, k]})
+  %p
     = f.label :description
     %br/
     = f.text_area :description
