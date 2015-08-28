@@ -24,7 +24,16 @@ ActiveAdmin.register Event do
 
   form do |f|
     f.semantic_errors # shows errors on :base
-    f.inputs          # builds an input field for every attribute
+    inputs 'Details' do
+      input :title
+      input :event_type, as: :select, collection: Event.event_types.keys.map { |k,v| [k.titleize, k]}
+      input :description
+      input :start_time
+      input :end_time
+      input :location
+      input :address
+    end
+    # f.inputs          # builds an input field for every attribute
 
     f.has_many :attendees, heading: 'Attendees', new_record: false do |a|
       a.input :name
