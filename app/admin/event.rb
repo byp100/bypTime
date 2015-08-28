@@ -1,9 +1,10 @@
 ActiveAdmin.register Event do
-  permit_params :title, :description, :start_time, :end_time, :location, :address
+  permit_params :title, :event_type, :description, :start_time, :end_time, :location, :address
 
   show do
     attributes_table do
       row :title
+      row :event_type
       row :description
       row :start_time
       row :end_time
