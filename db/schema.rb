@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828063218) do
+ActiveRecord::Schema.define(version: 20150828071742) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -91,6 +91,27 @@ ActiveRecord::Schema.define(version: 20150828063218) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin"
+    t.string   "nickname"
+    t.string   "native_city"
+    t.integer  "gender"
+    t.string   "preferred_pronouns"
+    t.integer  "sexual_orientation"
+    t.string   "home_phone"
+    t.boolean  "student"
+    t.date     "join_date"
+    t.integer  "committee_membership"
+    t.string   "superpowers"
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "instagram"
+    t.integer  "education_level"
+    t.integer  "children"
+    t.integer  "partnership_status"
+    t.integer  "income"
+    t.integer  "household_size"
+    t.string   "dietary_restrictions"
+    t.boolean  "immigrant"
+    t.string   "country_of_origin"
   end
 
   add_index "members", ["phone"], name: "index_members_on_phone", unique: true

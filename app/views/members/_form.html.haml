@@ -31,9 +31,112 @@
     = f.text_field :occupation
 
   .field
+    = f.label :nickname
+    %br/
+    = f.text_field :nickname
+
+  .field
+    = f.label :native_city
+    %br/
+    = f.text_field :native_city
+
+  .field
+    = f.label :gender
+    %br/
+    = f.select :gender, options_for_select(Member.genders.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :preferred_pronouns
+    %br/
+    = f.text_field :preferred_pronouns
+
+  .field
+    = f.label :sexual_orientation
+    %br/
+    = f.select :sexual_orientation, options_for_select(Member.sexual_orientations.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :home_phone
+    %br/
+    = f.text_field :home_phone
+
+  .field
+    = f.label :student
+    %br/
+    = f.check_box :student
+
+  .field
+    = f.label :join_date
+    %br/
+    = f.date_field :join_date
+
+  .field
+    = f.label :committee_membership
+    %br/
+    = f.select :committee_membership, options_for_select(Member.committee_memberships.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :superpowers
+    %br/
+    = f.text_field :superpowers
+
+  .field
+    = f.label :facebook
+    %br/
+    = f.text_field :facebook
+
+  .field
+    = f.label :twitter
+    %br/
+    = f.text_field :twitter
+
+  .field
+    = f.label :instagram
+    %br/
+    = f.text_field :instagram
+
+  .field
+    = f.label :education_level
+    %br/
+    = f.select :education_level, options_for_select(Member.education_levels.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :children
+    %br/
+    = f.number_field :children
+
+  .field
+    = f.label :partnership_status
+    %br/
+    = f.select :partnership_status, options_for_select(Member.partnership_statuses.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :income
+    %br/
+    = f.select :income, options_for_select(Member.incomes.map { |k,v| [k.titleize, k]})
+
+  .field
+    = f.label :household_size
+    %br/
+    = f.number_field :household_size
+
+  .field
+    = f.label :dietary_restrictions
+    %br/
+    = f.text_field :dietary_restrictions
+
+  .field
+    = f.label :immigrant
+    %br/
+    = f.check_box :immigrant
+
+
+  %hr
+  .field
     = f.label :password
     %br/
     = f.password_field :password, autocomplete: "off"
+
 
   .field
     = f.label :password_confirmation
