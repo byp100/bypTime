@@ -117,4 +117,29 @@ ActiveRecord::Schema.define(version: 20150828071742) do
   add_index "members", ["phone"], name: "index_members_on_phone", unique: true
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true
 
+  create_table "users", force: :cascade do |t|
+    t.string   "username",               default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+    t.datetime "birthdate"
+    t.string   "email"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "occupation"
+    t.boolean  "member"
+  end
+
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true
+
 end
