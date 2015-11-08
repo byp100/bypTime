@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :registerable, recoverable, :timeoutable and :omniauthable
+  include AASM
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
@@ -10,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, through: :attendances
+  has_many :memberships
+  has_many :organizations, through: :memberships
 
   attr_accessor :in_attendance
 
@@ -43,12 +46,36 @@ class User < ActiveRecord::Base
     end
   end
 
-  #for Devise so that primary id is phone number instead of email
   def email_required?
     false
   end
 
   def email_changed?
     false
+  end
+  aasm do
+    state :prospective, :initial => true
+    
+    state :active 
+
+    state :inactive
+
+    state :alumni
+
+    event :induct do
+      transitions :from => [:prospective], :to => :active
+    end
+
+    event :deactivate do
+      transitions :from => [:active], :to => :inactive
+    end
+
+    event :activate do
+      transitions :from => [:inactive], :to => :active
+    end
+
+    event :graduate do
+      transitions :from => [:active], :to => :alumni
+    end
   end
 end

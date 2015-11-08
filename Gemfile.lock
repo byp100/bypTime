@@ -1,6 +1,28 @@
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
+=======
+GIT
+  remote: git://github.com/activeadmin/activeadmin.git
+  revision: 893b46c6530cae30e30a5dd07b94f8a212a9804a
+  specs:
+    activeadmin (1.0.0.pre1)
+      arbre (~> 1.0, >= 1.0.2)
+      bourbon
+      coffee-rails
+      formtastic (~> 3.1)
+      formtastic_i18n
+      inherited_resources (~> 1.6)
+      jquery-rails
+      jquery-ui-rails (~> 5.0)
+      kaminari (~> 0.15)
+      rails (>= 3.2, < 5.0)
+      ransack (~> 1.3)
+      sass-rails
+
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
 GEM
   remote: https://rubygems.org/
   specs:
+    aasm (4.2.0)
     actionmailer (4.2.0)
       actionpack (= 4.2.0)
       actionview (= 4.2.0)
@@ -49,17 +71,21 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    acts_as_tenant (0.3.9)
+      rails (>= 3.1)
+      request_store (>= 1.0.5)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
-    arel (6.0.0)
-    autoprefixer-rails (5.1.7)
+    arel (6.0.3)
+    autoprefixer-rails (6.0.3)
       execjs
       json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.3)
+    bootstrap-sass (3.3.5.1)
       autoprefixer-rails (>= 5.0.0.1)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
       sass (>= 3.2.19)
     bourbon (4.2.6)
       sass (~> 3.4)
@@ -77,19 +103,30 @@ GEM
       xpath (~> 2.0)
     childprocess (0.5.6)
       ffi (~> 1.0, >= 1.0.11)
+=======
+      sass (>= 3.3.0)
+    bourbon (4.2.5)
+      sass (~> 3.4)
+      thor (~> 0.19)
+    builder (3.2.2)
+    byebug (6.0.2)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
     coderay (1.1.0)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
-    coffee-script (2.3.0)
+    coffee-script (2.4.1)
       coffee-script-source
       execjs
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     coffee-script-source (1.9.0)
     columnize (0.9.0)
     database_cleaner (1.5.0)
+=======
+    coffee-script-source (1.9.1.1)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
     debug_inspector (0.0.2)
-    debugger-linecache (1.2.0)
-    devise (3.4.1)
+    devise (3.5.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 3.2.6, < 5)
@@ -98,6 +135,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     execjs (2.3.0)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
@@ -105,6 +143,9 @@ GEM
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
     ffi (1.9.10)
+=======
+    execjs (2.6.0)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
     figaro (1.1.1)
       thor (~> 0.14)
     font-awesome-sass (4.4.0)
@@ -112,20 +153,25 @@ GEM
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     globalid (0.3.2)
+=======
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
+    globalid (0.3.6)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
       activesupport (>= 4.1.0)
-    haml (4.0.6)
+    haml (4.0.7)
       tilt
-    haml-rails (0.8.2)
+    haml-rails (0.9.0)
       actionpack (>= 4.0.1)
       activesupport (>= 4.0.1)
-      haml (>= 3.1, < 5.0)
+      haml (>= 4.0.6, < 5.0)
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
-    hike (1.2.3)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -137,42 +183,50 @@ GEM
       has_scope (~> 0.6.0.rc)
       railties (>= 3.2, < 5)
       responders
-    jbuilder (2.2.6)
+    jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
       multi_json (~> 1.2)
-    jquery-rails (4.0.3)
+    jquery-rails (4.0.5)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     json (1.8.2)
+=======
+    json (1.8.3)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    loofah (2.0.1)
+    loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
-    mime-types (2.4.3)
+    mime-types (2.6.2)
     mini_portile (0.6.2)
-    minitest (5.5.1)
-    multi_json (1.10.1)
+    minitest (5.8.0)
+    multi_json (1.11.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     pg (0.18.1)
+=======
+    pg (0.18.3)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
     polyamorous (1.2.0)
       activerecord (>= 3.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-doc (0.6.0)
+    pry-doc (0.8.0)
       pry (~> 0.9)
       yard (~> 0.8)
-    rack (1.6.0)
+    rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -188,17 +242,17 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.5)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.0.1)
+    rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.3)
+    rails_stdout_logging (0.0.4)
     railties (4.2.0)
       actionpack (= 4.2.0)
       activesupport (= 4.2.0)
@@ -212,8 +266,11 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rdoc (4.2.0)
+      json (~> 1.4)
+    request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     rspec-collection_matchers (1.1.2)
       rspec-expectations (>= 2.99.0.beta1)
     rspec-core (2.99.2)
@@ -234,14 +291,21 @@ GEM
     rubyzip (1.1.7)
     sass (3.4.11)
     sass-rails (5.0.1)
+=======
+    ruby_parser (3.7.1)
+      sexp_processor (~> 4.1)
+    sass (3.4.18)
+    sass-rails (5.0.4)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.1)
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
-      tilt (~> 1.1)
+      tilt (>= 1.1, < 3)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
     selenium-webdriver (2.48.1)
       childprocess (~> 0.5)
       multi_json (~> 1.0)
@@ -256,29 +320,34 @@ GEM
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
+=======
+    sexp_processor (4.6.0)
+    slop (3.6.0)
+    spring (1.4.0)
+    sprockets (3.3.4)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
       rack (~> 1.0)
-      tilt (~> 1.1, != 1.3.0)
-    sprockets-rails (2.2.4)
+    sprockets-rails (2.3.3)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     sqlite3 (1.3.10)
     thor (0.19.1)
-    thread_safe (0.3.4)
-    tilt (1.4.1)
+    thread_safe (0.3.5)
+    tilt (2.0.1)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.7.0)
+    uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
       rack (>= 1.0)
-    web-console (2.0.0)
-      activemodel (~> 4.0)
+    web-console (2.2.1)
+      activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
-      railties (~> 4.0)
+      railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
     websocket (1.2.2)
     will_paginate (3.0.7)
@@ -290,7 +359,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
   activeadmin (~> 1.0.0.pre2)
+=======
+  aasm
+  activeadmin!
+  acts_as_tenant
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
   bootstrap-sass
   byebug
   capybara
@@ -299,7 +374,11 @@ DEPENDENCIES
   devise
   factory_girl_rails
   figaro
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
   font-awesome-sass (~> 4.4.0)
+=======
+  friendly_id (~> 5.1.0)
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
@@ -319,4 +398,10 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+<<<<<<< ea4159916e12acf3ca0b69a0f8221a1685a966eb
   will_paginate (~> 3.0.6)
+=======
+
+BUNDLED WITH
+   1.10.6
+>>>>>>> Created segmentation across chapters, add chapters, add organizations, add state for membership status

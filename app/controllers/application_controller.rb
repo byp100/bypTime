@@ -3,8 +3,20 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  set_current_tenant_by_subdomain(:organization, :slug)
+  helper_method :chapter?
+
   def current_user?
     return current_user != nil
+  end
+
+  def member?
+    if current_member.memberships.find_by(organization_id:current_tenant.id)
+    end
+  end
+
+  def chapter?
+    Chapter.friendly.exists?(request.subdomain)
   end
 
   def after_sign_in_path_for resource
