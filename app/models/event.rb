@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  acts_as_tenant(:organization)
   has_many :attendances
   has_many :attendees, through: :attendances, source: :user
   accepts_nested_attributes_for :attendees

@@ -1,10 +1,10 @@
 - provide(:title, user.name)
 %div.container
   %p#notice= notice
-  - if user.admin?
+  - if user.admin?(current_tenant)
     %h3#notice= Admin
   %h1
-    = gravatar_for user
+    = gravatar_for user if user.email.present?
     = user.name
 
   %table.table.table-bordered.table-hover.table-responsive
