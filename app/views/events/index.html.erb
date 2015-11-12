@@ -1,0 +1,35 @@
+<% provide(:title, "Events") %>
+<div>
+  <h1>Events</h1>
+  <table class="table table-bordered table-striped table-hover table-responsive">
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>When</th>
+      <th>Where</th>
+    </tr>
+    <% @events.each do |event| %>
+        <tr>
+          <td>
+            <%= link_to event.title, event_path(event) %>
+          </td>
+          <td>
+            <%= event.event_type.titleize %>
+          </td>
+          <td>
+            <%= event.description %>
+          </td>
+          <td>
+            <%= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p") %>
+          </td>
+          <td>
+            <%= event.address %>
+          </td>
+        </tr>
+    <% end %>
+  </table>
+  <% if member_signed_in? && current_member.admin? %>
+      <%= link_to 'Create Event', new_event_path, class: 'btn btn-default' %>
+  <% end %>
+</div>

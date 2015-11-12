@@ -1,0 +1,87 @@
+<% provide(:title, @event.title.capitalize) %>
+<div class="container">
+  <p id="notice">
+    <%= notice %>
+  </p>
+  <h1>
+    <%= @event.title %>
+  </h1>
+  <h4>
+    <%= @event.event_type.titleize %>
+  </h4>
+  <div class="row">
+    <span class="col-md-4">
+      <table>
+        <tr>
+          <th>Description</th>
+        <tr>
+          <td>
+            <%= @event.description %>
+          </td>
+        </tr>
+        </tr>
+      </table>
+    </span>
+    <div class="col-md-8">
+      <table class="table table-bordered table-hover table-responsive">
+        <tr>
+          <th>When</th>
+          <td>
+            <%= @event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p") %>
+          </td>
+          <td>
+            <%= @event.end_time.strftime("%A, %b %-d, %Y %-I:%M %p") %>
+          </td>
+        <tr></tr>
+        <th>Where</th>
+        <td>
+          <%= @event.location %>
+        </td>
+        <td>
+          <%= @event.address %>
+        </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <% if member_signed_in? && current_member.attending?(@event) %>
+      <%= link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), class: 'btn btn-default', method: :put %>
+  <% else %>
+      <%= link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post %>
+  <% end %>
+  <% if member_signed_in? && current_member.admin? %>
+      <%= link_to "Edit", edit_event_path(@event), class: 'btn btn-default' %>
+      <%= link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <% unless @event.attendees.empty? %>
+      <% if member_signed_in? %>
+          <div>
+            <h3>Attending</h3>
+            <table class="table table-bordered table-hover table-responsive">
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <% if member_signed_in? && current_member.admin? %>
+                    <th>Check In</th>
+                <% end %>
+              </tr>
+              <% @event.attendees.each do |attendee| %>
+                  <tr>
+                    <td>
+                      <%= attendee.name %>
+                    </td>
+                    <td>
+                      <%= number_to_phone(attendee.phone, area_code: true) %>
+                    </td>
+                    <% if member_signed_in? && current_member.admin? %>
+                        <td>
+                          <%= check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id %>
+                        </td>
+                    <% end %>
+                  </tr>
+              <% end %>
+            </table>
+          </div>
+      <% end %>
+  <% end %>
+</div>

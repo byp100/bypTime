@@ -1,0 +1,155 @@
+<%= form_for @member do |f| %>
+    <% if @member.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= "#{pluralize(@member.errors.count, "error")} prohibited this member from being saved:" %>
+          </h2>
+          <ul>
+            <% @member.errors.full_messages.each do |msg| %>
+                <li>
+                  <%= msg %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <br/>
+      <%= f.email_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :phone %>
+      <br/>
+      <%= f.text_field :phone %>
+    </div>
+    <div class="field">
+      <%= f.label :birthdate %>
+      <br/>
+      <%= f.date_field :birthdate %>
+    </div>
+    <div class="field">
+      <%= f.label :occupation %>
+      <br/>
+      <%= f.text_field :occupation %>
+    </div>
+    <div class="field">
+      <%= f.label :nickname %>
+      <br/>
+      <%= f.text_field :nickname %>
+    </div>
+    <div class="field">
+      <%= f.label :native_city %>
+      <br/>
+      <%= f.text_field :native_city %>
+    </div>
+    <div class="field">
+      <%= f.label :gender %>
+      <br/>
+      <%= f.select :gender, options_for_select(Member.genders.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :preferred_pronouns %>
+      <br/>
+      <%= f.text_field :preferred_pronouns %>
+    </div>
+    <div class="field">
+      <%= f.label :sexual_orientation %>
+      <br/>
+      <%= f.select :sexual_orientation, options_for_select(Member.sexual_orientations.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :home_phone %>
+      <br/>
+      <%= f.text_field :home_phone %>
+    </div>
+    <div class="field">
+      <%= f.label :student %>
+      <br/>
+      <%= f.check_box :student %>
+    </div>
+    <div class="field">
+      <%= f.label :join_date %>
+      <br/>
+      <%= f.date_field :join_date %>
+    </div>
+    <div class="field">
+      <%= f.label :committee_membership %>
+      <br/>
+      <%= f.select :committee_membership, options_for_select(Member.committee_memberships.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :superpowers %>
+      <br/>
+      <%= f.text_field :superpowers %>
+    </div>
+    <div class="field">
+      <%= f.label :facebook %>
+      <br/>
+      <%= f.text_field :facebook %>
+    </div>
+    <div class="field">
+      <%= f.label :twitter %>
+      <br/>
+      <%= f.text_field :twitter %>
+    </div>
+    <div class="field">
+      <%= f.label :instagram %>
+      <br/>
+      <%= f.text_field :instagram %>
+    </div>
+    <div class="field">
+      <%= f.label :education_level %>
+      <br/>
+      <%= f.select :education_level, options_for_select(Member.education_levels.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :children %>
+      <br/>
+      <%= f.number_field :children %>
+    </div>
+    <div class="field">
+      <%= f.label :partnership_status %>
+      <br/>
+      <%= f.select :partnership_status, options_for_select(Member.partnership_statuses.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :income %>
+      <br/>
+      <%= f.select :income, options_for_select(Member.incomes.map { |k, v| [k.titleize, k] }) %>
+    </div>
+    <div class="field">
+      <%= f.label :household_size %>
+      <br/>
+      <%= f.number_field :household_size %>
+    </div>
+    <div class="field">
+      <%= f.label :dietary_restrictions %>
+      <br/>
+      <%= f.text_field :dietary_restrictions %>
+    </div>
+    <div class="field">
+      <%= f.label :immigrant %>
+      <br/>
+      <%= f.check_box :immigrant %>
+    </div>
+    <hr/>
+    <div class="field">
+      <%= f.label :password %>
+      <br/>
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <br/>
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    </div>
+    <div class="actions">
+      <%= f.submit 'Save' %>
+    </div>
+<% end %>
