@@ -44,7 +44,7 @@
       </table>
     </div>
   </div>
-  <% if member_signed_in? && current_member.attending?(@event) %>
+  <% if member_signed_in? && current_member.rsvp?(@event) %>
       <%= link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), class: 'btn btn-default', method: :put %>
   <% else %>
       <%= link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post %>

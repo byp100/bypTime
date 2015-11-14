@@ -5,6 +5,9 @@ class Member < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
 
+  validates :phone, presence: true, uniqueness: true
+  validates :name, presence: true
+
   has_many :attendances
   has_many :events, through: :attendances
 
@@ -17,20 +20,22 @@ class Member < ActiveRecord::Base
   enum partnership_status: [:single, :dating, :engaged, :married, :open_relationship, :widowed, :separated, :divorced, :civil_union, :domestic_partnership, :complicated]
   enum income: [:hourly_wage, :annual_salary]
 
-  def email_required?
-    false
-  end
 
-  def email_changed?
-    false
-  end
-
-  def attending? event
+  def rsvp? event
     events.include? event
   end
 
   def in_attendance? event
     attendance = Attendance.find_by(member_id: self.id, event_id: event.id)
     attendance.in_attendance
+  end
+
+  #for Devise so that primary id is phone number instead of email
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
   end
 end
