@@ -3,66 +3,68 @@
   <p id="notice">
     <%= notice %>
   </p>
-  <% if @member.admin? %>
-      <h3 id="notice">
-        <%= Admin %>
-      </h3>
-  <% end %>
-  <h1>
-    <%= gravatar_for @member %>
-    <%= @member.name %>
-  </h1>
-  <table class="table table-bordered table-hover table-responsive">
-    <tr>
-      <th>Email</th>
-      <td>
-        <%= @member.email %>
-      </td>
-    <tr></tr>
-    <th>Phone Number</th>
-    <td>
-      <%= number_to_phone(@member.phone, area_code: true) %>
-    </td>
-    <tr></tr>
-    <th>Occupation</th>
-    <td>
-      <%= @member.occupation %>
-    </td>
-    </tr>
-  </table>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-3">
+          <span class="member_profile__avatar"><%= gravatar_for @member %></span>
+        </div>
+        <div class="col-md-6">
+          <h1 class="member_profile__name"><%= @member.name %></h1>
+
+          <div class="member_profile__details">
+            <i class="fa fa-phone"></i>
+            <%= number_to_phone(@member.phone, area_code: true) %>
+          </div>
+          <div class="member_profile__details">
+            <i class="fa fa-envelope"></i>
+            <%= @member.email %>
+          </div>
+          <div class="member_profile__details">
+            <i class="fa fa-briefcase"></i>
+            <%= @member.occupation %>
+          </div>
+        </div>
+        <div class="col-md-3 member_profile__actions">
+          <%= link_to 'Edit Profile', edit_member_path(@member), class: 'btn btn-default' %>
+          <% if @member.admin? %>
+              <%= link_to 'Create Event', new_event_path, class: 'btn btn-default' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
   <% unless @member.events.empty? %>
-      <h3>Events Attending</h3>
-      <table class="table table-bordered table-hover table-responsive">
-        <tr>
-          <th>Event</th>
-          <th>Description</th>
-          <th>Date</th>
-          <th>Location</th>
-          <th>Unattend</th>
-        </tr>
-        <% @member.events.each do |event| %>
-            <tr>
-              <td>
-                <%= link_to event.title, event_path(event) %>
-              </td>
-              <td>
-                <%= event.description %>
-              </td>
-              <td>
-                <%= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p") %>
-              </td>
-              <td>
-                <%= event.location %>
-              </td>
-              <td>
-                <%= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put %>
-              </td>
-            </tr>
-        <% end %>
-      </table>
-  <% end %>
-  <%= link_to 'Edit Profile', edit_member_path(@member), class: 'btn btn-default' %>
-  <% if @member.admin? %>
-      <%= link_to 'Create Event', new_event_path, class: 'btn btn-default' %>
+      <div class="panel panel-warning">
+        <div class="panel-heading">Events</div>
+        <table class="table table-hover table-responsive">
+          <tr>
+            <th>Event</th>
+            <th>Description</th>
+            <th>When</th>
+            <th>Where</th>
+            <th></th>
+          </tr>
+          <% @member.events.each do |event| %>
+              <tr>
+                <td>
+                  <%= link_to event.title, event_path(event) %>
+                </td>
+                <td>
+                  <%= event.description %>
+                </td>
+                <td>
+                  <%= event.start_time.strftime("%A, %b %-d -- %-I:%M %P") %>
+                </td>
+                <td>
+                  <%= event.location %>
+                </td>
+                <td>
+                  <%= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put, class: 'btn btn-warning' %>
+                </td>
+              </tr>
+          <% end %>
+        </table>
+      </div>
   <% end %>
 </div>
