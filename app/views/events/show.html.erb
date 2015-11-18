@@ -15,39 +15,6 @@
         </div>
         <div class="col-xs-6">
           <%= @event.description %>
-
-          <% if !@event.attendees.empty? && member_signed_in? %>
-              <div class="panel panel-warning event_attendees">
-                <div class="panel-heading">Attending</div>
-                <table class="table table-hover table-responsive">
-                  <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <% if member_signed_in? && current_member.admin? %>
-                        <th>Check In</th>
-                    <% end %>
-                  </tr>
-                  <% @event.attendees.each do |attendee| %>
-                      <tr>
-                        <td>
-                          <%= attendee.name %>
-                        </td>
-                        <td>
-                          <%= number_to_phone(attendee.phone, area_code: true) %>
-                        </td>
-                        <% if member_signed_in? && current_member.admin? %>
-                            <td>
-                              <label class="event_check_in">
-                                <%= check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id %>
-                                <span></span>
-                              </label>
-                            </td>
-                        <% end %>
-                      </tr>
-                  <% end %>
-                </table>
-              </div>
-          <% end %>
         </div>
         <div class="col-xs-3 event_actions">
           <% if member_signed_in? && current_member.rsvp?(@event) %>
@@ -63,6 +30,38 @@
       </div>
     </div>
   </div>
+  <% if !@event.attendees.empty? && member_signed_in? %>
+      <div class="panel panel-warning event_attendees">
+        <div class="panel-heading">Attending</div>
+        <table class="table table-hover table-responsive">
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <% if member_signed_in? && current_member.admin? %>
+                <th>Check In</th>
+            <% end %>
+          </tr>
+          <% @event.attendees.each do |attendee| %>
+              <tr>
+                <td>
+                  <%= attendee.name %>
+                </td>
+                <td>
+                  <%= number_to_phone(attendee.phone, area_code: true) %>
+                </td>
+                <% if member_signed_in? && current_member.admin? %>
+                    <td>
+                      <label class="event_check_in">
+                        <%= check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id %>
+                        <span></span>
+                      </label>
+                    </td>
+                <% end %>
+              </tr>
+          <% end %>
+        </table>
+      </div>
+  <% end %>
 </div>
 
 
