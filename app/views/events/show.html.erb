@@ -6,17 +6,17 @@
     </div>
     <div class="panel-body">
       <div class="row">
-        <div class="col-xs-3 event_datetime">
+        <div class="col-md-3 event_datetime">
           <h4><%= @event.start_time.strftime("%A, %b %d") %></h4>
           <h4><%= @event.start_time.strftime("%l:%M %P") %></h4>
           <hr>
           <h4><%= @event.location %></h4>
           <h4><%= @event.address %></h4>
         </div>
-        <div class="col-xs-6">
+        <div class="col-md-6">
           <%= @event.description %>
         </div>
-        <div class="col-xs-3 event_actions">
+        <div class="col-md-3 event_actions">
           <% if member_signed_in? && current_member.rsvp?(@event) %>
               <div><%= link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), class: 'btn btn-default', method: :put %></div>
           <% else %>
