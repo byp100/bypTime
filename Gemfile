@@ -29,6 +29,8 @@ gem 'pry'
 gem 'pry-doc'
 gem 'figaro'
 gem 'sass'
+gem 'simple_form'
+gem 'font-awesome-sass', '~> 4.4.0'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

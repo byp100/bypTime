@@ -1,3 +1,42 @@
-// Place all the styles related to the Events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.events_header__details {
+  color: grey;
+}
+
+.event_datetime {
+  color: grey;
+  border-right: 1px solid #ddd;
+  text-align: center;
+  overflow: hidden;
+}
+
+.event_actions {
+  text-align: right;
+  a {
+    min-width: 85px;
+    margin: 5px;
+  }
+}
+
+.event_attendees {
+  margin-top: 40px;
+}
+
+.event_check_in {
+  margin-left: 15px;
+
+  input {
+    display: none;
+  }
+
+  span:before {
+    font-family: "FontAwesome";
+    width: 1em;
+    height: 1em;
+    content: '\f10c';
+    font-size: 1.5em;
+  }
+
+  input:checked ~ span:before {
+    content: '\f058';
+  }
+}

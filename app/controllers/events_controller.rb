@@ -1,5 +1,9 @@
 class EventsController < InheritedResources::Base
 
+  def index
+    @events = Event.order(start_time: :desc)
+  end
+
   def unattend
     @event = Event.find params[:event_id]
     @attendee = Member.find params[:attendee_id]
