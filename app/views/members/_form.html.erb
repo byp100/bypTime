@@ -11,8 +11,8 @@
     <% end %>
 
     <%= f.input :name, autofocus: true %>
-    <%= f.input :email, as: :email, placeholder: 'sample@email.com' %>
-    <%= f.input :phone, placeholder: '6465551000' %>
+    <%= f.input :email, as: :email %>
+    <%= f.input :phone, disabled: true  %>
     <%= f.input :birthdate, as: :date %>
     <%= f.input :occupation %>
     <!--<hr>-->
@@ -37,8 +37,6 @@
     <!--<%= f.input :household_size %>-->
     <!--<%= f.input :dietary_restrictions %>-->
     <!--<%= f.input :immigrant, as: :boolean %>-->
-    <hr>
-    <%= f.input :password, as: :password, autocomplete: 'off' %>
-    <%= f.input :password_confirmation, as: :password, autocomplete: 'off' %>
+   
     <%= f.button :submit %>
 <% end %>
