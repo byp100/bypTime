@@ -36,35 +36,35 @@
   </div>
   <% unless @member.events.empty? %>
       <div class="panel panel-warning">
-        <div class="panel-heading">Events</div>
-        <table class="table table-hover table-responsive">
-          <tr>
-            <th>Event</th>
-            <th>Description</th>
-            <th>When</th>
-            <th>Where</th>
-            <th></th>
-          </tr>
-          <% @member.events.each do |event| %>
-              <tr>
-                <td>
-                  <%= link_to event.title, event_path(event) %>
-                </td>
-                <td>
-                  <%= event.description %>
-                </td>
-                <td>
-                  <%= event.start_time.strftime("%A, %b %-d -- %-I:%M %P") %>
-                </td>
-                <td>
-                  <%= event.location %>
-                </td>
-                <td>
-                  <%= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put, class: 'btn btn-warning' %>
-                </td>
-              </tr>
-          <% end %>
-        </table>
+        <div class="panel-heading table-responsive">Events</div>
+          <table class="table table-hover">
+            <tr>
+              <th>Event</th>
+              <th>Description</th>
+              <th>When</th>
+              <th>Where</th>
+              <th>Unattend</th>
+            </tr>
+            <% @member.events.each do |event| %>
+                <tr>
+                  <td>
+                    <%= link_to event.title, event_path(event) %>
+                  </td>
+                  <td>
+                    <%= event.description %>
+                  </td>
+                  <td>
+                    <%= event.start_time.strftime("%A, %b %-d -- %-I:%M %P") %>
+                  </td>
+                  <td>
+                    <%= event.location %>
+                  </td>
+                  <td>
+                    <%= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put, class: 'btn btn-warning' %>
+                  </td>
+                </tr>
+            <% end %>
+          </table>
       </div>
   <% end %>
 </div>

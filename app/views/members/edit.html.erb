@@ -1,5 +1,14 @@
-<h1>Edit Profile</h1>
-<%= render 'form' %>
-<%= link_to 'Show', @member %>
-|
-<%= link_to 'Back', members_path %>
+<% provide(:title, 'Edit Profile') %>
+<div class="panel panel-default edit_form">
+  <div class="panel-heading">
+    <h2 class="panel-title">Edit Profile</h2>
+  </div>
+    <div class="panel-body">
+      <%= render 'form' %>
+    </div>
+  <span class="edit_form__actions">
+    <%= link_to 'Profile', @member, class: 'btn btn-default' %>
+    <%= link_to 'Back', members_path, class: 'btn btn-default' %>
+  </span>
+</div>
+

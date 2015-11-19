@@ -1,6 +1,14 @@
-<% provide(:title, "Edit Event") %>
-<h1>Edit Event</h1>
-<%= render 'form' %>
-<%= link_to 'Show', @event %>
-|
-<%= link_to 'Back', events_path %>
+<% provide(:title, 'Edit Event') %>
+<div class="panel panel-default edit_form">
+  <div class="panel-heading">
+    <h2 class="panel-title">Edit Event</h2>
+  </div>
+  <div class="panel-body">
+    <%= render 'form' %>
+  </div>
+  <span class="edit_form__actions">
+    <%= link_to 'Event', @event, class: 'btn btn-default' %>
+    <%= link_to 'Back', events_path, class: 'btn btn-default' %>
+  </span>
+</div>
+
