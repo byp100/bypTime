@@ -1,14 +1,19 @@
 <% provide(:title, "Events") %>
-
 <div class="container">
   <h1>Events</h1>
+
+  <div class="standard-pagination">
+    <%= will_paginate @events, previous_label: 'previous page', next_label: 'next page' %>
+  </div>
   <% @events.each do |event| %>
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
             <h2 class="col-md-2"><%= event.start_time.strftime("%b %d") %></h2>
+
             <div class="col-md-10">
               <h3><%= link_to event.title, event_path(event) %></h3>
+
               <p class="events_header__details">
                 <%= event.start_time.strftime("%l:%M %P") %>
                 &#x2022
@@ -27,4 +32,7 @@
         </div>
       </div>
   <% end %>
+  <div class="standard-pagination">
+    <%= will_paginate @events, previous_label: 'previous page', next_label: 'next page' %>
+  </div>
 </div>

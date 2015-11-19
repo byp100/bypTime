@@ -17,3 +17,12 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+a {
+  color: lightcoral;
+
+  &:hover {
+    color: #730E15;
+    text-decoration: none;
+  }
+}

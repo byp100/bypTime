@@ -1,7 +1,7 @@
 class EventsController < InheritedResources::Base
 
   def index
-    @events = Event.order(start_time: :desc)
+    @events = Event.order(start_time: :desc).page(params[:page]).per_page 5
   end
 
   def unattend
