@@ -5,24 +5,35 @@ Rails.application.routes.draw do
   get 'static_pages/about'
   get 'static_pages/import'
 
-  devise_for :users
-  resources :users do
-    post 'check_in'
-    collection { post :import }
-  end
-
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  resources :events do
-    collection do
-      post :import_events, as: 'import'
-      post :import_attendances, as: 'import_attendances'
+  authenticate :user do 
+    resources :users do
+        collection { post :import }
+        post 'check_in'
+    end
+
+    resources :events do
+      resources :users do
+      end
+      collection do
+        post :import_events, as: 'import'
+        post :import_attendances, as: 'import_attendances'
+      end
+    end
+
+    root 'static_pages#home'
+    put 'unattend' => 'events#unattend', as: 'unattend'
+    put 'check_in' => 'events#check_in', as: 'check_in'
+    put 'undo_check_in' => 'events#undo_check_in', as: 'undo_check_in'
+
+    devise_scope :user do
+      post 'create_attendee' => 'users#create_attendee', as: 'create_attendee'
     end
   end
-  put 'unattend' => 'events#unattend', as: 'unattend'
-
-  devise_scope :user do
-    post 'create_attendee' => 'users#create_attendee', as: 'create_attendee'
-  end
 end
+
+
+
+

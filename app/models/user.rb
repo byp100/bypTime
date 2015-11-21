@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
+  include AASM
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :registerable, recoverable, :timeoutable and :omniauthable
-  include AASM
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
@@ -53,6 +53,20 @@ class User < ActiveRecord::Base
   def email_changed?
     false
   end
+
+  def eligible_for_membership?
+    if attendances.where(event_type: "orientation").count == 1 && attendances.where(event_type: "general_body_meeting").count == 2 && attendances.where(event_type: "public_event").count == 1
+      return true
+    else
+      return false
+    end
+  end
+
+  def begin_enrollment
+    twilio = TwilioService.new
+    twilio.send("Welcome, you have completed the attendance requirements for BYP100 membership, please pay your dues at www.byp100.org", phone)
+  end
+
   aasm do
     state :prospective, :initial => true
     

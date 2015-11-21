@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+gem 'twilio-ruby'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use SCSS for stylesheets
@@ -37,6 +37,8 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'friendly_id', '~> 5.1.0' 
 gem 'acts_as_tenant'
 gem 'aasm'
+gem 'figaro'
+gem 'chargebee'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
