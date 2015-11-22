@@ -54,8 +54,16 @@ class User < ActiveRecord::Base
     false
   end
 
+  def admin?(current_tenant)
+    if super_admin
+      true
+    else
+      Membership.find_by(organization_id: current_tenant.id, member_id: id).admin
+    end
+  end
+
   def eligible_for_membership?
-    if attendances.where(event_type: "orientation").count == 1 && attendances.where(event_type: "general_body_meeting").count == 2 && attendances.where(event_type: "public_event").count == 1
+    if attendances.where(event_type: "orientation").count <= 1 && attendances.where(event_type: "general_body_meeting").count <= 2 && attendances.where(event_type: "public_event").count <= 1
       return true
     else
       return false
@@ -66,6 +74,24 @@ class User < ActiveRecord::Base
     twilio = TwilioService.new
     twilio.send("Welcome, you have completed the attendance requirements for BYP100 membership, please pay your dues at www.byp100.org", phone)
   end
+
+   def subscribed?(plan = nil)
+    if plan == nil
+      if customer_id.present?
+        result = ChargeBee::Subscription.retrieve(customer_id)
+        subscription = result.subscription
+        if subscription.status != "cancelled" && subscription.status != "future" && subscription.status != "non_renewing"
+          true
+        else
+         false
+        end
+      else
+        false
+      end
+    else
+      aasm_state == plan
+    end
+   end
 
   aasm do
     state :prospective, :initial => true

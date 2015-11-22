@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require maskedinput.min
+//= require jquery.payment
 //= require bootstrap-sprockets
 //= require_tree .

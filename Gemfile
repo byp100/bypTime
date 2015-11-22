@@ -31,6 +31,7 @@ gem 'figaro'
 
 gem 'sass'
 gem 'simple_form'
+gem 'country_select'
 gem 'font-awesome-sass', '~> 4.4.0'
 gem 'will_paginate', '~> 3.0.6'
 
@@ -39,6 +40,7 @@ gem 'acts_as_tenant'
 gem 'aasm'
 gem 'figaro'
 gem 'chargebee'
+gem 'bower-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
