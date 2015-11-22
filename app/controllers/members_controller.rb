@@ -30,6 +30,8 @@ class MembersController < InheritedResources::Base
   # POST /members.json
   def create
     @member = Member.create(member_params)
+    @member.memberships.create(organization_id: current_tenant.id)
+    @member.memberships.create(organization_id: Organization.find_by(slug: "www").id)
 
     if params[:event_id].present?
       @event = Event.find(params[:event_id])
@@ -55,9 +57,9 @@ class MembersController < InheritedResources::Base
       @member = current_member
       if Attendance.where(member: @member, event: @event).empty?
         Attendance.create(member: @member, event: @event)
-       if @member.eligible_for_membership?
-        @member.begin_enrollment
-      end
+        if @member.eligible_for_membership?
+          @member.begin_enrollment
+        end
         flash[:notice] = 'Thanks for signing up!'
       else
         flash[:notice] = 'Member already signed up'
