@@ -1,0 +1,21 @@
+- provide(:title, "Users")
+%h1 Users
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Phone
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.name
+        %td= user.email
+        %td= user.phone
+        %td= link_to 'Show', user
+        %td= link_to 'Edit', edit_user_path(user)
+        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+= link_to "Back", root_path

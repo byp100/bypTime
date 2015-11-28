@@ -25,8 +25,8 @@ describe Event do
     it 'returns the correct number of attendees' do
       event = create :event
       3.times do
-        member = create :member
-        event.attendees << member
+        user = create :user
+        event.attendees << user
       end
 
       expect(event.number_of_attendees).to eq 3

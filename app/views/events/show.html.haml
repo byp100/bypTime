@@ -26,28 +26,28 @@
           %td= @event.address
 
 
-  - if member_signed_in? && current_member.rsvp?(@event)
-    = link_to "Unattend", unattend_path(attendee_id: current_member.id, event_id: @event.id), class: 'btn btn-default', method: :put
+  - if user_signed_in? && current_user.rsvp?(@event)
+    = link_to "Unattend", unattend_path(attendee_id: current_user.id, event_id: @event.id), class: 'btn btn-default', method: :put
   - else
     = link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post
-  - if member_signed_in? && current_member.admin?
+  - if user_signed_in? && current_user.admin?
     = link_to "Edit", edit_event_path(@event), class: 'btn btn-default'
     = link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: { confirm: 'Are you sure?' }
 
   - unless @event.attendees.empty?
-    - if member_signed_in?
+    - if user_signed_in?
       %div
         %h3 Attending
         %table.table.table-bordered.table-hover.table-responsive
           %tr
             %th Name
             %th Phone
-            -if member_signed_in? && current_member.admin?
+            -if user_signed_in? && current_user.admin?
               %th Check In
           - @event.attendees.each do |attendee|
             %tr
               %td=attendee.name
               %td=number_to_phone(attendee.phone, area_code: true)
-              -if member_signed_in? && current_member.admin?
+              -if user_signed_in? && current_user.admin?
                 %td
                   = check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id

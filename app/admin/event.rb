@@ -15,7 +15,7 @@ ActiveAdmin.register Event do
     panel 'Attendees' do
       table_for event.attendances do
         column 'name' do |attendance|
-          attendance.member.name
+          attendance.user.name
         end
         column :in_attendance
       end

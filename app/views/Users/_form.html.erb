@@ -1,9 +1,9 @@
-<%= simple_form_for @member do |f| %>
-    <% if @member.errors.any? %>
+<%= simple_form_for @user do |f| %>
+    <% if @user.errors.any? %>
         <div id="error_explanation">
-          <h2><%= "#{pluralize(@member.errors.count, "error")} prohibited this member from being saved:" %></h2>
+          <h2><%= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:" %></h2>
           <ul>
-            <% @member.errors.full_messages.each do |msg| %>
+            <% @user.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
             <% end %>
           </ul>
@@ -19,21 +19,21 @@
     <!--<h3>Detailed Information</h3>-->
     <!--<%= f.input :nickname %>-->
     <!--<%= f.input :native_city %>-->
-    <!--<%= f.input :gender, collection: Member.genders.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :gender, collection: User.genders.map { |k, v| [k.titleize, k] } %>-->
     <!--<%= f.input :preferred_pronouns %>-->
-    <!--<%= f.input :sexual_orientation, collection: Member.sexual_orientations.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :sexual_orientation, collection: User.sexual_orientations.map { |k, v| [k.titleize, k] } %>-->
     <!--<%= f.input :home_phone %>-->
     <!--<%= f.input :student, as: :boolean %>-->
     <!--<%= f.input :join_date, as: :date %>-->
-    <!--<%= f.input :committee_membership, collection: Member.committee_memberships.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :committee_membership, collection: User.committee_memberships.map { |k, v| [k.titleize, k] } %>-->
     <!--<%= f.input :superpowers %>-->
     <!--<%= f.input :facebook %>-->
     <!--<%= f.input :twitter %>-->
     <!--<%= f.input :instagram %>-->
-    <!--<%= f.input :education_level, collection: Member.education_levels.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :education_level, collection: User.education_levels.map { |k, v| [k.titleize, k] } %>-->
     <!--<%= f.input :children %>-->
-    <!--<%= f.input :partnership_status, collection: Member.partnership_statuses.map { |k, v| [k.titleize, k] } %>-->
-    <!--<%= f.input :income, collection: Member.incomes.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :partnership_status, collection: User.partnership_statuses.map { |k, v| [k.titleize, k] } %>-->
+    <!--<%= f.input :income, collection: User.incomes.map { |k, v| [k.titleize, k] } %>-->
     <!--<%= f.input :household_size %>-->
     <!--<%= f.input :dietary_restrictions %>-->
     <!--<%= f.input :immigrant, as: :boolean %>-->

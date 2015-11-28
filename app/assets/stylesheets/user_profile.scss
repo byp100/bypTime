@@ -1,4 +1,4 @@
-.member_profile__avatar {
+.user_profile__avatar {
   img {
     border-radius: 50%;
     width: 150px;
@@ -7,16 +7,16 @@
   }
 }
 
-.member_profile__name {
+.user_profile__name {
   display: inline-block;
   margin-left: 30px;
 }
 
-.member_profile__details {
+.user_profile__details {
   margin-left: 30px;
 }
 
-.member_profile__actions {
+.user_profile__actions {
   margin-top: 30px;
   text-align: right;
   a {

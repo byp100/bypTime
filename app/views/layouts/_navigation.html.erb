@@ -15,11 +15,11 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "About", static_pages_about_path %></li>
         <li><%= link_to "Events", events_path %></li>
-        <% if member_signed_in? %>
-            <li><%= link_to "Sign Out", destroy_member_session_path, method: 'delete' %></li>
-            <li><%= link_to "Profile", current_member %></li>
+        <% if user_signed_in? %>
+            <li><%= link_to "Sign Out", destroy_user_session_path, method: 'delete' %></li>
+            <li><%= link_to "Profile", current_user %></li>
         <% else %>
-            <li><%= link_to "Log In", new_member_session_path %></li>
+            <li><%= link_to "Log In", new_user_session_path %></li>
         <% end %>
       </ul>
     </div>

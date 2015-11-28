@@ -1,9 +1,9 @@
-= form_for @member do |f|
-  - if @member.errors.any?
+= form_for @user do |f|
+  - if @user.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@member.errors.count, "error")} prohibited this member from being saved:"
+      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
       %ul
-        - @member.errors.full_messages.each do |msg|
+        - @user.errors.full_messages.each do |msg|
           %li= msg
   .field
     = f.label :name
@@ -43,7 +43,7 @@
   .field
     = f.label :gender
     %br/
-    = f.select :gender, options_for_select(Member.genders.map { |k,v| [k.titleize, k]})
+    = f.select :gender, options_for_select(User.genders.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :preferred_pronouns
@@ -53,7 +53,7 @@
   .field
     = f.label :sexual_orientation
     %br/
-    = f.select :sexual_orientation, options_for_select(Member.sexual_orientations.map { |k,v| [k.titleize, k]})
+    = f.select :sexual_orientation, options_for_select(User.sexual_orientations.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :home_phone
@@ -73,7 +73,7 @@
   .field
     = f.label :committee_membership
     %br/
-    = f.select :committee_membership, options_for_select(Member.committee_memberships.map { |k,v| [k.titleize, k]})
+    = f.select :committee_membership, options_for_select(User.committee_memberships.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :superpowers
@@ -98,7 +98,7 @@
   .field
     = f.label :education_level
     %br/
-    = f.select :education_level, options_for_select(Member.education_levels.map { |k,v| [k.titleize, k]})
+    = f.select :education_level, options_for_select(User.education_levels.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :children
@@ -108,12 +108,12 @@
   .field
     = f.label :partnership_status
     %br/
-    = f.select :partnership_status, options_for_select(Member.partnership_statuses.map { |k,v| [k.titleize, k]})
+    = f.select :partnership_status, options_for_select(User.partnership_statuses.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :income
     %br/
-    = f.select :income, options_for_select(Member.incomes.map { |k,v| [k.titleize, k]})
+    = f.select :income, options_for_select(User.incomes.map { |k,v| [k.titleize, k]})
 
   .field
     = f.label :household_size

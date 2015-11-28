@@ -1,4 +1,4 @@
-class Member < ActiveRecord::Base
+class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :registerable, recoverable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -26,7 +26,7 @@ class Member < ActiveRecord::Base
   end
 
   def in_attendance? event
-    attendance = Attendance.find_by(member_id: self.id, event_id: event.id)
+    attendance = Attendance.find_by(user_id: self.id, event_id: event.id)
     attendance.in_attendance
   end
 

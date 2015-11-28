@@ -123,14 +123,14 @@ describe EventsController do
   end
 
   describe 'PUT #unattend' do
-    it 'should remove the attendance from the member and the event' do
+    it 'should remove the attendance from the user and the event' do
       request.env['HTTP_REFERER'] = root_path
 
       event = create :event
-      member = create :member
-      event.attendees << member
+      user = create :user
+      event.attendees << user
 
-      put :unattend, event_id: event.id, attendee_id: member.id
+      put :unattend, event_id: event.id, attendee_id: user.id
 
       expect(Attendance.count).to eq 0
     end

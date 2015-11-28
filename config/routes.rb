@@ -4,11 +4,9 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/about'
 
-  devise_for :members
-  resources :members do
-    member do
-      post 'check_in'
-    end
+  devise_for :users
+  resources :users do
+    post 'check_in'
   end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -17,7 +15,7 @@ Rails.application.routes.draw do
   resources :events
   put 'unattend' => 'events#unattend', as: 'unattend'
 
-  devise_scope :member do
-    post 'create_attendee' => 'members#create_attendee', as: 'create_attendee'
+  devise_scope :user do
+    post 'create_attendee' => 'users#create_attendee', as: 'create_attendee'
   end
 end

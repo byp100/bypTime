@@ -7,6 +7,6 @@ jQuery ($) ->
   event_id = $('.check_in').data('event-id')
   $('.check_in').bind 'change', ->
     $.ajax
-      url: '/members/' + @value + '/check_in'
+      url: '/users/' + @value + '/check_in'
       type: 'POST'
       data: 'check_in': @checked, 'event_id': event_id

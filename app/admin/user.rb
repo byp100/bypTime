@@ -1,4 +1,4 @@
-ActiveAdmin.register Member do
+ActiveAdmin.register User do
   permit_params :name, :email, :phone, :birthdate, :occupation, :address, :member, :admin, :password, :password_confirmation
 
   index do
@@ -21,7 +21,7 @@ ActiveAdmin.register Member do
   filter :admin
 
   form do |f|
-    f.inputs "Member Details" do
+    f.inputs "User Details" do
       f.input :name
       f.input :phone
       f.input :email
@@ -39,9 +39,9 @@ ActiveAdmin.register Member do
 
   controller do
     def update
-      if params[:member][:password].blank?
-        params[:member].delete("password")
-        params[:member].delete("password_confirmation")
+      if params[:user][:password].blank?
+        params[:user].delete("password")
+        params[:user].delete("password_confirmation")
       end
       super
     end

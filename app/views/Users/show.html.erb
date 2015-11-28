@@ -1,4 +1,4 @@
-<% provide(:title, @member.name) %>
+<% provide(:title, @user.name) %>
 <div class="container">
   <p id="notice">
     <%= notice %>
@@ -7,34 +7,34 @@
     <div class="panel-heading">
       <div class="row">
         <div class="col-md-3">
-          <span class="member_profile__avatar"><%= gravatar_for @member %></span>
+          <span class="user_profile__avatar"><%= gravatar_for @user %></span>
         </div>
         <div class="col-md-6">
-          <h1 class="member_profile__name"><%= @member.name %></h1>
+          <h1 class="user_profile__name"><%= @user.name %></h1>
 
-          <div class="member_profile__details">
+          <div class="user_profile__details">
             <i class="fa fa-phone"></i>
-            <%= number_to_phone(@member.phone, area_code: true) %>
+            <%= number_to_phone(@user.phone, area_code: true) %>
           </div>
-          <div class="member_profile__details">
+          <div class="user_profile__details">
             <i class="fa fa-envelope"></i>
-            <%= @member.email %>
+            <%= @user.email %>
           </div>
-          <div class="member_profile__details">
+          <div class="user_profile__details">
             <i class="fa fa-briefcase"></i>
-            <%= @member.occupation %>
+            <%= @user.occupation %>
           </div>
         </div>
-        <div class="col-md-3 member_profile__actions">
-          <%= link_to 'Edit Profile', edit_member_path(@member), class: 'btn btn-default' %>
-          <% if @member.admin? %>
+        <div class="col-md-3 user_profile__actions">
+          <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default' %>
+          <% if @user.admin? %>
               <%= link_to 'Create Event', new_event_path, class: 'btn btn-default' %>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-  <% unless @member.events.empty? %>
+  <% unless @user.events.empty? %>
       <div class="panel panel-warning">
         <div class="panel-heading table-responsive">Events</div>
           <table class="table table-hover">
@@ -45,7 +45,7 @@
               <th>Where</th>
               <th>Unattend</th>
             </tr>
-            <% @member.events.each do |event| %>
+            <% @user.events.each do |event| %>
                 <tr>
                   <td>
                     <%= link_to event.title, event_path(event) %>
@@ -60,7 +60,7 @@
                     <%= event.location %>
                   </td>
                   <td>
-                    <%= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put, class: 'btn btn-warning' %>
+                    <%= link_to "Unattend", unattend_path(attendee_id: @user.id, event_id: event.id), method: :put, class: 'btn btn-warning' %>
                   </td>
                 </tr>
             <% end %>

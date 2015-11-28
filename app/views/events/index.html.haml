@@ -16,5 +16,5 @@
         %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
         %td= event.address
 
-  - if member_signed_in? && current_member.admin?
+  - if user_signed_in? && current_user.admin?
     = link_to 'Create Event', new_event_path, class: 'btn btn-default'

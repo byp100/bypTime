@@ -1,24 +1,24 @@
-- provide(:title, @member.name)
+- provide(:title, user.name)
 %div.container
   %p#notice= notice
-  - if @member.admin?
+  - if user.admin?
     %h3#notice= Admin
   %h1
-    = gravatar_for @member
-    = @member.name
+    = gravatar_for user
+    = user.name
 
   %table.table.table-bordered.table-hover.table-responsive
     %tr
       %th Email
-      %td= @member.email
+      %td= user.email
       %tr
       %th Phone Number
-      %td= number_to_phone(@member.phone, area_code: true)
+      %td= number_to_phone(user.phone, area_code: true)
       %tr
       %th Occupation
-      %td= @member.occupation
+      %td= user.occupation
 
-  - unless @member.events.empty?
+  - unless user.events.empty?
     %h3 Events Attending
     %table.table.table-bordered.table-hover.table-responsive
       %tr
@@ -27,15 +27,15 @@
         %th Date
         %th Location
         %th Unattend
-      - @member.events.each do |event|
+      - user.events.each do |event|
         %tr
           %td= link_to event.title, event_path(event)
           %td= event.description
           %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
           %td= event.location
-          %td= link_to "Unattend", unattend_path(attendee_id: @member.id, event_id: event.id), method: :put
+          %td= link_to "Unattend", unattend_path(attendee_id: user.id, event_id: event.id), method: :put
 
-  = link_to 'Edit Profile', edit_member_path(@member), class: 'btn btn-default'
-  - if @member.admin?
+  = link_to 'Edit Profile', edit_user_path(user), class: 'btn btn-default'
+  - if user.admin?
     = link_to 'Create Event', new_event_path, class: 'btn btn-default'
 

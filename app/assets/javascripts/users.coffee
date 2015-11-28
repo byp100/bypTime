@@ -3,9 +3,9 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ($) ->
-  $('#member_phone').mask '(999) 999-9999'
+  $('#user_phone').mask '(999) 999-9999'
 
-  $('#member_phone').blur ->
+  $('#user_phone').blur ->
       #Clear the hidden field
     $('#hidden_phone').val ''
     #Create char array from phone number field
@@ -19,5 +19,5 @@ jQuery ($) ->
       return
     #Set hidden field
     $('#hidden_phone').val phoneNumber
-    $('#member_phone').val phoneNumber
+    $('#user_phone').val phoneNumber
   return
