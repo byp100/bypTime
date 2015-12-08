@@ -15,7 +15,7 @@
 			<button class="update_card">Change Card</button>
 
 			<span id="card_summary"></span>
-			<%= simple_form_for :subscription, url: subscribe_billing_member_path do |f| %>
+			<%= simple_form_for :subscription, url: subscribe_billing_user_path do |f| %>
 			 		<%= f.input :plan_id, collection: @plans, as: :radio_buttons, value_method: :id, label_method: :id %>
 			 		<%= f.input :stripeToken, as: :hidden, input_html: {class: "stripeToken"} %>
 			    <%= f.simple_fields_for :customer do |a| %>

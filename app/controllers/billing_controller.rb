@@ -18,35 +18,35 @@ class BillingController < ApplicationController
     redirect_to :back, notice: ex.param
   end
   def edit
-  	if current_member.subscribed?
-     result = ChargeBee::Subscription.retrieve(current_member.customer_id)
+  	if current_user.subscribed?
+     result = ChargeBee::Subscription.retrieve(current_user.customer_id)
       @customer = result.customer
-      result = ChargeBee::Card.retrieve(current_member.customer_id)
+      result = ChargeBee::Card.retrieve(current_user.customer_id)
       card = result.card
       @card_summary = "Card Details: #{card.card_type.titleize} ending in #{card.last4}"
     else
-    	redirect_to enroll_billing_member_path
+    	redirect_to enroll_billing_user_path
     end
   end
 
   def update_card
-    result = ChargeBee::Card.update_card_for_customer(current_member.customer_id, {
+    result = ChargeBee::Card.update_card_for_customer(current_user.customer_id, {
       tmp_token: params[:stripeToken]
     })
     render json: {success: true}
   end
 
   def update_contact
-    result = ChargeBee::Customer.update(current_member.customer_id, params[:customer])
-    result = ChargeBee::Customer.update_billing_info(current_member.customer_id, {
+    result = ChargeBee::Customer.update(current_user.customer_id, params[:customer])
+    result = ChargeBee::Customer.update_billing_info(current_user.customer_id, {
       billing_address: params[:customer][:billing_address]
     })
-    redirect_to member_path(current_member), notice: "The billing contact info has been updated."
+    redirect_to user_path(current_user), notice: "The billing contact info has been updated."
   end
 
   def enroll
-  	if current_member.subscribed?
-  		redirect_to edit_billing_member_path
+  	if current_user.subscribed?
+  		redirect_to edit_billing_user_path
 	  else
 	  	plans = ChargeBee::Plan.list.select{|plan| plan.plan.status == "active"}
 	  	@plans = []
@@ -58,15 +58,15 @@ class BillingController < ApplicationController
   end
 
   def overview
-  	if current_member.aasm_state == "active"
-  		redirect_to edit_billing_member_path
+  	if current_user.aasm_state == "active"
+  		redirect_to edit_billing_user_path
   	else
-  		redirect_to enroll_billing_member_path
+  		redirect_to enroll_billing_user_path
   	end
   end
 
  def subscribe
-   if current_member.aasm_state == "prospective"
+   if current_user.aasm_state == "prospective"
        customer = params[:subscription][:customer]
        
        customer[:billing_address][:first_name] = customer[:first_name]
@@ -79,9 +79,9 @@ class BillingController < ApplicationController
            :tmp_token => params[:subscription][:stripeToken]
          }
        })
-       current_member.customer_id = result.customer.id
-       current_member.save
-       current_member.induct!
+       current_user.customer_id = result.customer.id
+       current_user.save
+       current_user.induct!
    else
      redirect_to settings_billing_path, notice: "You are already paying dues."
    end

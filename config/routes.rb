@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'admin/dashboard'
+
   get 'billing/edit'
 
   get 'billing/update_card'
@@ -7,13 +9,17 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
+  get 'static_pages/home', as: :static_pages_about
 
-<<<<<<< be520ec3cf59f8ba289790e7a717206c0a6ba625
+
+  devise_for :users
+
+  #devise_for :admin_users, ActiveAdmin::Devise.config
+  #ActiveAdmin.routes(self)
+
   authenticate :user do 
     resources :users do
-      user do
+      member do
         get 'dues', to: "billing#overview"
         scope 'dues', as: :billing do
           resources :subscriptions do
@@ -29,6 +35,19 @@ Rails.application.routes.draw do
         end
         post 'check_in'
       end
+    end
+    get 'admin', to: "admin#dashboard"
+    scope 'admin', as: :admin do
+      resources :events do
+        post 'cancel'
+        get 'renew'
+        put 'reactivate'
+      end
+      get 'enroll', to: "admin#enroll", as: :enroll
+      get 'edit', to: "admin#edit", as: :edit
+      post 'subscribe', to: "admin#subscribe", as: :subscribe
+      put 'update_card', to: "admin#update_card", as: :update_card
+      put 'update_contact', to: "admin#update_contact", as: :update_contact
     end
 
     resources :events do

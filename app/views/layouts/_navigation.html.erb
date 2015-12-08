@@ -9,6 +9,7 @@
       </button>
       <a class="navbar-brand" href="/">
         <%= image_tag "byp100_logo.jpg", class: 'navigation__logo' %>
+        <%= " #{current_tenant.short_name if chapter?}" %>
       </a>
     </div>
     <div class="collapse navbar-collapse" id="navbar-links">
