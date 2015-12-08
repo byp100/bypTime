@@ -22,11 +22,7 @@
           <% else %>
               <div><%= link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post %></div>
           <% end %>
-<<<<<<< be520ec3cf59f8ba289790e7a717206c0a6ba625
-          <% if user_signed_in? && current_user.admin? %>
-=======
-          <% if member_signed_in? && current_member.admin?(current_tenant) %>
->>>>>>> Integrated chargbees
+          <% if user_signed_in? && current_user.admin?(current_tenant) %>
               <div><%= link_to "Edit", edit_event_path(@event), class: 'btn btn-default' %></div>
               <div><%= link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: {confirm: 'Are you sure?'} %></div>
           <% end %>
@@ -41,11 +37,7 @@
           <tr>
             <th>Name</th>
             <th>Phone</th>
-<<<<<<< be520ec3cf59f8ba289790e7a717206c0a6ba625
-            <% if user_signed_in? && current_user.admin? %>
-=======
-            <% if member_signed_in? && current_member.admin?(current_tenant) %>
->>>>>>> Integrated chargbees
+            <% if user_signed_in? && current_user.admin?(current_tenant) %>
                 <th>Check In</th>
             <% end %>
           </tr>
@@ -57,11 +49,7 @@
                 <td>
                   <%= number_to_phone(attendee.phone, area_code: true) %>
                 </td>
-<<<<<<< be520ec3cf59f8ba289790e7a717206c0a6ba625
-                <% if user_signed_in? && current_user.admin? %>
-=======
-                <% if member_signed_in? && current_member.admin?(current_tenant) %>
->>>>>>> Integrated chargbees
+                <% if user_signed_in? && current_user.admin?(current_tenant) %>
                     <td>
                       <label class="event_check_in">
                         <%= check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id %>

@@ -1,13 +1,13 @@
 <script>Stripe.setPublishableKey("<%= ENV['stripe_publishable_key'] %>");
 </script>
-<% if current_member.subscribed? %>
+<% if current_user.subscribed? %>
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
 			<h4>Credit Card</h4>
 			<span class="payment-errors"></span>
 			<% image_tag("ajax-loader.gif", class: "loading-gif") %>
-			<%= simple_form_for :card_details, url: update_card_billing_member_path, method: :put, inner_html: { id: "credit-card-submit"} do |f| %>
+			<%= simple_form_for :card_details, url: update_card_billing_user_path, method: :put, inner_html: { id: "credit-card-submit"} do |f| %>
 				<%= f.input :number, input_html: {class: "cc-num"} %>
 				<%= f.input :cvc, input_html: {class: "cc-cvc"} %>
 				<%= f.input :expiry, input_html: {class:"cc-exp"} %>
@@ -18,7 +18,7 @@
 			<span id="card_summary"><%= @card_summary %></span>
 
 			<h4>Billing Contact</h4>
-			    <%= simple_form_for :customer, url: update_contact_billing_member_path, method: :put do |a| %>
+			    <%= simple_form_for :customer, url: update_contact_billing_user_path, method: :put do |a| %>
 			    	<%= a.input :first_name %>
 			    	<%= a.input :last_name %>
 			    	<%= a.input :email %>
@@ -56,7 +56,7 @@
 				var card = response.card;
 				$.ajax({
 			        type: "PUT",
-			        url: "<%= update_card_billing_member_path %>",
+			        url: "<%= update_card_billing_user_path %>",
 			        dataType: 'json',
 			        contentType: 'application/json',
 			        data: JSON.stringify({stripeToken: token, _method:'put'}),
