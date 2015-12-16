@@ -1,0 +1,90 @@
+<% provide(:title, "Import Data") %>
+<div class="container">
+  <div class="col-md-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Import Users</h2>
+      </div>
+      <div class="panel-body">
+        <%= form_tag import_users_path, multipart: true do %>
+            <%= file_field_tag :user_file, class: 'btn' %>
+            <%= submit_tag 'Import Users', class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Import Events</h2>
+      </div>
+      <div class="panel-body">
+        <%= form_tag import_events_path, multipart: true do %>
+            <%= file_field_tag :event_file, class: 'btn' %>
+            <%= submit_tag 'Import Events', class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Import Attendances</h2>
+      </div>
+      <div class="panel-body">
+        <%= form_tag import_attendances_events_path, multipart: true do %>
+            <%= file_field_tag :attendance_file, class: 'btn' %>
+            <%= submit_tag 'Import Attendances', class: 'btn btn-danger' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <div class="jumbotron">
+        <h2>Instructions for Importing Data</h2>
+        <ol>
+          <li>Create spreadsheets with corresponding headers</li>
+          <li>Export as CSV</li>
+          <li>Choose File and import data</li>
+        </ol>
+      <hr>
+      <h3>Header Formats</h3>
+      <h5>Users</h5>
+      <table class="table table-bordered table-hover">
+        <tr class="active">
+          <td>phone</td>
+          <td>name</td>
+          <td>email</td>
+          <td>password</td>
+        </tr>
+      </table>
+
+      <h5>Events</h5>
+      <table class="table table-bordered table-hover">
+        <tr class="active">
+          <td>title</td>
+          <td>description</td>
+          <td>start_time</td>
+          <td>event_type</td>
+        </tr>
+      </table>
+
+      <h5>Attendances</h5>
+      <table class="table table-bordered table-hover">
+        <tr class="active">
+          <td>phone</td>
+          <td>event_id</td>
+          <td>event_id</td>
+          <td>event_id</td>
+        </tr>
+      </table>
+
+      <hr>
+      <h4>Notes</h4>
+      <ul>
+        <li>Set all passwords to a known value so that users can sign in an manually change their passwords</li>
+        <li>Start time for events should be in this format: <samp>YYYY-MM-DD</samp></li>
+        <li>Valid event types are: <samp>orientation, general_body_meeting, public_event</samp></li>
+      </ul>
+    </div>
+  </div>
+</div>
