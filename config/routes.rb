@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  root 'static_pages#home'
-
   get 'static_pages/home'
   get 'static_pages/about'
   get 'static_pages/import'
@@ -21,6 +19,13 @@ Rails.application.routes.draw do
     end
   end
   put 'unattend' => 'events#unattend', as: 'unattend'
+
+  resources :chapters
+
+  match '/', to: 'chapters#index', constraints: { subdomain: 'www' }, via: [:get, :post, :put, :patch, :delete]
+  match '/', to: 'chapters#show', constraints: { subdomain: /.+/ }, via: [:get, :post, :put, :patch, :delete]
+
+  root to: 'chapters#index'
 
   devise_scope :user do
     post 'create_attendee' => 'users#create_attendee', as: 'create_attendee'

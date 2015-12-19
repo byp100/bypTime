@@ -10,6 +10,7 @@
         </div>
     <% end %>
     <%= f.input :title %>
+    <%= f.input :chapter_id, collection: Chapter.all.map { |chapter| [chapter.name, chapter.id] } %>
     <%= f.input :event_type, collection: Event.event_types.map { |k, v| [k.titleize, k] } %>
     <%= f.input :description %>
     <%= f.input :location %>

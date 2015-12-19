@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  belongs_to :chapter
   has_many :attendances
   has_many :attendees, through: :attendances, source: :user
   accepts_nested_attributes_for :attendees

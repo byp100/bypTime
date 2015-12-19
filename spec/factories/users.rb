@@ -5,6 +5,7 @@ FactoryGirl.define do
     name 'Angela Davis'
     email 'angela.davis@gmail.com'
     role 'guest'
+    chapter_id 1
 
     trait :admin do
       role 'admin'

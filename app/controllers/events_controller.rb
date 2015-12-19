@@ -1,7 +1,21 @@
 class EventsController < InheritedResources::Base
+  def show
+    @event = @chapter.events.find params[:id]
+  end
 
-  def index
-    @events = Event.order(start_time: :desc).page(params[:page]).per_page 5
+  def create
+    @event = Event.new(event_params)
+    # require 'pry'; binding.pry
+
+    respond_to do |format|
+      if @event.save
+        format.html { redirect_to @event, notice: 'Event was successfully created.' }
+        format.json { render :show, status: :created, location: @event }
+      else
+        format.html { render :new }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def unattend
@@ -26,7 +40,7 @@ class EventsController < InheritedResources::Base
   private
 
     def event_params
-      params.require(:event).permit(:title, :description, :start_time, :end_time, :location, :address, :event_type)
+      params.require(:event).permit(:title, :description, :start_time, :end_time, :location, :address, :event_type, :chapter_id)
     end
 end
 

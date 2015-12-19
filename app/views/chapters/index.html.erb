@@ -1,0 +1,15 @@
+<style>
+    body {  background-color: black;  }
+</style>
+<% provide(:title, "BYPtime") %>
+<div class="container">
+  <div class="col-md-4">
+    <div class="chapter__select">
+      <h1>Select Your Chapter</h1>
+      <%= select_tag 'chapter', options_for_select(@chapters.map{|chapter| [chapter.name, chapter.id, {'data-location'=>root_url(subdomain: chapter.subdomain)}]}),  class: 'js-redirect-on-change', include_blank: 'Please select a chapter' %>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <%= image_tag "byp100_logo.jpg", class: 'landing_page__logo' %>
+  </div>
+</div>

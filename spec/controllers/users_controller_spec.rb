@@ -2,6 +2,11 @@ require 'rails_helper'
 require_relative 'controller_helper'
 
 describe UsersController do
+  before(:each) do
+    create :chapter, name: "Subdomain", subdomain: 'sub'
+    @request.host = "sub.example.org"
+  end
+
   describe 'GET #index' do
     it 'populates the array of users' do
       user = create :user

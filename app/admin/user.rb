@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  permit_params :name, :email, :phone, :role, :birthdate, :occupation, :address, :password, :password_confirmation
+  permit_params :name, :email, :phone, :role, :chapter, :birthdate, :occupation, :address, :password, :password_confirmation
 
   index do
     column :name
@@ -9,6 +9,7 @@ ActiveAdmin.register User do
     column :occupation
     column :address
     column :role
+    column :chapter
     actions
   end
 
@@ -16,6 +17,7 @@ ActiveAdmin.register User do
   filter :email
   filter :name
   filter :birthdate
+  filter :chapter
   filter :role, as: :select
 
   form do |f|
@@ -23,6 +25,7 @@ ActiveAdmin.register User do
       f.input :name
       f.input :phone
       f.input :email
+      f.input :chapter
       f.input :role, as: :select, collection: User.roles.keys
       f.input :birthdate, :start_year => 1980,
                           :end_year => Date.today.year
