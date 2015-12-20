@@ -27,7 +27,8 @@
         </div>
         <div class="col-md-3 user_profile__actions">
           <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default' %>
-          <% if @user.admin? %>
+          <%= link_to 'Manage Dues', enroll_billing_user_path(id: @user.id), class: 'btn btn-default' %>
+          <% if @user.admin?(current_tenant) %>
               <%= link_to 'Create Event', new_event_path, class: 'btn btn-default' %>
           <% end %>
         </div>

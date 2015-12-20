@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include AASM
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :registerable, recoverable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -10,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, through: :attendances
+  has_many :memberships
+  has_many :organizations, through: :memberships
 
   attr_accessor :in_attendance
 
@@ -43,12 +46,76 @@ class User < ActiveRecord::Base
     end
   end
 
-  #for Devise so that primary id is phone number instead of email
   def email_required?
     false
   end
 
   def email_changed?
     false
+  end
+
+  def admin?(current_tenant)
+    if super_admin
+      true
+    else
+      Membership.find_by(organization_id: current_tenant.id, member_id: id).admin
+    end
+  end
+
+  def eligible_for_membership?
+    if attendances.joins(:events).where("events.event_type = orientation").count <= 1 && attendances.joins(:events).where("events.event_type = general_body_meeting").count <= 2 && attendances.joins(:events).where("events.event_type = public_event").count <= 1
+      return true
+    else
+      return false
+    end
+  end
+
+  def begin_enrollment
+    twilio = TwilioService.new
+    twilio.send("Welcome, you have completed the attendance requirements for BYP100 membership, please pay your dues at www.byp100.org", phone)
+  end
+
+   def subscribed?(plan = nil)
+    if plan == nil
+      if customer_id.present?
+        result = ChargeBee::Subscription.retrieve(customer_id)
+        subscription = result.subscription
+        if subscription.status != "cancelled" && subscription.status != "future" && subscription.status != "non_renewing"
+          true
+        else
+         false
+        end
+      else
+        false
+      end
+    else
+      aasm_state == plan
+    end
+   end
+
+  aasm do
+    state :prospective, :initial => true
+    
+    state :active 
+
+    state :inactive
+
+    state :alumni
+
+    event :induct do
+      transitions :from => [:prospective], :to => :active
+    end
+
+    event :deactivate do
+      transitions :from => [:active], :to => :inactive
+    end
+
+    event :activate do
+      transitions :from => [:inactive], :to => :active
+    end
+
+    event :graduate do
+      transitions :from => [:active], :to => :alumni
+    end
   end
 end

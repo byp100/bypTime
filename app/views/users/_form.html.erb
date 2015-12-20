@@ -12,9 +12,13 @@
 
     <%= f.input :name, autofocus: true %>
     <%= f.input :email, as: :email %>
-    <%= f.input :phone, disabled: true  %>
+    <%= f.input :phone %>
     <%= f.input :birthdate, as: :date %>
+    <%= f.input :pronouns %>
     <%= f.input :occupation %>
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+    <%= f.input :referred_by %>
     <!--<hr>-->
     <!--<h3>Detailed Information</h3>-->
     <!--<%= f.input :nickname %>-->

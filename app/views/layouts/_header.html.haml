@@ -1,7 +1,7 @@
 %body
   %header.navbar.navbar-fixed-top.navbar-inverse
     .container
-      = link_to "bypTIME", root_path, id: "logo"
+      = link_to "bypTIME #{current_tenant.short_name if chapter?}", root_path, id: "logo"
       %nav
         %ul.nav.navbar-nav.navbar-right
           %li= link_to "About", static_pages_about_path

@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20151130091706) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
     t.text     "body"
@@ -27,9 +24,9 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.datetime "updated_at"
   end
 
-  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
-  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
-  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -46,8 +43,8 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.datetime "updated_at"
   end
 
-  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
-  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "attendances", force: :cascade do |t|
     t.integer  "member_id"
@@ -58,8 +55,8 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.integer  "user_id"
   end
 
-  add_index "attendances", ["event_id"], name: "index_attendances_on_event_id", using: :btree
-  add_index "attendances", ["user_id"], name: "index_attendances_on_user_id", using: :btree
+  add_index "attendances", ["event_id"], name: "index_attendances_on_event_id"
+  add_index "attendances", ["user_id"], name: "index_attendances_on_user_id"
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -70,10 +67,45 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.text     "address"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.integer  "event_type"
+    t.integer  "organization_id"
   end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "organization_id"
+    t.integer  "member_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.boolean  "admin"
+    t.string   "aasm_state"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "type"
+    t.string   "slug"
+    t.string   "short_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "owner_id"
+  end
+
+  add_index "organizations", ["slug"], name: "index_organizations_on_slug"
 
   create_table "users", force: :cascade do |t|
     t.string   "phone"
@@ -114,10 +146,15 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.string   "dietary_restrictions"
     t.boolean  "immigrant"
     t.string   "country_of_origin"
+    t.string   "aasm_state"
+    t.boolean  "super_admin"
+    t.string   "customer_id"
+    t.string   "pronouns"
+    t.string   "referred_by"
     t.integer  "role"
   end
 
-  add_index "users", ["phone"], name: "index_users_on_phone", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["phone"], name: "index_users_on_phone", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end

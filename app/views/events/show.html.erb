@@ -22,7 +22,7 @@
           <% else %>
               <div><%= link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post %></div>
           <% end %>
-          <% if user_signed_in? && current_user.admin? %>
+          <% if user_signed_in? && current_user.admin?(current_tenant) %>
               <div><%= link_to "Edit", edit_event_path(@event), class: 'btn btn-default' %></div>
               <div><%= link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: {confirm: 'Are you sure?'} %></div>
           <% end %>
@@ -37,7 +37,7 @@
           <tr>
             <th>Name</th>
             <th>Phone</th>
-            <% if user_signed_in? && current_user.admin? %>
+            <% if user_signed_in? && current_user.admin?(current_tenant) %>
                 <th>Check In</th>
             <% end %>
           </tr>
@@ -49,7 +49,7 @@
                 <td>
                   <%= number_to_phone(attendee.phone, area_code: true) %>
                 </td>
-                <% if user_signed_in? && current_user.admin? %>
+                <% if user_signed_in? && current_user.admin?(current_tenant) %>
                     <td>
                       <label class="event_check_in">
                         <%= check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id %>
