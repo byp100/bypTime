@@ -48,6 +48,13 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+
+  if ENV['force_ssl'] == 'true'
+    config.force_ssl = true
+  else
+    config.force_ssl = false
+  end
+
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
