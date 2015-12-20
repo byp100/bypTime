@@ -26,6 +26,17 @@ class EventsController < InheritedResources::Base
     redirect_to :back, notice: 'You are no longer attending this event'
   end
 
+  def import_events
+    Event.import params[:event_file]
+    redirect_to :back, notice: 'Event data has been imported'
+  end
+
+  def import_attendances
+    Attendance.import params[:attendance_file]
+    redirect_to :back, notice: 'Attendance data has been imported'
+  end
+
+
   private
 
     def event_params
