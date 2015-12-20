@@ -4,7 +4,6 @@ FactoryGirl.define do
     description 'Event description goes here.'
     start_time Time.now
     event_type :orientation
-    chapter_id 1
 
     trait :orientation do
       title 'Membership Orientation'

@@ -1,9 +1,17 @@
 require 'rails_helper'
 
 describe EventsController do
-  before(:each) do
-    create :chapter, name: "Subdomain", subdomain: 'sub'
-    @request.host = "sub.example.org"
+  describe 'GET #index' do
+    it 'populates with all of the events' do
+      event = create :event
+      get :index
+      assigns(:events).should eq [event]
+    end
+
+    it 'renders the :index view' do
+      get :index
+      response.should render_template :index
+    end
   end
 
   describe 'GET #show' do
@@ -33,7 +41,7 @@ describe EventsController do
         expect(Event.count).to eq 1
       end
 
-      it 'redirects to the created event' do
+      it 'redirects to the homepage' do
         post :create, event: attributes_for(:event)
         response.should redirect_to Event.last
       end

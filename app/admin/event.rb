@@ -1,28 +1,10 @@
 ActiveAdmin.register Event do
-  permit_params :title, :event_type, :chapter, :description, :start_time, :end_time, :location, :address
-
-  index do
-    column :title
-    column :event_type
-    column :chapter
-    column :description
-    column :start_time
-    column :location
-    actions
-  end
-
-  filter :title
-  filter :event_type
-  filter :chapter
-  filter :description
-  filter :start_time
-  filter :location
+  permit_params :title, :event_type, :description, :start_time, :end_time, :location, :address
 
   show do
     attributes_table do
       row :title
       row :event_type
-      row :chapter
       row :description
       row :start_time
       row :end_time
@@ -45,7 +27,6 @@ ActiveAdmin.register Event do
     inputs 'Details' do
       input :title
       input :event_type, as: :select, collection: Event.event_types.keys.map { |k,v| [k.titleize, k]}
-      input :chapter
       input :description
       input :start_time
       input :end_time

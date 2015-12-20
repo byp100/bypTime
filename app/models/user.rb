@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
   validates :phone, presence: true, uniqueness: true
   validates :name, presence: true
 
-  belongs_to :chapter
-
   has_many :attendances
   has_many :events, through: :attendances
 

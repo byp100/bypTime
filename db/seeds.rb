@@ -5,7 +5,3 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-Chapter.create(name: 'Chicago', subdomain: 'chi')
-Chapter.create(name: 'New York', subdomain: 'ny')
-Chapter.create(name: 'Washington DC', subdomain: 'dc')
