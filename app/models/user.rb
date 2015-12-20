@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   has_many :attendances
   has_many :events, through: :attendances
-  has_many :memberships
+  has_many :memberships, foreign_key: "member_id"
   has_many :organizations, through: :memberships
 
   attr_accessor :in_attendance
