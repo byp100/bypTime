@@ -39,12 +39,6 @@ class User < ActiveRecord::Base
     self.role ||= :guest
   end
 
-  def self.import file
-    CSV.foreach(file.path, headers: true) do |row|
-      User.create! row.to_hash
-    end
-  end
-
   #for Devise so that primary id is phone number instead of email
   def email_required?
     false

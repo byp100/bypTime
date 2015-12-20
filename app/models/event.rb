@@ -13,10 +13,4 @@ class Event < ActiveRecord::Base
   def number_of_attendees
     attendees.size
   end
-
-  def self.import file
-    CSV.foreach(file.path, headers: true) do |row|
-      Event.create! row.to_hash
-    end
-  end
 end

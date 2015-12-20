@@ -28,11 +28,6 @@ class UsersController < InheritedResources::Base
     redirect_to :back, notice: "#{@attendee.name} is in attendance"
   end
 
-  def import
-    User.import params[:user_file]
-    redirect_to :back, notice: 'User data has been imported'
-  end
-
   private
 
     def set_user
