@@ -25,6 +25,7 @@
           <% if user_signed_in? && current_user.admin?(current_tenant) %>
               <div><%= link_to "Edit", edit_event_path(@event), class: 'btn btn-default' %></div>
               <div><%= link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: {confirm: 'Are you sure?'} %></div>
+              <div><%= link_to "Orientation Link", new_event_user_path(event_id: @event.id, code: @event.access_code), class: 'btn btn-default' if @event.event_type == "orientation" %></div>
           <% end %>
         </div>
       </div>
