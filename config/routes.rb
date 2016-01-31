@@ -28,13 +28,14 @@ Rails.application.routes.draw do
           get 'renew'
           put 'reactivate'
         end
+        get 'pay', to: "billing#pending_invoices", as: :pending_invoices
+        post 'pay', to: "billing#close_invoice", as: :close_invoice
         get 'enroll', to: "billing#enroll", as: :enroll
         get 'edit', to: "billing#edit", as: :edit
         post 'subscribe', to: "billing#subscribe", as: :subscribe
         put 'update_card', to: "billing#update_card", as: :update_card
         put 'update_contact', to: "billing#update_contact", as: :update_contact
       end
-      post 'check_in', to: "users#check_in"
     end
     resources :users do
       collection { post :import }
@@ -47,9 +48,11 @@ Rails.application.routes.draw do
       get 'users', to: "users#index", as: :users
       get 'users/:id/edit', to: "users#edit", as: :edit_user
       get 'users/:id', to: "users#show", as: :user
-
+      post 'users/:user_id/check_in', to: "users#check_in", as: :user_check_in
+      post 'users/import', to: "users#import", as: :user_import
       get "events", to: "events#all", as: :events
       get "events/:id", to: "events#show", as: :event
+
     end
 
     resources :events do

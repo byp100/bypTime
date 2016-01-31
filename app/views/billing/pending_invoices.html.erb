@@ -1,0 +1,3 @@
+<% @pending_invoices.each do |pending_invoice| %>
+<%= link_to pending_invoice.amount, billing_close_invoice_path(pending_invoice.id), method: :post, class: "btn btn-primary" %>
+<% end %>

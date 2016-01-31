@@ -48,13 +48,8 @@
 						<th></th>
 					</tr>
 					<% @events.last(5).each do |event| %>
-					 <tr>
-					   <td><%= event.start_time.strftime("%b.%d, %Y at %H:%M %p") %></td>
-					   <td><%= event.title %></td>
-					   <td><%= event.event_type.titleize %></td>
-					   <td><a class="btn btn-default">View</a></td>
-					 </tr>
-					 <% end %>
+					 <%= render "events/event_row", {event: event} %>
+ 					 <% end %>
 				</table>
 				<a href="<%= admin_events_path %>" class="btn btn-default">View All</a>
 			</div>

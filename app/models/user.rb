@@ -40,9 +40,97 @@ class User < ActiveRecord::Base
     self.role ||= :guest
   end
 
-  def self.import file
-    CSV.foreach(file.path, headers: true) do |row|
-      User.create! row.to_hash
+  def self.import(file, organization)
+    file_path = file.tempfile.to_path
+    xlsx = Roo::Excelx.new(file_path)
+    xlsx.default_sheet = xlsx.sheets.first
+
+    row_count = 0
+
+    event_count = 0
+
+    event_data = []
+
+    xlsx.each_row_streaming(pad_cells: true) do |row|
+
+      row_items = row
+
+      if row_count == 0
+
+        row_items.each_with_index do |item, index|
+          item = item.value
+          if index > 3
+            event_type = "public_event"
+            if item == "Orientation"
+              event_type = "orientation"
+            elsif item == "Meeting"
+              event_type = "general_body_meeting"
+            end
+            event_data.push({
+              event_type: event_type,
+              attendances: []
+            })
+          end
+
+        end
+
+      elsif row_count == 1
+        row_items.each_with_index do |item, index|
+          item = item.value
+          if index > 3
+            event_data[index - 4][:date] = item
+          end
+        end
+      elsif row_count == 2
+
+        row_items.each_with_index do |item, index|
+          item = item.value
+          if index > 3
+            if item.blank?
+              event_data[index - 4][:title] = "Event"
+            else
+              event_data[index - 4][:title] = item
+            end
+          end
+        end
+
+      elsif row_count >= 3
+        user_data = {}
+        row_items.each_with_index do |item, index|
+          if item.present?
+            item = item.value
+            if index == 0
+              user_data[:name] = item
+            elsif index == 1
+              user_data[:phone] = item
+            elsif index == 3
+              user_data[:email] = item
+            end
+            if index == 4
+              @user = User.create(name: user_data[:name], phone: user_data[:phone].to_s, email: user_data[:email], password: "password", password_confirmation: "password") if user_data[:phone].present?
+              if @user.id.present?
+                @user.memberships.create!(organization: organization)
+              end
+            end
+            if index >= 4
+              event_data[index - 4][:attendances].push(@user.id) if item.present? && @user.id.present?
+            end
+          else
+            if index == 0
+              break
+            end
+          end
+        end
+      end  
+
+      row_count += 1
+    end
+    event_data.each do |data|
+      event = Event.find_or_create_by!(event_type: data[:event_type].downcase, start_time: data[:date].to_datetime, end_time: data[:date].to_datetime, title: data[:title])
+      data[:attendances].each do |user_id|
+        event.attendances.create(user_id: user_id)
+      end
+
     end
   end
 
@@ -63,7 +151,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_membership?
-    if attendances.joins(:event).where("events.event_type = 'orientation'").count >= 1 && attendances.joins(:event).where("events.event_type = 'general_body_meeting'").count >= 2 && attendances.joins(:event).where("events.event_type = 'public_event'").count >= 1
+    if attendances.joins(:event).where(events: {event_type: 'orientation' }).count >= 1 && attendances.joins(:event).where(events: {event_type: 'general_body_meeting' }).count >= 2 && attendances.joins(:event).where(events: {event_type: 'public_event' }).count >= 1
       return true
     else
       return false

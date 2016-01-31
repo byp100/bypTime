@@ -29,6 +29,14 @@ class BillingController < ApplicationController
     end
   end
 
+  def pending_invoices
+    @pending_invoices = Billing::Invoice.list_invoices(current_user.customer_id).select{|result| result.invoice.status == "pending"}
+  end
+
+  def close_invoice
+    Billing::Invoice.collect(params[:invoice_id])
+  end
+
   def update_card
     result = ChargeBee::Card.update_card_for_customer(current_user.customer_id, {
       tmp_token: params[:stripeToken]

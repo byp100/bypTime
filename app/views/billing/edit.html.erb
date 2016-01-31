@@ -7,7 +7,7 @@
 			<h4>Credit Card</h4>
 			<span class="payment-errors"></span>
 			<% image_tag("ajax-loader.gif", class: "loading-gif") %>
-			<%= simple_form_for :card_details, url: _billing_update_card_path, method: :put, inner_html: { id: "credit-card-submit"} do |f| %>
+			<%= simple_form_for :card_details, url: billing_update_card_path, method: :put, inner_html: { id: "credit-card-submit"} do |f| %>
 				<%= f.input :number, input_html: {class: "cc-num"} %>
 				<%= f.input :cvc, input_html: {class: "cc-cvc"} %>
 				<%= f.input :expiry, input_html: {class:"cc-exp"} %>
@@ -56,7 +56,7 @@
 				var card = response.card;
 				$.ajax({
 			        type: "PUT",
-			        url: "<%= update_card_billing_user_path %>",
+			        url: "<%= billing_update_card_path %>",
 			        dataType: 'json',
 			        contentType: 'application/json',
 			        data: JSON.stringify({stripeToken: token, _method:'put'}),

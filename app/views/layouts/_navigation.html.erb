@@ -17,6 +17,7 @@
         <li><%= link_to "About", static_pages_about_path %></li>
         <li><%= link_to "Events", events_path %></li>
         <% if user_signed_in? %>
+          <li><%= link_to "Admin", admin_dashboard_path if current_user.admin?(current_tenant) %></li>
             <li><%= link_to "Sign Out", destroy_user_session_path, method: 'delete' %></li>
             <li><%= link_to "Profile", dashboard_path %></li>
         <% else %>

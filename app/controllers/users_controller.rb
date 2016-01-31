@@ -1,4 +1,4 @@
-class UsersController < InheritedResources::Base
+class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :verify_user, only: [:show, :edit, :update, :destroy]
 
@@ -21,7 +21,21 @@ class UsersController < InheritedResources::Base
   end
 
   def index
-    @users = User.all
+    if current_tenant.present?
+    @users = User.joins(:memberships).where(memberships: {organization_id: current_tenant.id}).uniq
+    else
+       @users = User.all
+    end
+  end
+
+  def update
+    if user_params[:password_confirmation].blank?
+      user_params.delete("password_confirmation")
+      user_params.delete("password")
+    end
+    if @user.update(user_params)
+      redirect_to dashboard_path, notice: "You've updated your account."
+    end
   end
 
   # POST /users
@@ -80,7 +94,7 @@ class UsersController < InheritedResources::Base
   end
 
   def import
-    User.import params[:user_file]
+    User.import(params[:user_file], current_tenant)
     redirect_to :admin_dashboard, notice: 'User data has been imported'
   end
 
@@ -102,6 +116,6 @@ class UsersController < InheritedResources::Base
     end
 
     def user_params
-      params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation)
+      params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation, :manual_invoicing)
     end
 end

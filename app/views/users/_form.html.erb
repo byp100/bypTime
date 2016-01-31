@@ -16,9 +16,10 @@
     <%= f.input :birthdate, as: :date %>
     <%= f.input :pronouns %>
     <%= f.input :occupation %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+    <%= f.input :password unless @user.id.present? %>
+    <%= f.input :password_confirmation unless @user.id.present? %>
     <%= f.input :referred_by %>
+    <%= f.input :manual_invoicing if @user.id.present? %>
     <!--<hr>-->
     <!--<h3>Detailed Information</h3>-->
     <!--<%= f.input :nickname %>-->

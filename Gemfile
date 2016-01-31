@@ -42,6 +42,8 @@ gem 'figaro'
 gem 'chargebee'
 gem 'bower-rails'
 
+gem 'roo', '~> 2.1.0'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
