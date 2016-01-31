@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-sm-5">
 		<div class="keen-widget keen-metric" style="background-color: #dd1c2e; width:NaNpx;">
-			<span class="keen-metric-value">321</span>
+			<span class="keen-metric-value"><%= @users.count %></span>
 			<span class="keen-metric-title">Total Members</span>
 		</div>
 		<div class="row">
@@ -14,33 +14,17 @@
 						<th>Name</th>
 						<th>Status</th>
 						<th></th>
-					</th>
+					</tr>
+					<% @users.last(5).each do |user| %>
 				  <tr>
-				    <td>321</td>
-				    <td>Charlene Carruthers</td>
-				    <td>Prospective</td>
+				    <td><%= user.id %></td>
+				    <td><%= user.name %></td>
+				    <td><%= user.aasm_state.titleize %></td>
 				    <td><a class="btn btn-default">View</a></td>
 				  </tr>
-				  <tr>
-				    <td>320</td>
-				    <td>Rose Afriyie</td>
-				    <td>Active</td>
-				    <td><a class="btn btn-default">View</a></td>
-				  </tr>
-				  <tr>
-				    <td>319</td>
-				    <td>Malcom London</td>
-				    <td>Prospective</td>
-				    <td><a class="btn btn-default">View</a></td>
-				  </tr>
-				  <tr>
-				    <td>318</td>
-				    <td>Janaé Bonsu</td>
-				    <td>Prospective</td>
-				    <td><a class="btn btn-default">View</a></td>
-				  </tr>
+				  <% end %>
 				</table>
-				<a class="btn btn-default">View All</a>
+				<a href="<%= admin_users_path %>" class="btn btn-default">View All</a>
 				<a class="btn btn-default">Download</a>
 				<a class="btn btn-default">Import Members</a>
 			</div>
@@ -48,7 +32,7 @@
 	</div>
 	<div class="col-sm-7">
 		<div class="keen-widget keen-metric" style="background-color: #E8B15F; width:NaNpx;">
-			<span class="keen-metric-value">23</span>
+			<span class="keen-metric-value"><%= @events.count %></span>
 			<span class="keen-metric-title">Total Events</span>
 		</div>
 		<div class="row">
@@ -57,44 +41,22 @@
 				<h3>Upcoming Events</h3>
 				<table class="table">
 					<tr>
-						<th>Date</th>
+						<th>Date & Time</th>
 						<th>Name</th>
 						<th>Type</th>
 						<th>Attendees</th>
 						<th></th>
-					</th>
-				  <tr>
-				    <td>12/12/15</td>
-				    <td>December Orientation</td>
-				    <td>Orientation</td>
-				    <td>12</td>
-				    <td><a class="btn btn-default">Send Blast</a></td>
-				  </tr>
-				  <tr>
-				  	<td>12/15/15</td>
-				    <td>Come to this thing</td>
-				    <td>Public</td>
-				    <td>49</td>
-				    <td><a class="btn btn-default">Send Blast</a></td>
-				  </tr>
-				  <tr>
-				    <td>12/23/15</td>
-				    <td>December Monthly Meeting</td>
-				    <td>General Body</td>
-				    <td>32</td>
-				    <td><a class="btn btn-default">Send Blast</a></td>
-				  </tr>
-				  <tr>
-				  	<td>12/27/15</td>
-				    <td>Come to this other thing</td>
-				    <td>Public</td>
-				    <td>47</td>
-				    <td><a class="btn btn-default">Send Blast</a></td>
-				  </tr>
+					</tr>
+					<% @events.last(5).each do |event| %>
+					 <tr>
+					   <td><%= event.start_time.strftime("%b.%d, %Y at %H:%M %p") %></td>
+					   <td><%= event.title %></td>
+					   <td><%= event.event_type.titleize %></td>
+					   <td><a class="btn btn-default">View</a></td>
+					 </tr>
+					 <% end %>
 				</table>
-				<a class="btn btn-default">View All</a>
-				<a class="btn btn-default">Download</a>
-				<a class="btn btn-default">Import Event Attendances</a>
+				<a href="<%= admin_events_path %>" class="btn btn-default">View All</a>
 			</div>
 		</div>
 	</div>

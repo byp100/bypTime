@@ -1,7 +1,11 @@
 class EventsController < InheritedResources::Base
 
   def index
-    @events = Event.order(start_time: :desc).page(params[:page]).per_page 5
+    @events = Event.where("start_time > ?", DateTime.now).order(start_time: :desc).page(params[:page]).per_page 5
+  end
+
+  def all
+    @events = Event.all.order(start_time: :desc)
   end
 
   def unattend

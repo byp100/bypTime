@@ -1,0 +1,19 @@
+<div class="row">
+
+	<div class="col-sm-12">
+		<h3>All Events</h3>
+		<table class="table">
+			<tr>
+				<th>Date & Time</th>
+				<th>Name</th>
+				<th>Type</th>
+				<th>Attendees</th>
+				<th></th>
+			</tr>
+			<% @events.last(5).each do |event| %>
+				<%= render "events/event_row", event: event %>
+			<% end %>
+		</table>
+		<a href="<%= admin_events_path %>" class="btn btn-default">View All</a>
+	</div>
+</div>

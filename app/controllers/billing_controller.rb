@@ -25,7 +25,7 @@ class BillingController < ApplicationController
       card = result.card
       @card_summary = "Card Details: #{card.card_type.titleize} ending in #{card.last4}"
     else
-    	redirect_to enroll_billing_user_path
+    	redirect_to billing_enroll_path
     end
   end
 
@@ -41,12 +41,12 @@ class BillingController < ApplicationController
     result = ChargeBee::Customer.update_billing_info(current_user.customer_id, {
       billing_address: params[:customer][:billing_address]
     })
-    redirect_to user_path(current_user), notice: "The billing contact info has been updated."
+    redirect_to dashboard, notice: "The billing contact info has been updated."
   end
 
   def enroll
   	if current_user.subscribed?
-  		redirect_to edit_billing_user_path
+  		redirect_to billing_edit_path
 	  else
 	  	plans = ChargeBee::Plan.list.select{|plan| plan.plan.status == "active"}
 	  	@plans = []
@@ -59,9 +59,9 @@ class BillingController < ApplicationController
 
   def overview
   	if current_user.aasm_state == "active"
-  		redirect_to edit_billing_user_path
+  		redirect_to billing_edit_path
   	else
-  		redirect_to enroll_billing_user_path
+  		redirect_to billing_enroll_path
   	end
   end
 

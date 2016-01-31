@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130091706) do
+ActiveRecord::Schema.define(version: 20160131040203) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.datetime "updated_at",      null: false
     t.integer  "event_type"
     t.integer  "organization_id"
+    t.string   "access_code"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -152,6 +153,7 @@ ActiveRecord::Schema.define(version: 20151130091706) do
     t.string   "pronouns"
     t.string   "referred_by"
     t.integer  "role"
+    t.boolean  "manual_invoicing"
   end
 
   add_index "users", ["phone"], name: "index_users_on_phone", unique: true

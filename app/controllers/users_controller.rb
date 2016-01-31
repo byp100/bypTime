@@ -4,37 +4,48 @@ class UsersController < InheritedResources::Base
 
   def new
     @event = Event.find(params[:event_id])
-    if @event.event_type == "orientation"
-      @user = User.new
+    if params[:code] == @event.access_code
+      if @event.event_type == "orientation"
+        @user = User.new
+      else
+        redirect_to event_path(@event), notice: "Sorry, you cannot join BYP with this type of event."
+      end
     else
-      redirect_to event_path(@event), notice: "Sorry, you cannot join BYP with this type of event."
+      redirect_to root_path
     end
   end
 
   # GET /users/1/edit
   def edit
+    @user = User.find(params[:id])
+  end
+
+  def index
+    @users = User.all
   end
 
   # POST /users
   # POST /users.json
   def create
-    @user = User.create(user_params)
-    Membership.create(organization_id: current_tenant.id, member_id: @user.id)
-    Membership.create(organization_id: Organization.find_by(slug: "www").id, member_id: @user.id)
+    @event = Event.find(params[:event_id])
+    if params[:code] == @event.access_code
+      @user = User.create(user_params)
+      Membership.create(organization_id: current_tenant.id, member_id: @user.id)
+      Membership.create(organization_id: Organization.find_by(slug: "www").id, member_id: @user.id)
 
-    if params[:event_id].present?
-      @event = Event.find(params[:event_id])
       Attendance.create(user: @user, event: @event)
-    end
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'user was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to root_path, notice: 'Your account was successfully created. Please login to access the event.' }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to root_path
     end
   end
 
@@ -70,17 +81,21 @@ class UsersController < InheritedResources::Base
 
   def import
     User.import params[:user_file]
-    redirect_to :back, notice: 'User data has been imported'
+    redirect_to :admin_dashboard, notice: 'User data has been imported'
   end
 
   private
 
     def set_user
-      @user = User.find(params[:id])
+      if params[:id].present?
+        @user = User.find(params[:id])
+      else
+        @user = current_user
+      end
     end
 
     def verify_user
-      unless user_signed_in? && current_user == @user
+      unless signed_in? && (current_user == @user || current_user.admin?(current_tenant))
         flash[:notice] = 'You are not authorized to view this page'
         redirect_to new_user_session_path
       end

@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def eligible_for_membership?
-    if attendances.joins(:events).where("events.event_type = orientation").count <= 1 && attendances.joins(:events).where("events.event_type = general_body_meeting").count <= 2 && attendances.joins(:events).where("events.event_type = public_event").count <= 1
+    if attendances.joins(:event).where("events.event_type = 'orientation'").count >= 1 && attendances.joins(:event).where("events.event_type = 'general_body_meeting'").count >= 2 && attendances.joins(:event).where("events.event_type = 'public_event'").count >= 1
       return true
     else
       return false
