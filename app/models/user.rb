@@ -118,6 +118,7 @@ class User < ActiveRecord::Base
             if index >= 4
               event_data[index - 4][:attendances].push(user.id) if item.present? && user.present?
             end
+            user = nil
           else
             if index == 0
               break
