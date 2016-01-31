@@ -106,14 +106,17 @@ class User < ActiveRecord::Base
             elsif index == 3
               user_data[:email] = item
             end
+            user = nil
             if index == 4
-              @user = User.create(name: user_data[:name], phone: user_data[:phone].to_s, email: user_data[:email], password: "password", password_confirmation: "password") if user_data[:phone].present?
-              if @user.id.present?
-                @user.memberships.create!(organization: organization)
+              user = User.find_by(phone: user_data[:phone].to_s) if user_data[:phone].present?
+              if user.nil?
+                user = User.create(name: user_data[:name], phone: user_data[:phone].to_s, email: user_data[:email], password: "password", password_confirmation: "password")
+                user.memberships.create!(organization: organization) if user.id.present?
               end
+
             end
             if index >= 4
-              event_data[index - 4][:attendances].push(@user.id) if item.present? && @user.id.present?
+              event_data[index - 4][:attendances].push(user.id) if item.present? && user.present?
             end
           else
             if index == 0
