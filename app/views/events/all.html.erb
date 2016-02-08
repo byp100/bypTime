@@ -10,7 +10,7 @@
 				<th>Attendees</th>
 				<th></th>
 			</tr>
-			<% @events.last(5).each do |event| %>
+			<% @events.each do |event| %>
 				<%= render "events/event_row", event: event %>
 			<% end %>
 		</table>
