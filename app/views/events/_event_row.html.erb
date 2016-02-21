@@ -1,5 +1,5 @@
 <tr>
-  <td><%= event.start_time.strftime("%b.%d, %Y at %H:%M %p") %></td>
+  <td><%= event.start_time.strftime("%b.%d, %Y at %l:%M %p") %></td>
   <td><%= event.title %></td>
   <td><%= event.event_type.titleize %></td>
   <td><a href= "<%= event_path(event) %>" class="btn btn-default">View</a></td>

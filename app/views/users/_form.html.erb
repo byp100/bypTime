@@ -16,7 +16,7 @@
     <%= f.input :birthdate, as: :date %>
     <%= f.input :pronouns %>
     <%= f.input :occupation %>
-    <%= f.input :password unless @user.id.present? %>
+    <%= f.input :password unless @user.id.present?  %>
     <%= f.input :password_confirmation unless @user.id.present? %>
     <%= f.input :referred_by %>
     <%= f.input :manual_invoicing if @user.id.present? %>
@@ -44,4 +44,20 @@
     <!--<%= f.input :immigrant, as: :boolean %>-->
    
     <%= f.button :submit %>
+<% end %>
+<% if @user.id.present? %>
+<%= form_for(@user, :url => { :action => "update_password" } ) do |f| %>
+    <%= f.hidden_field :id, value: @user.id  %>
+  <div class="field">
+    <%= f.label :password, "Password" %><br />
+    <%= f.password_field :password, :autocomplete => "off"  %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div class="action_container">
+    <%= f.submit "Update Password" %>
+  </div>
+<% end %>
 <% end %>

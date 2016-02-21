@@ -1,8 +1,8 @@
 <div class="row">
 	<div class="col-sm-5">
 		<div class="keen-widget keen-metric" style="background-color: #dd1c2e; width:NaNpx;">
-			<span class="keen-metric-value"><%= @users.count %></span>
-			<span class="keen-metric-title">Total Members</span>
+			<span class="keen-metric-value"><%= @users.active.count %></span>
+			<span class="keen-metric-title">Active Members</span>
 		</div>
 		<div class="row">
 
@@ -25,6 +25,18 @@
 				  <% end %>
 				</table>
 				<a href="<%= admin_users_path %>" class="btn btn-default">View All</a>
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h2 class="panel-title">Import Users</h2>
+				  </div>
+				  <div class="panel-body">
+				    <%= form_tag admin_user_import_path, multipart: true do %>
+				        <%= file_field_tag :user_file, class: 'btn' %>
+				        <%= submit_tag 'Import Users', class: 'btn btn-danger' %>
+				    <% end %>
+				    <a href="https://docs.google.com/spreadsheets/d/1TvSILiOxFIgq8kC_LqfNhhutcEuEAoQvh8ARtRvlGmk/edit?usp=sharing" target="_blank">Sample Excel File</a>
+				  </div>
+				</div>
 			</div>
 		</div>
 	</div>

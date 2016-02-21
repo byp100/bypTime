@@ -1,16 +1,5 @@
 <% provide(:title, "Users") %>
 <div class="row">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">Import Users</h2>
-    </div>
-    <div class="panel-body">
-      <%= form_tag admin_user_import_path, multipart: true do %>
-          <%= file_field_tag :user_file, class: 'btn' %>
-          <%= submit_tag 'Import Users', class: 'btn btn-danger' %>
-      <% end %>
-    </div>
-  </div>
   <div class="col-sm-12">
     <h3>All <%= current_tenant.name %> Members</h3>
     <p><%= @users.where(aasm_state: "prospective").count %> Prospective, <%= @users.where(aasm_state: "active").count %> Active</p>

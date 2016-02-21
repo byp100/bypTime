@@ -27,6 +27,9 @@ class User < ActiveRecord::Base
   after_initialize :set_default_role, if: :new_record?
 
 
+  scope :active, -> { where(:aasm_state => "active") }
+
+
   def rsvp? event
     events.include? event
   end

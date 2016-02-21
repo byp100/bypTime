@@ -7,9 +7,10 @@
 			<span class="payment-errors"></span>
 			<% image_tag("ajax-loader.gif", class: "loading-gif") %>
 			<%= simple_form_for :card_details, inner_html: { id: "credit-card-submit"} do |f| %>
-				<%= f.input :number, input_html: {class: "cc-num"} %>
-				<%= f.input :cvc, input_html: {class: "cc-cvc"} %>
-				<%= f.input :expiry, input_html: {class:"cc-exp"} %>
+				<%= f.input :number, input_html: {class: "cc-num"}, label: "Credit/Debit Card Number", placeholder: "4242 4242 4242 4242" %>
+
+				<%= f.input :cvc, input_html: {class: "cc-cvc"}, label: "CVC", placeholder: "123" %>
+				<%= f.input :expiry, input_html: {class:"cc-exp"}, label: "Expiration Date", placeholder: "06 / 18"  %>
 			  <%= f.button :submit, class: "submit-credit-card-button" %>
 			<% end %>
 			<button class="update_card">Change Card</button>
@@ -24,7 +25,7 @@
 			    	<%= a.input :email %>
 			    	<%= a.input :phone %>
 			      <%= a.simple_fields_for :billing_address do |b| %>
-			        <%= b.input :line1 %>
+			        <%= b.input :line1, label: "Address" %>
 			        <%= b.input :city %>
 			        <%= b.input :state %>
 			        <%= b.input :zip %>

@@ -1,7 +1,7 @@
 class EventsController < InheritedResources::Base
 
   def index
-    @events = Event.all.page(params[:page]).per_page 5
+    @events = Event.all.order(start_time: :desc).page(params[:page]).per_page 5
   end
 
   def all

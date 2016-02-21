@@ -1,3 +1,4 @@
+<h1>Pending Invoices</h1>
 <% @pending_invoices.each do |pending_invoice| %>
-<%= link_to pending_invoice.amount, billing_close_invoice_path(pending_invoice.id), method: :post, class: "btn btn-primary" %>
+<%= link_to "Pay #{pending_invoice.amount.to_i / 100}", billing_close_invoice_path(pending_invoice.id), method: :post, class: "btn btn-primary" %>
 <% end %>

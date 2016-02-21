@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   #ActiveAdmin.routes(self)
 
   authenticated :user do
+    patch 'update_password', to: "users#update_password"
     get "dashboard", to: "users#show", as: :dashboard
     scope 'dashboard' do
       get 'dues', to: "billing#overview"

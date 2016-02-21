@@ -9,7 +9,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <h2 class="col-md-2"><%= event.start_time.strftime("%b %d") %></h2>
+            <h2 class="col-md-2"><%= event.start_time.strftime("%b %d, %Y") %></h2>
 
             <div class="col-md-10">
               <h3><%= link_to event.title, event_path(event) %></h3>
