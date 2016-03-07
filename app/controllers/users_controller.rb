@@ -32,9 +32,26 @@ class UsersController < ApplicationController
     user_data = user_params
     user_data = user_params.except(:password_confirmation, :password) if user_params[:password_confirmation].blank?
     user_data[:phone] = user_data[:phone].gsub(/\D/, '')
+      if user_params[:admin] == "1" && current_user.admin?(current_tenant)
+        @user.memberships.find_by(organization_id: current_tenant.id).admin = true
+        @user.membership.save
+      elsif (user_params[:admin] == "0") && (@user.membership.admin == true) && current_user.admin?(current_tenant)
+        @user.memberships.find_by(organization_id: current_tenant.id).admin = false
+        @user.membership.save
+      else
+
+      end
     if @user.update!(user_data)
       redirect_to dashboard_path, notice: "You've updated your account."
     end
+  end
+
+  def update_membership
+    @membership = Membership.find(params[:id])
+
+    @membership.update_attributes!(membership_params)
+      
+    redirect_to :back
   end
 
   # POST /users
@@ -129,6 +146,10 @@ class UsersController < ApplicationController
         # NOTE: Using `strong_parameters` gem
         params.require(:user).permit(:password, :password_confirmation)
       end
+
+    def membership_params
+      params.require(:membership).permit(:id, :organization_id, :admin,  :membership_id)
+    end
 
     def user_params
       params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation, :manual_invoicing)

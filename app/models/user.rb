@@ -63,16 +63,21 @@ class User < ActiveRecord::Base
         row_items.each_with_index do |item, index|
           item = item.value
           if index > 3
-            event_type = "public_event"
-            if item == "Orientation"
-              event_type = "orientation"
-            elsif item == "Meeting"
-              event_type = "general_body_meeting"
+            if item.present?
+              event_type = "public_event"
+              if item == "Orientation"
+                event_type = "orientation"
+              elsif item == "Meeting"
+                event_type = "general_body_meeting"
+              end
+              event_data.push({
+                event_type: event_type,
+                attendances: []
+              })
+            else
+              event_data.push({
+              })
             end
-            event_data.push({
-              event_type: event_type,
-              attendances: []
-            })
           end
 
         end
@@ -113,7 +118,7 @@ class User < ActiveRecord::Base
             if index == 4
               user = User.find_by(phone: user_data[:phone].to_s) if user_data[:phone].present?
               if user.nil?
-                user = User.create(name: user_data[:name], phone: user_data[:phone].to_s, email: user_data[:email], password: "password", password_confirmation: "password")
+                user = User.create(name: user_data[:name], phone: user_data[:phone].to_i.to_s, email: user_data[:email], password: "password", password_confirmation: "password")
                 user.memberships.create!(organization: organization) if user.id.present?
               end
 
@@ -133,9 +138,14 @@ class User < ActiveRecord::Base
       row_count += 1
     end
     event_data.each do |data|
-      event = Event.find_or_create_by!(event_type: data[:event_type].downcase, start_time: data[:date].to_datetime, end_time: data[:date].to_datetime, title: data[:title])
-      data[:attendances].each do |user_id|
-        event.attendances.create(user_id: user_id)
+      if data[:event_type].present?
+        datetime = data[:date].to_datetime
+        if Event.find_by(start_time: datetime.beginning_of_day..datetime.end_of_day).nil?
+          event = Event.find_or_create_by!(event_type: data[:event_type].downcase, start_time: data[:date].to_datetime, end_time: data[:date].to_datetime, title: data[:title])
+          data[:attendances].each do |user_id|
+            event.attendances.create(user_id: user_id)
+          end
+        end
       end
 
     end

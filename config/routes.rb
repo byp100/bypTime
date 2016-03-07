@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     scope 'admin', as: :admin do
       get 'users', to: "users#index", as: :users
       get 'users/:id/edit', to: "users#edit", as: :edit_user
+      put 'users/:id/update_membership', to: "users#update_membership", as: :update_membership
       get 'users/:id', to: "users#show", as: :user
       post 'users/:user_id/check_in', to: "users#check_in", as: :user_check_in
       post 'users/import', to: "users#import", as: :user_import
