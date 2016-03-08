@@ -8,19 +8,21 @@
     </div>
     <% if current_user.admin?(current_tenant) %>
     <% @membership = Membership.find_by(organization_id: current_tenant.id, member_id: @user.id) %>
-    <% if current_user.admin?(current_tenant) %>
-      <% unless @user.admin?(current_tenant) %>
-        <%= simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f| %>
-          <%= f.input :admin, as: :hidden, input_html: {value: true } %>
-          <%= f.button :submit, "Make #{@user.name} an Admin" %>
-        <% end %>
-      <% else %>
-        <%= simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f| %>
-          <%= f.input :admin, as: :hidden, input_html: {value: false } %>
-          <%= f.button :submit, "Remove #{@user.name}'s Admin Status" %>
+      <% if @membership.present? %>
+        <% if current_user.admin?(current_tenant) %>
+          <% unless @user.admin?(current_tenant) %>
+            <%= simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f| %>
+              <%= f.input :admin, as: :hidden, input_html: {value: true } %>
+              <%= f.button :submit, "Make #{@user.name} an Admin" %>
+            <% end %>
+          <% else %>
+            <%= simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f| %>
+              <%= f.input :admin, as: :hidden, input_html: {value: false } %>
+              <%= f.button :submit, "Remove #{@user.name}'s Admin Status" %>
+            <% end %>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
     <% end %>
   <span class="edit_form__actions">
     <%= link_to 'Profile', admin_user_path(@user), class: 'btn btn-default' %>
