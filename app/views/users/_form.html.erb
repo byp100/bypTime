@@ -20,6 +20,20 @@
     <%= f.input :password_confirmation unless @user.id.present? %>
     <%= f.input :referred_by %>
     <%= f.input :manual_invoicing if @user.id.present? %>
+
+    <% superpower_skills = [
+"Grassroots fundraising","Grant writing","Child Care","Healing/Holistic Wellness","Media/Communications","Web Development/Coding   ","Youth work/ Educating","Art","singing","acting","writing","clothes making","public speaking","conflict mediator","event planning/logistics","video editing/media communications/graphic design","civic engagement [Drop down}","electoral politics","advocacy ","lobbying","public policy","mental health professionals","health care workers", "Other"] %>
+
+     <%= f.simple_fields_for :additional_info do |j| %>
+        <%= j.input :superpower_skills, label: "If your superpower was reflected in your skill set, what would it be?", collection: superpower_skills, selected: @user.additional_info["superpower_skills"], include_blank: true %>
+        <%= j.input :other_superpower, label: "If you selected \"Other\" for your superpower, please write in your superpower.", input_html: {value: @user.additional_info["other_superpower"]} %>
+        <%= j.input :join_date, label: "When did you join byp100?", input_html: {value: @user.additional_info["join_date"]} %>
+        <%= j.input :twitter, label: "Twitter", input_html: {value: @user.additional_info["twitter"]} %>
+        <%= j.input :facebook, label: "Facebook", input_html: {value: @user.additional_info["facebook"]} %>
+        <%= j.input :instagram, label: "Instagram", input_html: {value: @user.additional_info["instagram"]} %>
+        <%= j.input :personal_site, label: "Personal Blog/Site", input_html: {value: @user.additional_info["personal_site"]} %>
+
+    <% end %>
     <!--<hr>-->
     <!--<h3>Detailed Information</h3>-->
     <!--<%= f.input :nickname %>-->

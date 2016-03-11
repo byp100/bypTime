@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   authenticated :user do
     patch 'update_password', to: "users#update_password"
+    patch "update_demographics", to: "users#update_demographics", as: :update_user_demographics
     get "dashboard", to: "users#show", as: :dashboard
     scope 'dashboard' do
       get 'dues', to: "billing#overview"

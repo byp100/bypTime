@@ -30,6 +30,11 @@ class UsersController < ApplicationController
 
   def update
     user_data = user_params
+
+    additional_info = params[:user][:additional_info]
+
+    @user.update_attributes(additional_info: additional_info)
+
     user_data = user_params.except(:password_confirmation, :password) if user_params[:password_confirmation].blank?
     user_data[:phone] = user_data[:phone].gsub(/\D/, '')
       if user_params[:admin] == "1" && current_user.admin?(current_tenant)
@@ -125,6 +130,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_demographics
+    @user = User.find(current_user.id)
+    # @user.update(demographics: {})
+
+    demographic_info = params[:user][:demographic_info]
+    if @user.update_attributes(demographic_info: demographic_info)
+      # Sign in the user by passing validation in case their password changed
+      redirect_to dashboard_path, notice: "You've filled out your demographic info."
+    else
+      render "edit"
+    end
+  end
+
   private
 
     def set_user
@@ -152,6 +170,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation, :manual_invoicing)
+      params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation, :manual_invoicing, :demographic_info, :additional_info)
     end
 end
