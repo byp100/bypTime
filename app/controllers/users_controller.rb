@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def index
     if current_tenant.present?
-    @users = User.joins(:memberships).where(memberships: {organization_id: current_tenant.id}).uniq
+    @users = User.where(id: User.joins(:memberships).where(memberships: {organization_id: current_tenant.id}).to_a.uniq.map{|u| u.id})
     else
        @users = User.all
     end
