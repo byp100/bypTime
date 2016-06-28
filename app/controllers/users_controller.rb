@@ -120,11 +120,21 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    @user = User.find(current_user.id)
+    if current_user.super_admin && current_user.id != params[:user][:id]
+      @user = User.find(params[:user][:id])
+    else
+      @user = User.find(current_user.id)
+    end
+
     if @user.update(user_params)
       # Sign in the user by passing validation in case their password changed
-      sign_in @user, :bypass => true
-      redirect_to dashboard_path, notice: "You've updated your account."
+      if !current_user.super_admin
+        sign_in @user, :bypass => true
+        redirect_to dashboard_path, notice: "You've updated your account."
+      else
+        redirect_to edit_user_path(@user), notice: "You've changed the user's password."
+      end
+      
     else
       render "edit"
     end
