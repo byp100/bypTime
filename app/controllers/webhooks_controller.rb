@@ -9,7 +9,7 @@ class WebhooksController < ApplicationController
 
 			invoice = params[:content][:invoice]
 			
-			customer = User.find_by(customer_id: params[:content][:customer][:id])
+			customer = User.find_by(customer_id: invoice[:customer_id])
 
 				unless customer.manual_invoicing == true
 					Billing::Invoice.collect(invoice[:id])
