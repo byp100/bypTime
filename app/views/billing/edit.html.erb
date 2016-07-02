@@ -3,6 +3,9 @@
 <% if current_user.subscribed? %>
 <div class="container">
 	<div class="row">
+		<% if current_user.pending_invoices? %>
+			<%= link_to("Pending invoices", billing_pending_invoices_path) %>
+		<% end %>
 		<div class="col-md-8">
 			<h4>Credit Card</h4>
 			<span class="payment-errors"></span>

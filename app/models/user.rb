@@ -175,6 +175,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def pending_invoices?
+    Billing::Invoice.list_invoices(customer_id).select{|result| result.invoice.status == "pending"}.count > 0
+  end
+
   def begin_enrollment
     twilio = TwilioService.new
     twilio.send("Welcome, you have completed the attendance requirements for BYP100 membership, please pay your dues at www.byp100.org", phone)
