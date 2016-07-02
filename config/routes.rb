@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/import'
 
+  scope 'webhooks', as: :messages do
+    post 'chargebee_event', to: "webhooks#chargebee_event", as: :chargebee_event
+  end
+
 
   root 'static_pages#home'
 
