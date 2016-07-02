@@ -1,4 +1,5 @@
 class WebhooksController < ApplicationController
+	protect_from_forgery with: :null_session
 	http_basic_authenticate_with name: ENV['webhooks_name'], password: ENV['webhooks_password']
 
 	def chargebee_event
