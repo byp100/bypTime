@@ -35,6 +35,7 @@ class BillingController < ApplicationController
 
   def close_invoice
     Billing::Invoice.collect(params[:invoice_id])
+    redirect_to billing_pending_invoices_path, notice: "Thanks for paying your invoice!"
   end
 
   def update_card
