@@ -15,3 +15,8 @@ development:
   database: bypTime
   pool: 5
 
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: bypTime
+  pool: 5
