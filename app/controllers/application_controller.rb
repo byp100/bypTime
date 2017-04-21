@@ -31,14 +31,16 @@ class ApplicationController < ActionController::Base
   end
 
   def set_organization_as_tenant
-    organization = Organization.friendly.find(request.subdomain)
-    if organization.is_a? Chapter
+    organization = current_tenant
+    if !organization.nil? and organization.is_a? Chapter
       set_current_tenant(organization)
     end
   end
 
   def current_tenant
-    Organization.friendly.find(request.subdomain)
+    unless request.subdomain.empty?
+      Organization.friendly.find(request.subdomain)
+    end
   end
 
   def after_sign_out_path_for resource
