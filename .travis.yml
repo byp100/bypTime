@@ -1,3 +1,10 @@
 language: ruby
 rvm:
   - "2.1.1"
+services:
+  - postgresql
+test:
+  adapter: postgresql
+  database: bypTime
+before_script:
+  - rake db:test:prepare
