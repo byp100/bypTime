@@ -18,5 +18,5 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: bypTime
+  database: travis_ci_test
   pool: 5

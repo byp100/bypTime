@@ -40,7 +40,6 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'friendly_id', '~> 5.1.0' 
 gem 'acts_as_tenant'
 gem 'aasm'
-gem 'figaro'
 gem 'chargebee'
 gem 'bower-rails'
 
@@ -56,8 +55,6 @@ gem 'roo', '~> 2.1.0'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -73,8 +70,6 @@ group :development, :test do
 end
 
 group :production do
-  #Use postgres as the database for Heroku deployment
-  gem 'pg'
   gem 'rails_12factor'
 end
 
