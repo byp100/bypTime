@@ -1,4 +1,4 @@
-# BYP Time
+# BYP Time [![Build Status](https://travis-ci.org/byp100/bypTime.svg?branch=master)](https://travis-ci.org/byp100/bypTime)
 A web application to manage BYP membership and attendance
 
 ## Development
@@ -19,6 +19,19 @@ Organization.new(name: "City", slug:"city").save
 rails server
 ```
 navigate to [http://city.lvh.me:3000](http://city.lvh.me:3000)
+
+
+## Testing
+#### Run tests
+```
+rake db:test:prepare
+rspec
+```
+
+#### Run Single File
+```
+rspec spec/directory/file.rb
+```
 
 ## Deployment
 #### Requirements
