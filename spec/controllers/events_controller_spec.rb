@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 describe EventsController do
+  before :each do
+    User.destroy_all
+    Event.destroy_all
+  end
+
   describe 'GET #index' do
     it 'populates with all of the events' do
       event = create :event
