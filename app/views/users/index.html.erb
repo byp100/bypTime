@@ -9,6 +9,7 @@
         <th>Name</th>
         <th>Phone</th>
         <th>Status</th>
+        <th colspan="3">Actions</th>
         <th></th>
       </tr>
       <% @users.each do |user| %>
@@ -17,46 +18,14 @@
         <td><%= user.name %></td>
         <td><%= user.phone %></td>
         <td><%= user.aasm_state.titleize %></td>
+        <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', admin_edit_user_path(user) %></td>
+        <td><%= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
       </tr>
       <% end %>
     </table>
-    <a class="btn btn-default">Import Members</a>
   </div>
 </div>
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Phone</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-      <tr>
-        <td>
-          <%= user.name %>
-        </td>
-        <td>
-          <%= user.email %>
-        </td>
-        <td>
-          <%= user.phone %>
-        </td>
-        <td>
-          <%= link_to 'Show', user %>
-        </td>
-        <td>
-          <%= link_to 'Edit', edit_user_path(user) %>
-        </td>
-        <td>
-          <%= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' } %>
-        </td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-<%= link_to "Back", root_path %>
+<%= link_to "Back", :back, class: 'btn btn-default' %>
 
 

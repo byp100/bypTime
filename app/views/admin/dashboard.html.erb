@@ -20,28 +20,16 @@
 				    <td><%= user.id %></td>
 				    <td><%= user.name %></td>
 				    <td><%= user.aasm_state.titleize %></td>
-				    <td><a class="btn btn-default">View</a></td>
+				    <td><a href= "<%= user_path(user) %>" class="btn btn-default">View</a></td>
 				  </tr>
 				  <% end %>
 				</table>
 				<a href="<%= admin_users_path %>" class="btn btn-default">View All</a>
-				<div class="panel panel-default">
-				  <div class="panel-heading">
-				    <h2 class="panel-title">Import Users</h2>
-				  </div>
-				  <div class="panel-body">
-				    <%= form_tag admin_user_import_path, multipart: true do %>
-				        <%= file_field_tag :user_file, class: 'btn' %>
-				        <%= submit_tag 'Import Users', class: 'btn btn-danger' %>
-				    <% end %>
-				    <a href="https://docs.google.com/spreadsheets/d/1TvSILiOxFIgq8kC_LqfNhhutcEuEAoQvh8ARtRvlGmk/edit?usp=sharing" target="_blank">Sample Excel File</a>
-				  </div>
-				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-sm-7">
-		<div class="keen-widget keen-metric" style="background-color: #E8B15F; width:NaNpx;">
+		<div class="keen-widget keen-metric" style="background-color: #E8B15F;">
 			<span class="keen-metric-value"><%= @events.count %></span>
 			<span class="keen-metric-title">Total Events</span>
 		</div>
@@ -54,7 +42,6 @@
 						<th>Date & Time</th>
 						<th>Name</th>
 						<th>Type</th>
-						<th>Attendees</th>
 						<th></th>
 					</tr>
 					<% @events.last(5).each do |event| %>

@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
 
-
+  root 'static_pages#home'
   get 'static_pages/home'
-  get 'static_pages/import'
 
   scope 'webhooks', as: :messages do
     post 'chargebee_event', to: "webhooks#chargebee_event", as: :chargebee_event
   end
-
-
-  root 'static_pages#home'
-
-  get 'static_pages/home', as: :static_pages_about
 
   get 'events/:event_id/join', to: "users#new", as: :new_event_user
   post 'events/:event_id/users', to: "users#create", as: :event_users
@@ -48,6 +42,7 @@ Rails.application.routes.draw do
     end
 
     get 'admin', to: "admin#dashboard", as: :admin_dashboard
+    get 'admin/import', to: "admin#import", as: :admin_import
     scope 'admin', as: :admin do
       get 'users', to: "users#index", as: :users
       get 'users/:id/edit', to: "users#edit", as: :edit_user
