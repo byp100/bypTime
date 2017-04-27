@@ -20,6 +20,29 @@ class UsersController < InheritedResources::Base
     end
   end
 
+  def create_with_access_code
+    @event = Event.find(params[:event_id])
+    if params[:code] == @event.access_code
+      @user = User.create(user_params)
+      Membership.create(organization_id: ActsAsTenant.current_tenant.id, member_id: @user.id)
+      Membership.create(organization_id: Organization.find_by(slug: "www").id, member_id: @user.id)
+
+      Attendance.create(user: @user, event: @event)
+
+      respond_to do |format|
+        if @user.save
+          format.html { redirect_to root_path, notice: 'Your account was successfully created. Please login to access the event.' }
+          format.json { render :show, status: :created, location: @user }
+        else
+          format.html { render :new }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      redirect_to root_path, alert: 'Unable to create user. Invalid access code'
+    end
+  end
+
   def check_in
     @event = Event.find params[:event_id]
     @attendee = User.find params[:user_id]
