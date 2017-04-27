@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'events/:event_id/join', to: "users#new", as: :new_event_user
   post 'events/:event_id/users', to: "users#create", as: :event_users
 
+  post 'users/create_with_access_code', to: 'users#create_with_access_code', as: 'create_with_access_code'
 
   devise_for :users
 

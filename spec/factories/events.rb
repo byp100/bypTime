@@ -22,5 +22,9 @@ FactoryGirl.define do
       description 'Meet us downtown at the mayors office to unite against oppression and structural racism'
       event_type :public_event
     end
+
+    trait :access_code do
+      access_code "4422"
+    end
   end
 end

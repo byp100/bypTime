@@ -67,6 +67,32 @@ describe UsersController do
     end
   end
 
+  describe 'POST #create_with_access_code' do
+    context 'with valid access code' do
+      it 'creates the user and an attendance' do
+        organization = create :organization, slug: 'www'
+        ActsAsTenant.current_tenant = organization
+        event = create :event, :access_code
+
+        post :create_with_access_code, code: '4422', user: attributes_for(:user), event_id: event.id
+        expect(User.count).to eq 1
+        expect(Attendance.count).to eq 1
+      end
+    end
+
+    context 'with invalid access code' do
+      it 'redirects to home page with error message' do
+        organization = create :organization, slug: 'www'
+        ActsAsTenant.current_tenant = organization
+        event = create :event, :access_code
+
+        post :create_with_access_code, code: '4425', user: attributes_for(:user), event_id: event.id
+        expect(response).to redirect_to root_path
+        expect(flash[:alert]).to eq 'Unable to create user. Invalid access code'
+      end
+    end
+  end
+
   describe 'PUT #update' do
     before :each do
       @user = create :user
