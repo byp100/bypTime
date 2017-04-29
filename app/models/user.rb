@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone]
 
-  validates :phone, presence: true, uniqueness: true
+  validates :phone, presence: true, uniqueness: true, format: { with: /\d{10}/ }
   validates :name, presence: true
 
   has_many :attendances

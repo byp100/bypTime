@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'membership_eligibility:event_requirements' do
+describe 'users:membership_status' do
   include_context 'rake'
 
   before do
@@ -23,7 +23,7 @@ describe 'membership_eligibility:event_requirements' do
   end
 
   it 'sets eligibility correctly' do
-    subject.invoke # Rake::Task['membership_eligibility:event_requirements'].invoke
+    subject.invoke # Rake::Task['users:membership_status'].invoke
     @user.reload
     @ineligible_user.reload
     @admin_user.reload
@@ -31,5 +31,26 @@ describe 'membership_eligibility:event_requirements' do
     expect(@user.role).to eq 'member'
     expect(@ineligible_user.role).to eq 'guest'
     expect(@admin_user.role).to eq 'admin'
+  end
+end
+
+describe 'users:sanitize_phone' do
+  include_context 'rake'
+
+  before do
+    @user1 = build :user, phone: '(312) 555-1000'
+    @user1.save validate: false
+
+    @user2 = build :user, phone: '704.555.1000'
+    @user2.save validate: false
+  end
+
+  it 'removes non numeric characters from phone numbers' do
+    subject.invoke # Rake::Task['users:sanitize_phone'].invoke
+    @user1.reload
+    @user2.reload
+
+    expect(@user1.phone).to eq '3125551000'
+    expect(@user2.phone).to eq '7045551000'
   end
 end
