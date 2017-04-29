@@ -9,14 +9,27 @@ describe User do
   it 'has a valid factory' do
     @user.should be_valid
   end
-  it 'is invalid without a phone number' do
-    user = build :user, phone: nil
-    user.should_not be_valid
-  end
 
-  it 'is invalid without a name' do
-    user = build :user, name: nil
-    user.should_not be_valid
+  context 'it is invalid' do
+    it 'without a phone number' do
+      user = build :user, phone: nil
+      user.should_not be_valid
+    end
+
+    it 'with non numerical phone number' do
+      user = build :user, phone: '(312) 555-1000'
+      user.should_not be_valid
+    end
+
+    it 'with phone number less than 10 digits' do
+      user = build :user, phone: '5551000'
+      user.should_not be_valid
+    end
+
+    it 'without a name' do
+      user = build :user, name: nil
+      user.should_not be_valid
+    end
   end
 
   describe '#rsvp?' do
