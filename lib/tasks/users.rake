@@ -1,7 +1,8 @@
-namespace :membership_eligibility do
-  desc 'Daily task to check whether each user is meeting their membership requirements'
-  task event_requirements: :environment do
+namespace :users do
+  desc 'Update role based on membership requirements'
+  task membership_status: :environment do
     User.all.each do |user|
+      puts "Name: #{user.name}"
       next if user.role == 'admin'
       orientations = Event.joins(:attendances).where(event_type: 0, attendances: { user_id: user.id, in_attendance: true } )
       general_body_meetings = Event.joins(:attendances).where(event_type: 1, attendances: { user_id: user.id, in_attendance: true } )
@@ -12,6 +13,14 @@ namespace :membership_eligibility do
       else
         user.update_attributes(role: 'guest')
       end
+    end
+  end
+
+  desc "Clean up phone numbers"
+  task sanitize_phone: :environment do
+    User.all.each do |user|
+      user.update_attributes(phone: user.phone.gsub(/\D/, ''))
+      puts "Name: #{user.name} Phone: #{user.phone}"
     end
   end
 end
