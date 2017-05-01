@@ -2,7 +2,6 @@ namespace :users do
   desc 'Update role based on membership requirements'
   task membership_status: :environment do
     User.all.each do |user|
-      puts "Name: #{user.name}"
       next if user.role == 'admin'
       orientations = Event.joins(:attendances).where(event_type: 0, attendances: { user_id: user.id, in_attendance: true } )
       general_body_meetings = Event.joins(:attendances).where(event_type: 1, attendances: { user_id: user.id, in_attendance: true } )
