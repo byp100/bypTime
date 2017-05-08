@@ -67,6 +67,8 @@ Rails.application.routes.draw do
       post 'create_attendee' => 'users#create_attendee', as: 'create_attendee'
     end
   end
+
+  match "*path", to: redirect('/'), via: :all, alert: 'Page does not exist!'
 end
 
 
