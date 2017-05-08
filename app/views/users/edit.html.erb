@@ -35,7 +35,7 @@
     <h2 class="panel-title">Edit Demographic Info</h2>
   </div>
     <div class="panel-body">
-      <%= simple_form_for @user, url: update_user_demographics_path do |f| %>
+      <%= simple_form_for @user do |f| %>
      <%= f.simple_fields_for :demographic_info do |j| %>
         <%= j.input :immigration_status, label: "What is your immigrant status?", collection: ["US Citizen" ,"US National", "Permanent Resident Alien", "I am a resident alien permit holder", "I am a green card holder", "I am undocumented"], selected: @user.demographic_info["immigration_status"], include_blank: true %>
         <%= j.input :employment_status, label: "Are you employed?", collection: ["Yes" ,"No"], selected: @user.demographic_info["employment_status"], include_blank: true %>

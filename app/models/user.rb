@@ -162,6 +162,8 @@ class User < ActiveRecord::Base
   def admin?(current_tenant)
     if super_admin
       true
+    elsif current_tenant.nil?
+      false
     else
       Membership.find_by(organization_id: current_tenant.id, member_id: id).admin
     end
