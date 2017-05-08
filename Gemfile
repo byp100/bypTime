@@ -42,6 +42,8 @@ gem 'acts_as_tenant'
 gem 'aasm'
 gem 'chargebee'
 gem 'bower-rails'
+gem 'faker'
+gem 'factory_girl_rails'
 
 gem 'roo', '~> 2.1.0'
 
@@ -63,7 +65,6 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
