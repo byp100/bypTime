@@ -1,0 +1,20 @@
+%nav.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#navbar-links", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      .navbar-brand
+        = link_to image_tag("byp100_logo.jpg", class: 'navigation__logo'), "/"
+        = " #{current_tenant.short_name.capitalize if chapter?}"
+    #navbar-links.collapse.navbar-collapse
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to "Events", events_path
+          %li= link_to "Admin", admin_dashboard_path if current_user.admin?(current_tenant)
+          %li= link_to "Sign Out", destroy_user_session_path, method: 'delete'
+          %li= link_to "Profile", user_path(current_user)
+        - else
+          %li= link_to "Log In", new_user_session_path

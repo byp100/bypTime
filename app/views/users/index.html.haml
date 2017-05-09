@@ -1,21 +1,26 @@
 - provide(:title, "Users")
-%h1 Users
-
-%table
-  %thead
-    %tr
-      %th Name
-      %th Email
-      %th Phone
-
-  %tbody
-    - @users.each do |user|
+.row
+  .col-sm-12
+    %h3
+      All #{current_tenant.name} Members
+    %p
+      = @users.where(aasm_state: "prospective").count
+      Prospective, #{@users.where(aasm_state: "active").count} Active
+    %table.table
       %tr
-        %td= user.name
-        %td= user.email
-        %td= user.phone
-        %td= link_to 'Show', user
-        %td= link_to 'Edit', edit_user_path(user)
-        %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-= link_to "Back", root_path
+        %th #
+        %th Name
+        %th Phone
+        %th Status
+        %th{:colspan => "3"} Actions
+        %th
+      - @users.each do |user|
+        %tr
+          %td= user.id
+          %td= user.name
+          %td= user.phone
+          %td= user.aasm_state.titleize
+          %td= link_to 'Show', user
+          %td= link_to 'Edit', admin_edit_user_path(user)
+          %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
+= link_to "Back", :back, class: 'btn btn-default'

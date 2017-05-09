@@ -2,13 +2,24 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title= full_title(yield(:title))
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0", :name => "viewport"}/
+    %title
+      = full_title(yield(:title))
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    %script{:src => "https://js.stripe.com/v2/", :type => "text/javascript"}
+    %script{:src => "https://checkout.stripe.com/checkout.js"}
     = render 'layouts/shim'
   %body
-    = render 'layouts/header'
+    = render 'layouts/navigation'
+    - if alert.present?
+      .alert.alert-dismissable.alert-warning
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+        = alert
+    - if notice.present?
+      .alert.alert-dismissable.alert-success
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "alert", :type => "button"} ×
+        = notice
     .container
       = yield
-      = render 'layouts/footer'

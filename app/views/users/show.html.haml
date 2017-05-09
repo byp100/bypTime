@@ -1,41 +1,47 @@
-- provide(:title, user.name)
-%div.container
-  %p#notice= notice
-  - if user.admin?(current_tenant)
-    %h3#notice= Admin
-  %h1
-    = gravatar_for user if user.email.present?
-    = user.name
-
-  %table.table.table-bordered.table-hover.table-responsive
-    %tr
-      %th Email
-      %td= user.email
-      %tr
-      %th Phone Number
-      %td= number_to_phone(user.phone, area_code: true)
-      %tr
-      %th Occupation
-      %td= user.occupation
-
-  - unless user.events.empty?
-    %h3 Events Attending
-    %table.table.table-bordered.table-hover.table-responsive
-      %tr
-        %th Event
-        %th Description
-        %th Date
-        %th Location
-        %th Unattend
-      - user.events.each do |event|
+- provide(:title, @user.name)
+.container
+  %p#notice
+    = notice
+  .panel.panel-default
+    .panel-heading
+      .row
+        .col-md-3
+          %span.user_profile__avatar= gravatar_for @user
+        .col-md-6
+          %h1.user_profile__name= @user.name
+          .user_profile__details
+            %i.fa.fa-phone
+            = number_to_phone(@user.phone, area_code: true)
+          .user_profile__details
+            %i.fa.fa-envelope
+            = @user.email
+          .user_profile__details
+            %i.fa.fa-briefcase
+            = @user.occupation
+        .col-md-3.user_profile__actions
+          = link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default'
+          = link_to 'Manage Dues', billing_enroll_path, class: 'btn btn-default' if current_user == @user
+          - if @user.admin?(current_tenant)
+            = link_to 'Create Event', new_event_path, class: 'btn btn-default' if current_user == @user
+  - unless @user.events.empty?
+    .panel.panel-warning
+      .panel-heading.table-responsive Events
+      %table.table.table-hover
         %tr
-          %td= link_to event.title, event_path(event)
-          %td= event.description
-          %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
-          %td= event.location
-          %td= link_to "Unattend", unattend_path(attendee_id: user.id, event_id: event.id), method: :put
-
-  = link_to 'Edit Profile', edit_user_path(user), class: 'btn btn-default'
-  - if user.admin?
-    = link_to 'Create Event', new_event_path, class: 'btn btn-default'
-
+          %th Event
+          %th Description
+          %th When
+          %th Where
+          %th Unattend
+        - @user.events.each do |event|
+          %tr
+            %td
+              = link_to event.title, event_path(event)
+            %td
+              = event.description
+            %td
+              = event.start_time.strftime("%A, %b %-d -- %-I:%M %P")
+            %td
+              = event.location
+            %td
+              = link_to "Unattend", unattend_path(attendee_id: @user.id, event_id: event.id), method: :put, class: 'btn btn-warning'

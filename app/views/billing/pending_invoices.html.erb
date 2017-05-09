@@ -1,7 +1,0 @@
-<h1>Pending Invoices</h1>
-<% @pending_invoices.each do |pending_invoice| %>
-  <p>
-    <%= link_to "Pay $#{pending_invoice.invoice.amount.to_i / 100}", billing_close_invoice_path(invoice_id: pending_invoice.invoice.id), method: :post, class: "btn btn-primary" %>
-    Invoice for dues from <%= Time.at(pending_invoice.invoice.start_date).strftime("%B %e, %Y") %> to <%= Time.at(pending_invoice.invoice.end_date).strftime("%B %e, %Y") %>
-  </p>
-<% end %>
