@@ -1,2 +1,22 @@
-%h1 Admin#dashboard
-%p Find me in app/views/admin/dashboard.html.haml
+.row
+  .col-sm-5
+    .keen-widget.keen-metric
+      %span.keen-metric-value= @users.active.count
+      %span.keen-metric-title Active Members
+    .row
+      .col-sm-12
+        %h3 Latest Members
+        %table.table
+          %tr
+            %th #
+            %th Name
+            %th Status
+            %th
+          - @users.last(5).each do |user|
+            %tr
+              %td= user.id
+              %td= user.name
+              %td= user.aasm_state.titleize
+              %td
+                = link_to "View", user_path(user), class: "btn btn-default"
+      = link_to "View All", admin_users_path, class: "btn btn-default"

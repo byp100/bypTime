@@ -1,18 +1,12 @@
-%h2 Log In
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :phone
-    %input#hidden_phone{:name => "phone_number", :type => "hidden", :value => ""}/
-    %br/
-    = f.text_field :phone, autofocus: true
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log In"
-= render "devise/shared/links"
+.panel.panel-default.login_form
+  .panel-heading
+    %h2.panel-title Log in
+  .panel-body
+    = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .form-inputs
+        = f.input :phone, required: false, autofocus: true
+        = f.input :password, required: false
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+      .form-actions
+        = f.button :submit, "Log in"
+    = render "devise/shared/links"

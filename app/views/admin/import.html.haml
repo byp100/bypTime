@@ -1,0 +1,64 @@
+- provide(:title, "Import Data")
+.container
+  .col-md-3
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Import Users
+      .panel-body
+        = form_tag import_users_path, multipart: true do
+          = file_field_tag :user_file, class: 'btn'
+          = submit_tag 'Import Users', class: 'btn btn-danger'
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Import Events
+      .panel-body
+        = form_tag import_events_path, multipart: true do
+          = file_field_tag :event_file, class: 'btn'
+          = submit_tag 'Import Events', class: 'btn btn-danger'
+    .panel.panel-default
+      .panel-heading
+        %h2.panel-title Import Attendances
+      .panel-body
+        = form_tag import_attendances_events_path, multipart: true do
+          = file_field_tag :attendance_file, class: 'btn'
+          = submit_tag 'Import Attendances', class: 'btn btn-danger'
+  .col-md-7
+    .jumbotron
+      %h2 Instructions for Importing Data
+      %ol
+        %li Create spreadsheets with corresponding headers
+        %li Export as CSV
+        %li Choose File and import data
+      %hr/
+      %h3 Header Formats
+      %h5 Users
+      %table.table.table-bordered.table-hover
+        %tr.active
+          %td phone
+          %td name
+          %td email
+          %td password
+      %h5 Events
+      %table.table.table-bordered.table-hover
+        %tr.active
+          %td title
+          %td description
+          %td start_time
+          %td event_type
+      %h5 Attendances
+      %table.table.table-bordered.table-hover
+        %tr.active
+          %td phone
+          %td event_id
+          %td event_id
+          %td event_id
+      %hr/
+      %h4 Notes
+      %ul
+        %li Set all passwords to a known value so that users can sign in an manually change their passwords
+        %li
+          Start time for events should be in this format:
+          %samp YYYY-MM-DD
+        %li
+          Valid event types are:
+          %samp orientation, general_body_meeting, public_event

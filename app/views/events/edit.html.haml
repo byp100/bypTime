@@ -1,6 +1,9 @@
-- provide(:title, "Edit Event")
-%h1 Edit Event
-= render 'form'
-= link_to 'Show', @event
-\|
-= link_to 'Back', events_path
+- provide(:title, 'Edit Event')
+.panel.panel-default.edit_form
+  .panel-heading
+    %h2.panel-title Edit Event
+  .panel-body
+    = render 'form'
+  %span.edit_form__actions
+    = link_to 'Event', @event, class: 'btn btn-default'
+    = link_to 'Back', events_path, class: 'btn btn-default'

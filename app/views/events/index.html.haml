@@ -1,20 +1,23 @@
 - provide(:title, "Events")
-%div
+.container
   %h1 Events
-  %table.table.table-bordered.table-striped.table-hover.table-responsive
-    %tr
-      %th Title
-      %th Type
-      %th Description
-      %th When
-      %th Where
-    - @events.each do |event|
-      %tr
-        %td= link_to event.title, event_path(event)
-        %td= event.event_type.titleize
-        %td= event.description
-        %td= event.start_time.strftime("%A, %b %-d, %Y %-I:%M %p")
-        %td= event.address
-
-  - if user_signed_in? && current_user.admin?
-    = link_to 'Create Event', new_event_path, class: 'btn btn-default'
+  .standard-pagination
+    = will_paginate @events, previous_label: 'previous page', next_label: 'next page'
+  - @events.each do |event|
+    .panel.panel-default
+      .panel-heading
+        .row
+          %h2.col-md-2= event.start_time.strftime("%b %d, %Y")
+          .col-md-10
+            %h3= link_to event.title, event_path(event)
+            %p.events_header__details
+              = event.start_time.strftime("%l:%M %P")
+              •
+              \#{event.address}
+      .panel-body
+        .row
+          .col-md-2
+          .col-md-10
+            = event.description
+  .standard-pagination
+    = will_paginate @events, previous_label: 'previous page', next_label: 'next page'

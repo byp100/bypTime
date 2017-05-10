@@ -1,7 +1,44 @@
-%h1 Edit Profile
-
-= render 'form'
-
-= link_to 'Show', @user
-\|
-= link_to 'Back', users_path
+- provide(:title, 'Edit Profile')
+.panel.panel-default.edit_form
+  .panel-heading
+    %h2.panel-title Edit Profile
+  .panel-body
+    = render 'form'
+  - if current_user.admin?(current_tenant)
+    - @membership = Membership.find_by(organization_id: current_tenant.id, member_id: @user.id)
+    - if @membership.present?
+      - if current_user.admin?(current_tenant)
+        - unless @user.admin?(current_tenant)
+          = simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f|
+            = f.input :admin, as: :hidden, input_html: {value: true }
+            = f.button :submit, "Make #{@user.name} an Admin"
+        - else
+          = simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f|
+            = f.input :admin, as: :hidden, input_html: {value: false }
+            = f.button :submit, "Remove #{@user.name}'s Admin Status"
+  %span.edit_form__actions
+    = link_to 'Profile', admin_user_path(@user), class: 'btn btn-default'
+    = link_to 'Back', admin_users_path, class: 'btn btn-default'
+.panel.panel-default.edit_form
+  .panel-heading
+    %h2.panel-title Edit Demographic Info
+  .panel-body
+    = simple_form_for @user do |f|
+      = f.simple_fields_for :demographic_info do |j|
+        = j.input :immigration_status, label: "What is your immigrant status?", collection: ["US Citizen" ,"US National", "Permanent Resident Alien", "I am a resident alien permit holder", "I am a green card holder", "I am undocumented"], selected: @user.demographic_info["immigration_status"], include_blank: true
+        = j.input :employment_status, label: "Are you employed?", collection: ["Yes" ,"No"], selected: @user.demographic_info["employment_status"], include_blank: true
+        = j.input :income_frequency, label: "What is the frequency of your income?", collection: ["Hourly Wage" ,"Part-time", "Annual Salary"], selected: @user.demographic_info["income_frequency"], include_blank: true
+        = j.input :income, label: "What is your income?", input_html: {value: @user.demographic_info["income"]}
+        = j.input :student_status, label: "Are you a student?", collection: ["Yes" ,"No"], selected: @user.demographic_info["student_status"], include_blank: true
+        = j.input :education_level, label: "What is the highest level of education completed?", collection: ["Attained a professional degree (JD, MBA, PHD)", "Attained a Master’s Degree", "Attained a Bachelor’s degree", "Attained an Associate's degree/ professional license", "Attained a High School diploma", "Other"], selected: @user.demographic_info["education_level"], include_blank: true
+        = j.input :partnership_status, label: "What is your partnership status", collection: ["In a partnership/relationship" ,"Not partnered", "Living with a partner", "Married"], selected: @user.demographic_info["partnership_status"], include_blank: true
+        = j.input :parent_status, label: "Are you a parent/guardian?", collection: ["Yes" ,"No"], selected: @user.demographic_info["parent_status"], include_blank: true
+        = j.input :childcare_interest, label: "If you are a parent or guardian, are you interested in childcare options?", collection: ["Yes" ,"No"], selected: @user.demographic_info["childcare_interest"], include_blank: true
+        = j.input :children_count, label: "If you are a parent or guardian, of how many children?", input_html: {value: @user.demographic_info["children_count"]}
+        = j.input :household_size, label: "What is your household size?", input_html: {value: @user.demographic_info["household_size"]}
+        = j.input :dietary_needs, label: "Do you have any dietary restrictions", collection: ["Yes" ,"No"], selected: @user.demographic_info["dietary_needs"], include_blank: true
+        = j.input :diet_details, label: "If you have dietary restrictions, what are they?", input_html: {value: @user.demographic_info["diet_details"]}
+        = j.input :disability_status, label: "Do you identify as a person who is differently abled or living with a disability?", collection: ["Yes" ,"No"], selected: @user.demographic_info["disability_status"], include_blank: true
+        = j.input :disability_details, label: "If you identify as a person who is differently abled or living with a disability, in what way?", input_html: {value: @user.demographic_info["disability_details"]}
+        = j.input :disability_preferences, label: "If you identify as a person who is differently abled or living with a disability, what can be done to make byp100 accessible for you?", input_html: {value: @user.demographic_info["disability_preferences"]}
+      = f.button :submit
