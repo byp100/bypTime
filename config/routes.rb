@@ -18,6 +18,11 @@ Rails.application.routes.draw do
   #ActiveAdmin.routes(self)
 
   authenticated :user do
+    scope 'dues' do
+      get 'show', to: 'billing#show', as: :show_dues
+      get 'edit', to: 'billing#edit', as: :edit_dues
+    end
+
     scope 'dashboard' do
       get 'dues', to: "billing#overview"
       scope 'dues', as: :billing do

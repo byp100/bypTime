@@ -1,0 +1,12 @@
+- provide(:title, "Dues")
+.container
+  .jumbotron
+    %h1 Dues
+    - unless current_user.subscribed?
+      %p Become an active BYP100 member!
+      = link_to 'Pay Dues', edit_dues_path, class: 'btn btn-danger btn-lg', role: 'button'
+    - else
+      %h3 Active Since
+      %h3 Pay Cycle
+      %h3 Next Payment
+      %h3 Credit Card

@@ -1,21 +1,16 @@
 class BillingController < ApplicationController
   rescue_from ChargeBee::PaymentError do |ex|
-    # First check for card parameters entered by the user.
-    # We recommend you to validate the input at the client side itself to catch simple mistakes.
     if "card[number]" == ex.param
-      # Ask your user to recheck the card number. A better way is to use
-      # Stripe's https://github.com/stripe/jquery.payment for validating it in the client side itself.
-
-      #elsif <other card params> == ex.param
-      # Similarly check for other card parameters entered by the user.
-      # ....
-
+      redirect_to :back, notice: "Please recheck your card number."
     else
       redirect_to :back, notice: "Your payment method was declined. Please try another card."
     end
   end
   rescue_from ChargeBee::InvalidRequestError do |ex|
     redirect_to :back, notice: ex.param
+  end
+
+  def show
   end
 
   def edit
