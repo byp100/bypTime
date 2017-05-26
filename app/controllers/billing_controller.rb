@@ -10,9 +10,6 @@ class BillingController < ApplicationController
     redirect_to :back, notice: ex.param
   end
 
-  def show
-  end
-
   def edit
     if current_user.subscribed?
       @customer = ChargeBee::Subscription.retrieve(current_user.customer_id).customer
