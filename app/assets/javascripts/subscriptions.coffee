@@ -27,8 +27,8 @@ subscribeErrorHandler = (jqXHR, textStatus, errorThrown) ->
   return
 
 subscribeResponseHandler = (responseJSON) ->
-  console.log "successful submission! #{JSON.stringify responseJSON}"
-  window.location.replace responseJSON.forward
+  console.log "success!"
+  window.location.reload()
   return
 
 handleStripeToken = (token, args) ->
@@ -43,8 +43,8 @@ handleStripeToken = (token, args) ->
 
 $(document).ready ->
   handler = StripeCheckout.configure(
-    key: 'pk_test_f5J0lsDJKmvBsuIP30VSgxac'
-    allowRememberMe: false
+    key: 'pk_test_ZCYcc9IRBdjalYABgew5bkEZ'
+    allowRememberMe: true
     token: handleStripeToken)
 
   populateEmail()

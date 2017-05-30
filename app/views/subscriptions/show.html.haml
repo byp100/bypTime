@@ -1,12 +1,28 @@
 - provide(:title, "Dues")
+= javascript_include_tag 'subscriptions'
 .container
   .jumbotron
     %h1 Dues
     - unless current_user.subscribed?
-      %p Become an active BYP100 member!
-      = link_to 'Pay Dues', edit_dues_path, class: 'btn btn-danger btn-lg', role: 'button'
+      %p Pay dues monthly to become an active BYP100 member!
+      = form_tag({controller: 'subscriptions', action: 'create', method: 'post'}, id: 'subscribe-form')  do
+        %article
+          - if flash[:error].present?
+            #error_explanation
+              %p= flash[:error]
+        = hidden_field_tag 'member_email', ''
+        = hidden_field_tag 'plan_desc', 'Monthly Membership Dues'
+        = hidden_field_tag 'plan_price', '1000'
+        = hidden_field_tag 'stripeToken', ''
+        = submit_tag 'Pay Dues',  class: 'btn btn-success btn-lg', id: 'submit-btn'
     - else
       %h3 Active Since
+      %p
+        = Time.at(@subscription.started_at).strftime("%A, %b %d")
       %h3 Pay Cycle
+      %p
+        = @subscription.plan_id == 'membership_monthly' ? 'Monthly' : 'Yearly'
       %h3 Next Payment
-      %h3 Credit Card
+      %p
+        = Time.at(@subscription.current_term_end).strftime("%A, %b %d")
+      = link_to 'Cancel Payments', { action: :destroy }, class: 'btn btn-danger btn-lg', method: :delete, data: {confirm: 'Are you sure?'}
