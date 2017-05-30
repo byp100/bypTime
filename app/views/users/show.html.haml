@@ -20,7 +20,7 @@
             = @user.occupation
         .col-md-3.user_profile__actions
           = link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default'
-          = link_to 'Manage Dues', billing_enroll_path, class: 'btn btn-default' if current_user == @user
+          = link_to 'Subscriptions', subscription_path(@user), class: 'btn btn-default' if current_user == @user
           - if @user.admin?(current_tenant)
             = link_to 'Create Event', new_event_path, class: 'btn btn-default' if current_user == @user
   - unless @user.events.empty?
