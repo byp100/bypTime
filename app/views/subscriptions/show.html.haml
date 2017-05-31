@@ -18,11 +18,11 @@
     - else
       %h3 Active Since
       %p
-        = Time.at(@subscription.started_at).strftime("%A, %b %d")
+        = Time.at(@subscription.started_at).strftime("%A, %b %-d, %Y")
       %h3 Pay Cycle
       %p
         = @subscription.plan_id == 'membership_monthly' ? 'Monthly' : 'Yearly'
       %h3 Next Payment
       %p
-        = Time.at(@subscription.current_term_end).strftime("%A, %b %d")
+        = Time.at(@subscription.current_term_end).strftime("%A, %b %-d, %Y")
       = link_to 'Cancel Payments', { action: :destroy }, class: 'btn btn-danger btn-lg', method: :delete, data: {confirm: 'Are you sure?'}

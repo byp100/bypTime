@@ -37,7 +37,7 @@ class SubscriptionsController < ApplicationController
     flash[:notice] = 'Thanks, you are now an active member!'
     respond_to do |format|
         format.html { redirect_to :back }
-        format.json {render json: current_user, status: :created}
+        format.json { render json: current_user, status: :created }
     end
   end
 

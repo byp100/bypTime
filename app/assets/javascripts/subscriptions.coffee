@@ -29,7 +29,7 @@ subscribeErrorHandler = (jqXHR, textStatus, errorThrown) ->
 
 subscribeResponseHandler = (responseJSON) ->
   console.log "success!"
-  window.location.reload()
+  window.location.replace "/subscriptions/#{responseJSON.id}"
   return
 
 handleStripeToken = (token, args) ->
