@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#home'
   get 'static_pages/home'
+  post 'static_pages/chapter', to: 'static_pages#chapter'
 
   scope 'webhooks', as: :messages do
     post 'chargebee_event', to: "webhooks#chargebee_event", as: :chargebee_event

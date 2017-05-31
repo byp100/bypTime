@@ -14,7 +14,8 @@ populateEmail = () ->
     a
   ), {})['email']
 
-  $('#member_email').val email.replace('%40', '@')
+  if email
+    $('#member_email').val email.replace('%40', '@')
   return
 
 
