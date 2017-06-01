@@ -33,6 +33,7 @@ class SubscriptionsController < ApplicationController
 
     subscription = create_subscription plan_id, customer
     current_user.update(customer_id: subscription.customer.id)
+    current_user.aasm_state == 'prospective' ? current_user.induct! : current_user.activate!
 
     flash[:notice] = 'Thanks, you are now an active member!'
     respond_to do |format|
@@ -44,6 +45,7 @@ class SubscriptionsController < ApplicationController
   def destroy
     if current_user.customer_id.present?
       ChargeBee::Subscription.cancel(current_user.customer_id)
+      current_user.deactivate!
       flash[:notice] = 'You have successfully canceled your membership'
     else
       flash[:error] = 'You do not have a currently active membership'
