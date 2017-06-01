@@ -3,15 +3,15 @@ class WebhooksController < ApplicationController
 	http_basic_authenticate_with name: ENV['webhooks_name'], password: ENV['webhooks_password']
 
 	def chargebee_event
-		if params[:event_type] == "subscription_cancelled"
-		elsif params[:event_type] == "invoice_created"
+		if params[:event_type] == 'subscription_cancelled'
+		elsif params[:event_type] == 'invoice_created'
 			invoice = params[:content][:invoice]
 			customer = User.find_by(customer_id: invoice[:customer_id])
 
-			ChargeBee::Invoice.collect(invoice[:id]) unless customer.manual_invoicing
-			render json: {outcome: "Event Processed."}
+			ChargeBee::Invoice.collect_payment(invoice[:id]) unless customer.manual_invoicing
+			render json: {outcome: 'Event Processed.'}
 		else
-			render json: {outcome: "Not processed."}
+			render json: {outcome: 'Not processed.'}
 		end
 	end
 
