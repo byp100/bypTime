@@ -6,9 +6,9 @@ class WebhooksController < ApplicationController
 		if params[:event_type] == 'subscription_cancelled'
 		elsif params[:event_type] == 'invoice_created'
 			invoice = params[:content][:invoice]
-			customer = User.find_by(customer_id: invoice[:customer_id])
+			customer = User.find_by(customer_id: invoice.customer_id)
 
-			ChargeBee::Invoice.collect_payment(invoice[:id]) unless customer.manual_invoicing
+			ChargeBee::Invoice.collect_payment(invoice.id) unless customer.manual_invoicing
 			render json: {outcome: 'Event Processed.'}
 		else
 			render json: {outcome: 'Not processed.'}
