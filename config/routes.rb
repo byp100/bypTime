@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'events/:event_id/users', to: "users#create", as: :event_users
 
   post 'users/create_with_access_code', to: 'users#create_with_access_code', as: 'create_with_access_code'
+  put 'users/:id/update_membership', to: "users#update_membership", as: :update_membership
 
   devise_for :users
 

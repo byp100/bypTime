@@ -1,23 +1,67 @@
 class UsersController < InheritedResources::Base
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :verify_user, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!
+  # after_action :verify_authorized
+
+  def index
+    if current_tenant.present?
+      @users = User.where(id: User.joins(:memberships).where(memberships: {organization_id: current_tenant.id}).to_a.uniq.map{|u| u.id})
+    else
+      @users = User.all
+    end
+  end
+
+  def new
+    @event = Event.find(params[:event_id])
+    if params[:code] == @event.access_code
+      if @event.event_type == 'orientation'
+        @user = User.new
+      else
+        flash[:error] = 'Sorry, you cannot join BYP with this type of event.'
+        redirect_to event_path @event
+      end
+    else
+      flash[:error] = 'Invalid access code'
+      redirect_to event_path @event
+    end
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      redirect_to @user, notice: 'User updated.'
+    else
+      redirect_to @user, alert: 'Unable to update user.'
+    end
+  end
+
+  def update_membership
+    @membership = Membership.find(params[:id])
+    @membership.update_attributes!(membership_params)
+    redirect_to :back, notice: 'Membership successfully updated'
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    redirect_to users_path, notice: 'User deleted.'
+  end
 
   def create_attendee
     @event = Event.find params[:event_id]
     redirect_to root_path and return unless @event
     @attendance = Attendance.new
-    if current_user?
-      user = current_user
-      if Attendance.where(user: user, event: @event).empty?
-        Attendance.create(user: user, event: @event)
-        flash[:notice] = 'Thanks for signing up!'
-      else
-        flash[:notice] = 'User already signed up'
-      end
-      redirect_to event_path @event
+
+    if Attendance.where(user: current_user, event: @event).empty?
+      Attendance.create(user: current_user, event: @event)
+      flash[:notice] = 'Thanks for signing up!'
     else
-      redirect_to new_user_session_path
+      flash[:notice] = 'User already signed up'
     end
+    redirect_to event_path @event
   end
 
   def create_with_access_code
@@ -31,7 +75,7 @@ class UsersController < InheritedResources::Base
 
       respond_to do |format|
         if @user.save
-          format.html { redirect_to root_path, notice: 'Your account was successfully created. Please login to access the event.' }
+          format.html { redirect_to root_path, notice: "#{@user.name}'s account was successfully created. Please login to access the event." }
           format.json { render :show, status: :created, location: @user }
         else
           format.html { render :new }
@@ -51,14 +95,6 @@ class UsersController < InheritedResources::Base
     redirect_to :back, notice: "#{@attendee.name} is in attendance"
   end
 
-  def index
-    if current_tenant.present?
-      @users = User.where(id: User.joins(:memberships).where(memberships: {organization_id: current_tenant.id}).to_a.uniq.map{|u| u.id})
-    else
-      @users = User.all
-    end
-  end
-
   def import
     User.import(params[:user_file], current_tenant)
     redirect_to :admin_dashboard, notice: 'User data has been imported'
@@ -66,18 +102,11 @@ class UsersController < InheritedResources::Base
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
-  end
-
-  def verify_user
-    unless user_signed_in? && current_user == @user
-      flash[:notice] = 'You are not authorized to view this page'
-      redirect_to new_user_session_path
-    end
-  end
-
   def user_params
     params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation)
+  end
+
+  def membership_params
+    params.require(:membership).permit(:id, :organization_id, :admin,  :membership_id)
   end
 end

@@ -10,19 +10,56 @@ describe UsersController do
   describe 'GET #index' do
     it 'populates the array of users' do
       user = create :user
+      admin = create :user, :admin
+      user_logged_in! admin
       get :index
-      assigns(:users).should eq [user]
+      assigns(:users).should eq [user, admin]
     end
 
     it 'renders the :index view' do
+      user_logged_in! create(:user, :admin)
       get :index
       response.should render_template :index
+    end
+  end
+
+  describe 'GET #new' do
+    it 'assigns the requested event to @event' do
+      event = create :event, :orientation, :access_code
+      user_logged_in! create(:user, :admin)
+      get :new, event_id: event, code: '4422'
+      assigns(:event).should eq event
+    end
+
+    context 'wrong access code' do
+      it 'redirects to the event with error message' do
+        event = create :event, :orientation, :access_code
+        user_logged_in! create(:user, :admin)
+
+        get :new, event_id: event, code: '1234'
+
+        expect(response).to redirect_to event
+        expect(flash[:error]).to eq 'Invalid access code'
+      end
+    end
+
+    context 'wrong event type' do
+      it 'redirects to the event with error message' do
+        event = create :event, :public_event, :access_code
+        user_logged_in! create(:user, :admin)
+
+        get :new, event_id: event, code: '4422'
+
+        expect(response).to redirect_to event
+        expect(flash[:error]).to eq 'Sorry, you cannot join BYP with this type of event.'
+      end
     end
   end
 
   describe 'GET #show' do
     it 'assigns the requested user to @user' do
       user = create :user
+      user_logged_in! create(:user, :admin)
       get :show, id: user
       assigns(:user).should eq user
     end
@@ -44,11 +81,13 @@ describe UsersController do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'creates the user' do
+        user_logged_in! create(:user, :admin)
         post :create, user: attributes_for(:user)
-        expect(User.count).to eq 1
+        expect(User.count).to eq 2 # including logged in admin
       end
 
       it 'redirects to the show action for the new user' do
+        user_logged_in! create(:user, :admin)
         post :create, user: attributes_for(:user)
         expect(response).to redirect_to User.last
       end
@@ -61,6 +100,7 @@ describe UsersController do
       end
 
       it 're renders the new view' do
+        user_logged_in! create(:user, :admin)
         post :create, user: attributes_for(:user, name: nil)
         expect(response).to render_template :new
       end
@@ -73,9 +113,10 @@ describe UsersController do
         organization = create :organization, slug: 'www'
         ActsAsTenant.current_tenant = organization
         event = create :event, :access_code
+        user_logged_in! create(:user, :admin)
 
         post :create_with_access_code, code: '4422', user: attributes_for(:user), event_id: event.id
-        expect(User.count).to eq 1
+        expect(User.count).to eq 2 # including logged in admin
         expect(Attendance.count).to eq 1
       end
     end
@@ -85,6 +126,7 @@ describe UsersController do
         organization = create :organization, slug: 'www'
         ActsAsTenant.current_tenant = organization
         event = create :event, :access_code
+        user_logged_in! create(:user, :admin)
 
         post :create_with_access_code, code: '4425', user: attributes_for(:user), event_id: event.id
         expect(response).to redirect_to root_path
@@ -134,7 +176,7 @@ describe UsersController do
 
       it 're renders the edit template' do
         put :update, id: @user, user: attributes_for(:user, name: nil, phone: '6465551000')
-        expect(response).to render_template :edit
+        expect(response).to redirect_to @user
       end
     end
   end
@@ -200,6 +242,7 @@ describe UsersController do
 
       event = create :event
       user = create :user
+      user_logged_in! user
       event.attendees << user
 
       put :check_in, event_id: event.id, user_id: user.id, check_in: true

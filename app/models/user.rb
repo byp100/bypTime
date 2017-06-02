@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
     self.role ||= :guest
   end
 
-  def admin?(current_tenant)
+  def tenant_admin?(current_tenant)
     if super_admin
       true
     elsif current_tenant.nil?
