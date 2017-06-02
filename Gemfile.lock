@@ -206,6 +206,8 @@ GEM
     pry-doc (0.6.0)
       pry (~> 0.9)
       yard (~> 0.8)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -367,6 +369,7 @@ DEPENDENCIES
   pry
   pry-debugger
   pry-doc
+  pundit
   rails (= 4.2.0)
   rails_12factor
   roo (~> 2.1.0)

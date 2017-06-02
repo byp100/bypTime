@@ -18,7 +18,7 @@
             %div= link_to "Unattend", unattend_path(attendee_id: current_user.id, event_id: @event.id), class: 'btn btn-default', method: :put
           - else
             %div= link_to "RSVP", create_attendee_path(event_id: @event.id), class: 'btn btn-default', method: :post
-          - if user_signed_in? && current_user.admin?(current_tenant)
+          - if user_signed_in? && current_user.tenant_admin?(current_tenant)
             %div= link_to "Edit", edit_event_path(@event), class: 'btn btn-default'
             %div= link_to "Delete", event_path(@event), class: 'btn btn-default', method: :delete, data: {confirm: 'Are you sure?'}
             %div= link_to "Orientation Link", new_event_user_path(event_id: @event.id, code: @event.access_code), class: 'btn btn-default' if @event.event_type == "orientation"
@@ -29,7 +29,7 @@
         %tr
           %th Name
           %th Phone
-          - if user_signed_in? && current_user.admin?(current_tenant)
+          - if user_signed_in? && current_user.tenant_admin?(current_tenant)
             %th Check In
         - @event.attendees.each do |attendee|
           %tr
@@ -37,7 +37,7 @@
               = attendee.name
             %td
               = number_to_phone(attendee.phone, area_code: true)
-            - if user_signed_in? && current_user.admin?(current_tenant)
+            - if user_signed_in? && current_user.tenant_admin?(current_tenant)
               %td
                 %label.event_check_in
                   = check_box_tag 'check_in', attendee.id , attendee.in_attendance?(@event), class: 'check_in', "data-event-id" => @event.id
