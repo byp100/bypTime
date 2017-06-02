@@ -4,17 +4,17 @@
   .jumbotron
     %h1 Dues
     - unless current_user.subscribed?
-      %p Pay dues monthly to become an active BYP100 member!
-      = form_tag({controller: 'subscriptions', action: 'create', method: 'post'}, id: 'subscribe-form')  do
-        %article
-          - if flash[:error].present?
-            #error_explanation
-              %p= flash[:error]
-        = hidden_field_tag 'member_email', ''
-        = hidden_field_tag 'plan_desc', 'Monthly Membership Dues'
-        = hidden_field_tag 'plan_price', '1000'
-        = hidden_field_tag 'stripeToken', ''
-        = submit_tag 'Pay Dues',  class: 'btn btn-success btn-lg', id: 'submit-btn'
+      %p Pay dues to become an active BYP100 member!
+      - @plans.each do |plan|
+        %br
+        = form_tag({controller: 'subscriptions', action: 'create', method: 'post'}, class: "subscribe-form #{plan.id}")  do
+          = hidden_field_tag 'member_email', @user.email
+          = hidden_field_tag 'user_id', @user.id
+          = hidden_field_tag 'plan_id', plan.id
+          = hidden_field_tag 'plan_desc', plan.description
+          = hidden_field_tag 'plan_price', plan.price
+          = hidden_field_tag 'stripeToken', ''
+          = submit_tag plan.name,  class: 'btn btn-success btn-lg', id: 'submit-btn'
     - else
       %h3 Active Since
       %p

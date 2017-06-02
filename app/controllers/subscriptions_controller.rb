@@ -18,27 +18,30 @@ class SubscriptionsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:id])
     @subscription = ChargeBee::Subscription.retrieve(current_user.customer_id).subscription if current_user.customer_id.present?
+    @plans = ChargeBee::Plan.list.select {|plan| plan.plan.status == "active"}.map {|plan| plan.plan}
   end
 
   def create
-    plan_id = 'membership_monthly'
-    @amount = 1000
+    plan_id = params[:plan_id]
+    user = User.find(params[:user_id])
+
     customer = {
-        first_name: current_user.name.split(' ').first,
-        last_name: current_user.name.split(' ').second,
-        phone: current_user.phone,
-        email: current_user.email
+        first_name: user.name.split(' ').first,
+        last_name: user.name.split(' ').second,
+        phone: user.phone,
+        email: user.email
     }
 
     subscription = create_subscription plan_id, customer
-    current_user.update(customer_id: subscription.customer.id)
-    current_user.aasm_state == 'prospective' ? current_user.induct! : current_user.activate!
+    user.update(customer_id: subscription.customer.id)
+    user.aasm_state == 'prospective' ? user.induct! : user.activate!
 
     flash[:notice] = 'Thanks, you are now an active member!'
     respond_to do |format|
         format.html { redirect_to :back }
-        format.json { render json: current_user, status: :created }
+        format.json { render json: user, status: :created }
     end
   end
 

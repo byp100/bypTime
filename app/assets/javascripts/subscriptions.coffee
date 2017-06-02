@@ -6,19 +6,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-populateEmail = () ->
-  email = document.cookie.split(';').map((x) ->
-    x.trim().split '='
-  ).reduce(((a, b) ->
-    a[b[0]] = b[1]
-    a
-  ), {})['email']
-
-  if email
-    $('#member_email').val email.replace('%40', '@')
-  return
-
-
 subscribeErrorHandler = (jqXHR, textStatus, errorThrown) ->
   try
     resp = JSON.parse(jqXHR.responseText)
@@ -32,28 +19,29 @@ subscribeResponseHandler = (responseJSON) ->
   window.location.replace "/subscriptions/#{responseJSON.id}"
   return
 
+plan = {}
+
 handleStripeToken = (token, args) ->
   $('input[name=\'stripeToken\']').val token.id
   $.ajax
     url: '/subscriptions.json'
     type: 'post'
     dataType: 'json'
-    data: $('#subscribe-form').serializeArray()
+    data: $(".subscribe-form.#{plan.id}").serializeArray()
     error: subscribeErrorHandler
     success: subscribeResponseHandler
 
 $(document).ready ->
   handler = StripeCheckout.configure(
-    key: 'pk_live_yHZtoMbhF4ZDkoZTOElAFwyx'
+    key: 'pk_test_ZCYcc9IRBdjalYABgew5bkEZ'
     allowRememberMe: true
     token: handleStripeToken)
 
-  populateEmail()
-
-  $('#submit-btn').on 'click', (e) ->
+  $('form').on 'submit', (e) ->
+    plan['id'] = this.children.plan_id.value
     handler.open
       name: 'BYP100'
-      description: $('#plan_desc').val()
-      amount: $('#plan_price').val()
-      email: $('#member_email').val()
+      description: this.children.plan_desc.value
+      amount: this.children.plan_price.value
+      email: this.children.member_email.value
     false
