@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable,
          authentication_keys: [:phone]
 
-  validates :phone, presence: true, uniqueness: true, format: { with: /\d{10}/ }
+  validates :phone, presence: true, uniqueness: true, phone_number: {format: /\d{10}/, message: 'Invalid format. Ten digit number (no symbols)'}
   validates :name, presence: true
 
   has_many :attendances

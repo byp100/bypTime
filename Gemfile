@@ -46,6 +46,7 @@ gem 'factory_girl_rails'
 gem 'roo', '~> 2.1.0'
 gem 'stripe'
 gem 'pundit'
+gem 'validates_phone_number'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
