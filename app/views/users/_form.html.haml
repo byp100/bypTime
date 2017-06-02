@@ -7,7 +7,7 @@
           %li= msg
   = f.input :name, autofocus: true
   = f.input :email, as: :email
-  = f.input :phone
+  = f.input :phone, as: :tel, disabled: true
   = f.input :birthdate, as: :date, start_year: Date.today.year - 36, end_year: Date.today.year - 18
   = f.input :pronouns
   = f.input :occupation
