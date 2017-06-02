@@ -23,6 +23,39 @@ describe UsersController do
     end
   end
 
+  describe 'GET #new' do
+    it 'assigns the requested event to @event' do
+      event = create :event, :orientation, :access_code
+      user_logged_in! create(:user, :admin)
+      get :new, event_id: event, code: '4422'
+      assigns(:event).should eq event
+    end
+
+    context 'wrong access code' do
+      it 'redirects to the event with error message' do
+        event = create :event, :orientation, :access_code
+        user_logged_in! create(:user, :admin)
+
+        get :new, event_id: event, code: '1234'
+
+        expect(response).to redirect_to event
+        expect(flash[:error]).to eq 'Invalid access code'
+      end
+    end
+
+    context 'wrong event type' do
+      it 'redirects to the event with error message' do
+        event = create :event, :public_event, :access_code
+        user_logged_in! create(:user, :admin)
+
+        get :new, event_id: event, code: '4422'
+
+        expect(response).to redirect_to event
+        expect(flash[:error]).to eq 'Sorry, you cannot join BYP with this type of event.'
+      end
+    end
+  end
+
   describe 'GET #show' do
     it 'assigns the requested user to @user' do
       user = create :user

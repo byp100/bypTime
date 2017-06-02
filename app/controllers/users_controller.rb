@@ -11,6 +11,21 @@ class UsersController < InheritedResources::Base
     authorize User
   end
 
+  def new
+    @event = Event.find(params[:event_id])
+    if params[:code] == @event.access_code
+      if @event.event_type == 'orientation'
+        @user = User.new
+      else
+        flash[:error] = 'Sorry, you cannot join BYP with this type of event.'
+        redirect_to event_path @event
+      end
+    else
+      flash[:error] = 'Invalid access code'
+      redirect_to event_path @event
+    end
+  end
+
   def show
     @user = User.find(params[:id])
     authorize @user

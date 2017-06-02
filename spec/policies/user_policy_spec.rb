@@ -21,7 +21,7 @@ RSpec.describe UserPolicy do
     end
   end
 
-  permissions :create?, :index? do
+  permissions :create?, :index?, :new? do
     it 'denies access if user is not an admin (even if logged in)' do
       user = create :user
       current_user = user
