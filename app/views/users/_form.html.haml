@@ -15,8 +15,7 @@
   = f.input :password_confirmation unless @user.id.present?
   = f.input :referred_by
   = f.input :manual_invoicing if @user.id.present?
-  - superpower_skills = [
-  - "Grassroots fundraising","Grant writing","Child Care","Healing/Holistic Wellness","Media/Communications","Web Development/Coding   ","Youth work/ Educating","Art","singing","acting","writing","clothes making","public speaking","conflict mediator","event planning/logistics","video editing/media communications/graphic design","civic engagement [Drop down}","electoral politics","advocacy ","lobbying","public policy","mental health professionals","health care workers", "Other"]
+  - superpower_skills = ["Grassroots fundraising","Grant writing","Child Care","Healing/Holistic Wellness","Media/Communications","Web Development/Coding   ","Youth work/ Educating","Art","singing","acting","writing","clothes making","public speaking","conflict mediator","event planning/logistics","video editing/media communications/graphic design","civic engagement [Drop down}","electoral politics","advocacy ","lobbying","public policy","mental health professionals","health care workers", "Other"]
   = f.simple_fields_for :additional_info do |j|
     = j.input :superpower_skills, label: "If your superpower was reflected in your skill set, what would it be?", collection: superpower_skills, selected: @user.additional_info["superpower_skills"], include_blank: true
     = j.input :other_superpower, label: "If you selected \"Other\" for your superpower, please write in your superpower.", input_html: {value: @user.additional_info["other_superpower"]}
@@ -25,28 +24,6 @@
     = j.input :facebook, label: "Facebook", input_html: {value: @user.additional_info["facebook"]}
     = j.input :instagram, label: "Instagram", input_html: {value: @user.additional_info["instagram"]}
     = j.input :personal_site, label: "Personal Blog/Site", input_html: {value: @user.additional_info["personal_site"]}
-  / <hr>
-  / <h3>Detailed Information</h3>
-  / <haml_loud> f.input :nickname </haml_loud>
-  / <haml_loud> f.input :native_city </haml_loud>
-  / <haml_loud> f.input :gender, collection: User.genders.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :preferred_pronouns </haml_loud>
-  / <haml_loud> f.input :sexual_orientation, collection: User.sexual_orientations.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :home_phone </haml_loud>
-  / <haml_loud> f.input :student, as: :boolean </haml_loud>
-  / <haml_loud> f.input :join_date, as: :date </haml_loud>
-  / <haml_loud> f.input :committee_membership, collection: User.committee_memberships.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :superpowers </haml_loud>
-  / <haml_loud> f.input :facebook </haml_loud>
-  / <haml_loud> f.input :twitter </haml_loud>
-  / <haml_loud> f.input :instagram </haml_loud>
-  / <haml_loud> f.input :education_level, collection: User.education_levels.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :children </haml_loud>
-  / <haml_loud> f.input :partnership_status, collection: User.partnership_statuses.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :income, collection: User.incomes.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :household_size </haml_loud>
-  / <haml_loud> f.input :dietary_restrictions </haml_loud>
-  / <haml_loud> f.input :immigrant, as: :boolean </haml_loud>
   = f.button :submit
 - if @user.id.present?
   = simple_form_for @user do |f|

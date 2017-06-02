@@ -16,27 +16,5 @@
   = f.input :password
   = f.input :password_confirmation
   = f.input :referred_by
-  / <hr>
-  / <h3>Detailed Information</h3>
-  / <haml_loud> f.input :nickname </haml_loud>
-  / <haml_loud> f.input :native_city </haml_loud>
-  / <haml_loud> f.input :gender, collection: User.genders.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :preferred_pronouns </haml_loud>
-  / <haml_loud> f.input :sexual_orientation, collection: User.sexual_orientations.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :home_phone </haml_loud>
-  / <haml_loud> f.input :student, as: :boolean </haml_loud>
-  / <haml_loud> f.input :join_date, as: :date </haml_loud>
-  / <haml_loud> f.input :committee_membership, collection: User.committee_memberships.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :superpowers </haml_loud>
-  / <haml_loud> f.input :facebook </haml_loud>
-  / <haml_loud> f.input :twitter </haml_loud>
-  / <haml_loud> f.input :instagram </haml_loud>
-  / <haml_loud> f.input :education_level, collection: User.education_levels.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :children </haml_loud>
-  / <haml_loud> f.input :partnership_status, collection: User.partnership_statuses.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :income, collection: User.incomes.map { |k, v| [k.titleize, k] } </haml_loud>
-  / <haml_loud> f.input :household_size </haml_loud>
-  / <haml_loud> f.input :dietary_restrictions </haml_loud>
-  / <haml_loud> f.input :immigrant, as: :boolean </haml_loud>
   = f.button :submit
 = link_to 'Back', users_path

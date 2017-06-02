@@ -30,6 +30,10 @@ class UserPolicy < ApplicationPolicy
     @current_user.admin? or is_current_user?
   end
 
+  def update_membership?
+    @current_user.admin?
+  end
+
   private
 
   def is_current_user?

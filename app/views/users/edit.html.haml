@@ -4,21 +4,28 @@
     %h2.panel-title Edit Profile
   .panel-body
     = render 'form'
-  - if current_user.tenant_admin?(current_tenant)
-    - @membership = Membership.find_by(organization_id: current_tenant.id, member_id: @user.id)
-    - if @membership.present?
-      - if current_user.tenant_admin?(current_tenant)
-        - unless @user.tenant_admin?(current_tenant)
-          = simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f|
-            = f.input :admin, as: :hidden, input_html: {value: true }
-            = f.button :submit, "Make #{@user.name} an Admin"
-        - else
-          = simple_form_for(@membership, url: admin_update_membership_path(@membership.id), :method => :put)  do |f|
-            = f.input :admin, as: :hidden, input_html: {value: false }
-            = f.button :submit, "Remove #{@user.name}'s Admin Status"
   %span.edit_form__actions
     = link_to 'Profile', admin_user_path(@user), class: 'btn btn-default'
     = link_to 'Back', admin_users_path, class: 'btn btn-default'
+
+- if current_user.admin? and current_user != @user
+  %br
+  .panel.panel-default.edit_form
+    .panel-heading
+      %h2.panel-title Admin Status
+    .panel-body
+      - @membership = Membership.find_by(organization_id: current_tenant.id, member_id: @user.id)
+      - if @membership.present?
+        - unless @user.tenant_admin?(current_tenant)
+          = simple_form_for(@membership, url: update_membership_path(@membership.id), :method => :put)  do |f|
+            = f.input :admin, as: :hidden, input_html: {value: true }
+            = f.button :submit, "Make #{@user.name} an Admin", class: 'btn-lg btn-success'
+        - else
+          = simple_form_for(@membership, url: update_membership_path(@membership.id), :method => :put)  do |f|
+            = f.input :admin, as: :hidden, input_html: {value: false }
+            = f.button :submit, "Remove #{@user.name}'s Admin Status", class: 'btn-lg btn-danger'
+
+%br
 .panel.panel-default.edit_form
   .panel-heading
     %h2.panel-title Edit Demographic Info

@@ -8,7 +8,6 @@ class UsersController < InheritedResources::Base
     else
       @users = User.all
     end
-    authorize User
   end
 
   def new
@@ -28,24 +27,27 @@ class UsersController < InheritedResources::Base
 
   def show
     @user = User.find(params[:id])
-    authorize @user
   end
 
   def update
     @user = User.find(params[:id])
-    authorize @user
     if @user.update_attributes(user_params)
-      redirect_to @user, :notice => "User updated."
+      redirect_to @user, notice: 'User updated.'
     else
-      redirect_to @user, :alert => "Unable to update user."
+      redirect_to @user, alert: 'Unable to update user.'
     end
+  end
+
+  def update_membership
+    @membership = Membership.find(params[:id])
+    @membership.update_attributes!(membership_params)
+    redirect_to :back, notice: 'Membership successfully updated'
   end
 
   def destroy
     user = User.find(params[:id])
-    authorize user
     user.destroy
-    redirect_to users_path, :notice => "User deleted."
+    redirect_to users_path, notice: 'User deleted.'
   end
 
   def create_attendee
@@ -102,5 +104,9 @@ class UsersController < InheritedResources::Base
 
   def user_params
     params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation)
+  end
+
+  def membership_params
+    params.require(:membership).permit(:id, :organization_id, :admin,  :membership_id)
   end
 end
