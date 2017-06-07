@@ -25,17 +25,8 @@ class UsersController < InheritedResources::Base
     end
   end
 
-  def show
-    @user = User.find(params[:id])
-  end
-
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      redirect_to @user, notice: 'User updated.'
-    else
-      redirect_to @user, alert: 'Unable to update user.'
-    end
+    update! { @user }
   end
 
   def update_membership
@@ -103,7 +94,7 @@ class UsersController < InheritedResources::Base
   private
 
   def user_params
-    params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :nickname, :native_city, :gender, :preferred_pronouns, :sexual_orientation, :home_phone, :student, :join_date, :committee_membership, :superpowers, :twitter, :facebook, :instagram, :education_level, :children, :partnership_status, :income, :household_size, :dietary_restriction, :immigrant, :country_of_origin, :password, :password_confirmation)
+    params.require(:user).permit(:name, :phone, :email, :birthdate, :occupation, :gender, :preferred_pronouns, :manual_invoicing, :referred_by, :password, :password_confirmation)
   end
 
   def membership_params

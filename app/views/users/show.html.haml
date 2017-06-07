@@ -1,7 +1,5 @@
 - provide(:title, @user.name)
 .container
-  %p#notice
-    = notice
   .panel.panel-default
     .panel-heading
       .row
@@ -15,9 +13,10 @@
           .user_profile__details
             %i.fa.fa-envelope
             = @user.email
-          .user_profile__details
-            %i.fa.fa-briefcase
-            = @user.occupation
+          - if @user.occupation?
+            .user_profile__details
+              %i.fa.fa-briefcase
+              = @user.occupation
         .col-md-3.user_profile__actions
           = link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-default'
           = link_to 'Manage Dues', subscription_path(@user), class: 'btn btn-default' if current_user == @user

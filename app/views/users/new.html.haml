@@ -1,20 +1,25 @@
-%h1 New Member Sign Up
-%h1 Sign up at Orientation
-= simple_form_for @user, url: create_with_access_code_path(event_id:@event.id, code: @event.access_code) do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
-  = f.input :name, autofocus: true
-  = f.input :email, as: :email
-  = f.input :phone, as: :tel, placeholder: '########## (10 digits - no symbols)', input_html: { maxlength: 10 }
-  = f.input :birthdate, as: :date, start_year: Date.today.year - 36, end_year: Date.today.year - 18
-  = f.input :pronouns
-  = f.input :occupation
-  = f.input :password
-  = f.input :password_confirmation
-  = f.input :referred_by
-  = f.button :submit
-= link_to 'Back', users_path
+.col-md-6.col-md-offset-3
+  .panel.panel-default
+    .panel-heading
+      %h2.panel-title New Member Sign Up - Orientation
+    .panel-body
+      = simple_form_for @user, url: create_with_access_code_path(event_id:@event.id, code: @event.access_code) do |f|
+        - if @user.errors.any?
+          #error_explanation.bs-callout.bs-callout-danger
+            %h4= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
+        = f.input :name, autofocus: true
+        = f.input :email, as: :email
+        = f.input :phone, as: :tel, placeholder: '10 digits | No symbols', input_html: { maxlength: 10 }
+        = f.input :birthdate, as: :date, start_year: Date.today.year - 36, end_year: Date.today.year - 18
+        = f.input :preferred_pronouns
+        = f.input :occupation
+        = f.input :referred_by
+        %hr
+        = f.input :password
+        = f.input :password_confirmation
+        = f.button :submit
+      %br
+      = link_to 'Back', users_path, class: 'btn btn-default'

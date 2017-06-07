@@ -176,7 +176,7 @@ describe UsersController do
 
       it 're renders the edit template' do
         put :update, id: @user, user: attributes_for(:user, name: nil, phone: '6465551000')
-        expect(response).to redirect_to @user
+        expect(response).to render_template :edit
       end
     end
   end

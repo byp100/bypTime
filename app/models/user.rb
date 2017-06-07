@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   attr_accessor :in_attendance
 
   enum role: [:guest, :member, :admin]
+
   enum gender: [:agender, :androgyne, :androgynous, :bigender, :cis, :cisgender, :cisgender_female, :cisgender_male, :cisgender_man, :cisgender_woman, :female_to_male, :gender_fluid, :gender_nonconforming, :gender_questioning, :gender_variant, :genderqueer, :male_to_female, :neither, :neutrois, :non_binary, :other, :pangender, :transgender, :transgender_person, :transgender_female, :transgender_male, :transgender_man, :transgender_woman, :transmasculine, :transfeminine, :transsexual, :transsexual_female, :transsexual_male, :transsexual_man, :transsexual_woman, :transsexual_person, :two_spirit]
   enum sexual_orientation: [:androgynosexual, :androsexual, :asexual, :autosexual, :bisexual, :demisexual, :gray_a, :gynosexual, :heterosexual, :heteroflexible, :homosexual, :homoflexible, :objectumsexual, :omnisexual, :polysexual, :queer, :skoliosexual]
   enum committee_membership: [:membership, :treasury, :secretary, :leadership_development, :organizing, :communications, :fundraising]
