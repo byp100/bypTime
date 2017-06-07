@@ -30,6 +30,16 @@ describe User do
       user = build :user, name: nil
       user.should_not be_valid
     end
+
+    it 'without an email' do
+      user = build :user, email: nil
+      user.should_not be_valid
+    end
+
+    it 'with an invalid email' do
+      user = build :user, email: "invalid@email"
+      user.should_not be_valid
+    end
   end
 
   describe '#rsvp?' do

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   validates :phone, presence: true, uniqueness: true, phone_number: {format: /\d{10}/, message: 'Invalid format. Ten digit number (no symbols)'}
   validates :name, presence: true
+  validates :email, presence: true
 
   has_many :attendances
   has_many :events, through: :attendances
