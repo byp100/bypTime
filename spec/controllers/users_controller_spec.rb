@@ -13,7 +13,7 @@ describe UsersController do
       admin = create :user, :admin
       user_logged_in! admin
       get :index
-      assigns(:users).should eq [user, admin]
+      assigns(:users).should contain_exactly user, admin
     end
 
     it 'renders the :index view' do
@@ -132,6 +132,26 @@ describe UsersController do
         expect(response).to redirect_to root_path
         expect(flash[:alert]).to eq 'Unable to create user. Invalid access code'
       end
+    end
+  end
+
+  describe 'PUT #update_membership' do
+    before :each do
+      @user = create :user
+      user_logged_in! @user
+    end
+
+    it 'changes the users membership' do
+      city_org = create :organization, slug: 'city'
+      town_org = create :organization, slug: 'town'
+
+      membership = create :membership, organization_id: city_org.id, member_id: @user.id
+
+      put :update_membership, id: membership, membership: attributes_for(:membership, organization_id: town_org.id, member_id: @user.id)
+      @user.reload
+
+      expect(@user.organizations).to include town_org
+      expect(@user.organizations).to_not include city_org
     end
   end
 

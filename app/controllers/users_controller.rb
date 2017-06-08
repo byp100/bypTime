@@ -30,9 +30,14 @@ class UsersController < InheritedResources::Base
   end
 
   def update_membership
+    @user = User.find(params[:membership][:member_id])
     @membership = Membership.find(params[:id])
-    @membership.update_attributes!(membership_params)
-    redirect_to :back, notice: 'Membership successfully updated'
+
+    if @membership.update_attributes(membership_params)
+      redirect_to @user, notice: 'Membership successfully updated'
+    else
+      render :edit, error: 'Error updating membership'
+    end
   end
 
   def destroy

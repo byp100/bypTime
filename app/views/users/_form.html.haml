@@ -12,10 +12,10 @@
   = f.input :preferred_pronouns
   = f.input :occupation
   = f.input :manual_invoicing
-  = f.button :submit
+  = f.button :submit, class: 'btn-lg btn-success'
 %hr
 = simple_form_for @user do |f|
   = f.hidden_field :id, value: @user.id
   = f.input :password
   = f.input :password_confirmation
-  = f.button :submit, "Update Password"
+  = f.button :submit, "Update Password", class: 'btn-lg btn-success'

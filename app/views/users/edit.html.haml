@@ -12,15 +12,12 @@
   %br
   .panel.panel-default.edit_form
     .panel-heading
-      %h2.panel-title Admin Status
+      %h2.panel-title Membership Status
     .panel-body
-      - @membership = Membership.find_by(organization_id: current_tenant.id, member_id: @user.id)
+      - @membership = Membership.find_by(member_id: @user.id)
       - if @membership.present?
-        - unless @user.tenant_admin?(current_tenant)
-          = simple_form_for(@membership, url: update_membership_path(@membership.id), :method => :put)  do |f|
-            = f.input :admin, as: :hidden, input_html: {value: true }
-            = f.button :submit, "Make #{@user.name} an Admin", class: 'btn-lg btn-success'
-        - else
-          = simple_form_for(@membership, url: update_membership_path(@membership.id), :method => :put)  do |f|
-            = f.input :admin, as: :hidden, input_html: {value: false }
-            = f.button :submit, "Remove #{@user.name}'s Admin Status", class: 'btn-lg btn-danger'
+        = simple_form_for(@membership, url: update_membership_path(@membership.id), :method => :put)  do |f|
+          = f.input :admin, label: 'Chapter Admin'
+          = f.input :member_id, as: :hidden
+          = f.input :organization_id, collection: Organization.where.not(slug: 'www'), include_blank: false
+          = f.button :submit, class: 'btn-lg btn-success'
