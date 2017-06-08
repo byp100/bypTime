@@ -4,7 +4,7 @@
   .panel-body
     = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .form-inputs
-        = f.input :phone, required: false, autofocus: true, as: :tel, placeholder: '########## (10 digits - no symbols)', input_html: { maxlength: 10 }
+        = f.input :phone, required: false, autofocus: true, as: :tel, placeholder: '10 digits | No symbols', input_html: { maxlength: 10 }
         = f.input :password, required: false
         = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
       .form-actions

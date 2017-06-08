@@ -1,7 +1,7 @@
 = simple_form_for @event do |f|
   - if @event.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
+    #error_explanation.bs-callout.bs-callout-danger
+      %h4= "#{pluralize(@event.errors.count, "error")} prohibited this event from being saved:"
       %ul
         - @event.errors.full_messages.each do |msg|
           %li= msg
