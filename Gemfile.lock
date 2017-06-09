@@ -148,6 +148,7 @@ GEM
     formtastic_i18n (0.4.1)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
+    geocoder (1.4.4)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     haml (4.0.6)
@@ -378,6 +379,7 @@ DEPENDENCIES
   figaro
   font-awesome-sass (~> 4.4.0)
   friendly_id (~> 5.1.0)
+  geocoder
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
