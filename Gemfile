@@ -48,6 +48,11 @@ gem 'stripe'
 gem 'pundit'
 gem 'validates_phone_number'
 
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+gem 'geocoder'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

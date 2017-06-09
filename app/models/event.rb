@@ -8,6 +8,9 @@ class Event < ActiveRecord::Base
   validates :start_time, presence: true
   validates :event_type, presence: true
 
+  geocoded_by :address
+  after_validation :geocode
+
   enum event_type: [:orientation, :general_body_meeting, :public_event]
 
   def number_of_attendees
