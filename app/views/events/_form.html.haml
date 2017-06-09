@@ -6,11 +6,11 @@
         - @event.errors.full_messages.each do |msg|
           %li= msg
   = f.input :title
-  = f.input :event_type, collection: Event.event_types.map { |k, v| [k.titleize, k] }
+  = f.input :event_type, collection: Event.event_types.map { |k, v| [k.titleize, k] }, include_blank: false
   = f.input :description
   = f.input :location
   = f.input :address
-  = f.input :start_time, as: :datetime
-  = f.input :end_time, as: :datetime
+  = f.input :start_time, as: :datetime_picker
+  = f.input :end_time, as: :datetime_picker
   = f.input :access_code
   = f.button :submit

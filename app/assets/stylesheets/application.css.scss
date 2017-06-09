@@ -15,7 +15,9 @@
  *= require_self
  */
 
-@import "bootstrap";
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap-datetimepicker';
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "admin";
