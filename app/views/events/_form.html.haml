@@ -13,4 +13,12 @@
   = f.input :start_time, as: :datetime_picker
   = f.input :end_time, as: :datetime_picker
   = f.input :access_code
-  = f.button :submit
+  = f.button :submit, class: 'btn-success'
+
+:javascript
+  function initAddressAutocomplete(){
+    var input = document.getElementById('event_address');
+    new google.maps.places.Autocomplete(input);
+  }
+
+%script{src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyDzVY0j4NRGe7KPEfYUI-hKkel4nBzzESs&libraries=places&callback=initAddressAutocomplete"}
