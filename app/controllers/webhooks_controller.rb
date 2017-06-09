@@ -22,16 +22,19 @@ class WebhooksController < ApplicationController
       invoice = params[:content][:invoice]
       customer = User.find_by(customer_id: invoice[:customer_id])
 
-      result = ChargeBee::Invoice.collect_payment(invoice[:id]) unless customer.nil? or customer.manual_invoicing or paid invoice
+      if customer.nil?
+        result = 'Customer not found'
+      elsif customer.manual_invoicing
+        result = 'Manual invoicing enabled'
+      elsif invoice[:status] == 'paid'
+        result = 'Invoice is already paid'
+      else
+        result = ChargeBee::Invoice.collect_payment(invoice[:id])
+      end
+
       render json: {outcome: 'Event Processed.', result: result}
     else
       render json: {outcome: 'Not processed.'}
     end
-  end
-
-  private
-
-  def paid invoice
-    invoice[:status] == 'paid'
   end
 end
