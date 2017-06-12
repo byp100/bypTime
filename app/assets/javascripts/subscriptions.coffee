@@ -33,7 +33,7 @@ handleStripeToken = (token, args) ->
 
 $(document).ready ->
   handler = StripeCheckout.configure(
-    key: 'pk_test_ZCYcc9IRBdjalYABgew5bkEZ'
+    key: 'pk_live_yHZtoMbhF4ZDkoZTOElAFwyx'
     allowRememberMe: true
     token: handleStripeToken)
 
