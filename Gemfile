@@ -52,6 +52,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 gem 'geocoder'
+gem 'american_date'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
