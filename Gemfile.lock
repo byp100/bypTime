@@ -62,6 +62,7 @@ GEM
     acts_as_tenant (0.3.9)
       rails (>= 3.1)
       request_store (>= 1.0.5)
+    american_date (1.1.1)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
@@ -363,6 +364,7 @@ DEPENDENCIES
   aasm
   activeadmin (~> 1.0.0.pre2)
   acts_as_tenant
+  american_date
   bootstrap-sass
   bootstrap3-datetimepicker-rails
   bower-rails

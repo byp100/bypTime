@@ -2,7 +2,6 @@ $(document).on('ready page:change', function() {
   $('.datetimepicker').datetimepicker({
     // put here your custom picker options, that should be applied for all pickers
     stepping: 15,
-    viewMode: 'months',
     showClear: true,
     icons: {
       date: 'fa fa-calendar',
