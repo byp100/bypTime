@@ -44,6 +44,12 @@ class User < ActiveRecord::Base
     self.role ||= :guest
   end
 
+  def self.import file
+    CSV.foreach(file.path, headers: true) do |row|
+      User.create! row.to_hash
+    end
+  end
+
   def tenant_admin?(current_tenant)
     if super_admin
       true
