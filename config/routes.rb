@@ -20,31 +20,7 @@ Rails.application.routes.draw do
   #ActiveAdmin.routes(self)
 
   authenticated :user do
-    # scope 'dues' do
-    #   get 'show', to: 'billing#show', as: :show_dues
-    #   get 'edit', to: 'billing#edit', as: :edit_dues
-    #   post 'subscribe', to: 'billing#subscribe', as: :subscribe_dues
-    # end
     resources :subscriptions
-
-    scope 'dashboard' do
-      get 'dues', to: "billing#overview"
-      scope 'dues', as: :billing do
-        resources :subscriptions do
-          post 'cancel'
-          get 'renew'
-          put 'reactivate'
-        end
-        get 'pay', to: "billing#pending_invoices", as: :pending_invoices
-        post 'pay', to: "billing#close_invoice", as: :close_invoice
-        get 'enroll', to: "billing#enroll", as: :enroll
-        get 'edit', to: "billing#edit", as: :edit
-        post 'subscribe', to: "billing#subscribe", as: :subscribe
-        put 'update_card', to: "billing#update_card", as: :update_card
-        put 'update_contact', to: "billing#update_contact", as: :update_contact
-      end
-    end
-
     resources :users do
       collection { post :import }
     end
