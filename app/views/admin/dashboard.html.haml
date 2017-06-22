@@ -1,5 +1,5 @@
-.row
-  .col-sm-5
+.container
+  .col-md-8.col-md-offset-2
     .keen-widget.keen-metric
       %span.keen-metric-value= @users.active.count
       %span.keen-metric-title Active Members
@@ -20,3 +20,4 @@
               %td
                 = link_to "View", user_path(user), class: "btn btn-default"
       = link_to "View All", admin_users_path, class: "btn btn-default"
+      = link_to "Import Data", admin_import_path, class: "btn btn-default"
