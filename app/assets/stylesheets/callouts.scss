@@ -52,3 +52,9 @@
 .bs-callout a.alert-link {
   font-weight: bold;
 }
+
+.alert.alert-dismissable {
+  margin-top: -20px;
+  border-radius: 0;
+  border: none;
+}
