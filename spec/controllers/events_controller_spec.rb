@@ -1,9 +1,11 @@
 require 'rails_helper'
+require_relative 'controller_helper'
 
 describe EventsController do
   before :each do
     User.destroy_all
     Event.destroy_all
+    user_logged_in! create :user
   end
 
   describe 'GET #index' do

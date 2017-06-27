@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#home'
-  get 'static_pages/home'
+  root 'events#index'
+  get 'select_chapter', to: 'static_pages#select_chapter', as: 'select_chapter'
   post 'static_pages/chapter', to: 'static_pages#chapter'
 
   scope 'webhooks', as: :messages do

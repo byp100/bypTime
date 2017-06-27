@@ -37,7 +37,7 @@ $(document).ready ->
     allowRememberMe: true
     token: handleStripeToken)
 
-  $('form').on 'submit', (e) ->
+  $('form.subscribe-form').on 'submit', (e) ->
     plan['id'] = this.children.plan_id.value
     handler.open
       name: 'BYP100'
