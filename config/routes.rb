@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#home'
-  get 'static_pages/home'
-  post 'static_pages/chapter', to: 'static_pages#chapter'
+  root 'events#index'
+  get 'select_chapter', to: 'static_pages#select_chapter', as: 'select_chapter'
+  post 'switch_chapter', to: 'static_pages#chapter'
 
   scope 'webhooks', as: :messages do
     post 'chargebee_event', to: "webhooks#chargebee_event", as: :chargebee_event

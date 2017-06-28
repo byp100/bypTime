@@ -110,7 +110,7 @@ describe UsersController do
   describe 'POST #create_with_access_code' do
     context 'with valid access code' do
       it 'creates the user and an attendance' do
-        organization = create :organization, slug: 'www'
+        organization = create :organization, slug: 'city'
         ActsAsTenant.current_tenant = organization
         event = create :event, :access_code
         user_logged_in! create(:user, :admin)
@@ -123,7 +123,7 @@ describe UsersController do
 
     context 'with invalid access code' do
       it 'redirects to home page with error message' do
-        organization = create :organization, slug: 'www'
+        organization = create :organization, slug: 'city'
         ActsAsTenant.current_tenant = organization
         event = create :event, :access_code
         user_logged_in! create(:user, :admin)

@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
     elsif current_tenant.nil?
       false
     else
-      Membership.find_by(organization_id: current_tenant.id, member_id: id).admin
+      membership = Membership.find_by(organization_id: current_tenant.id, member_id: self.id)
+      membership.admin unless membership.nil?
     end
   end
 

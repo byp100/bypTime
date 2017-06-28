@@ -11,7 +11,7 @@
   = f.input :birthdate, as: :date_picker
   = f.input :preferred_pronouns
   = f.input :occupation
-  = f.input :manual_invoicing
+  = f.input :manual_invoicing if current_user.admin?
   = f.button :submit, class: 'btn-lg btn-success'
 %hr
 = simple_form_for @user do |f|

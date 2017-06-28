@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
       Organization.friendly.find(request.subdomain)
     end
   rescue ActiveRecord::RecordNotFound
-    redirect_to root_path, notice: 'Chapter does not exist'
+    redirect_to select_chapter_path
   end
 
   def after_sign_out_path_for resource

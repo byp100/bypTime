@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   skip_before_filter :set_organization_as_tenant
 
-  def home
+  def select_chapter
     @chapters = Organization.all
   end
 
