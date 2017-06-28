@@ -5,9 +5,9 @@
   }
   nav { display: none; }
   .container { padding: 60px 0; }
-- provide(:title, "Home")
+- provide(:title, "Select Chapter")
 .container
   .col-md-6.col-md-offset-3
-    = simple_form_for :organization, url:  ({controller: 'static_pages', action: 'chapter', method: 'post'}), html:{ id: 'chapter-select' } do |f|
-      = f.input :chapter, collection: @chapters, prompt: 'Select your chapter', required: false, label: false, input_html:{ onchange: "$('#chapter-select').submit();"}
+    = simple_form_for :organization, url: '/switch_chapter', method: 'post', html:{ id: 'chapter-select', class: 'select' } do |f|
+      = f.input :chapter, collection: Organization.all, prompt: 'Select your chapter', required: false, label: false, input_html:{ onchange: "$('#chapter-select.select').submit();"}
     = image_tag "byp100_logo.jpg", class: 'landing_page__logo img-responsive'
