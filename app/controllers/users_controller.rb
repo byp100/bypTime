@@ -65,7 +65,6 @@ class UsersController < InheritedResources::Base
     if params[:code] == @event.access_code
       @user = User.create(user_params)
       Membership.create(organization_id: ActsAsTenant.current_tenant.id, member_id: @user.id)
-      Membership.create(organization_id: Organization.find_by(slug: "www").id, member_id: @user.id)
 
       Attendance.create(user: @user, event: @event)
 
