@@ -30,12 +30,8 @@ Rails.application.routes.draw do
     scope 'admin', as: :admin do
       get 'users', to: "users#index", as: :users
       get 'users/:id/edit', to: "users#edit", as: :edit_user
-      get 'users/:id', to: "users#show", as: :user
       post 'users/:user_id/check_in', to: "users#check_in", as: :user_check_in
       post 'users/import', to: "users#import", as: :user_import
-      get "events", to: "events#all", as: :events
-      get "events/:id", to: "events#show", as: :event
-
     end
 
     resources :events do
@@ -44,6 +40,7 @@ Rails.application.routes.draw do
         post :import_attendances, as: 'import_attendances'
       end
     end
+    get 'past_events', to: 'events#past_events', as: :past_events
 
     put 'unattend' => 'events#unattend', as: 'unattend'
     put 'undo_check_in' => 'events#undo_check_in', as: 'undo_check_in'

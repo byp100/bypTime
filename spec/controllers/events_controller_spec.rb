@@ -9,8 +9,9 @@ describe EventsController do
   end
 
   describe 'GET #index' do
-    it 'populates with all of the events' do
-      event = create :event
+    it 'populates with all future events' do
+      event = create :event, start_time: Time.now + 2.days
+      past_event = create :event, start_time: Time.now - 2.days
       get :index
       assigns(:events).should eq [event]
     end
@@ -18,6 +19,20 @@ describe EventsController do
     it 'renders the :index view' do
       get :index
       response.should render_template :index
+    end
+  end
+
+  describe 'GET #past_events' do
+    it 'populates with all past events' do
+      event = create :event, start_time: Time.now + 2.days
+      past_event = create :event, start_time: Time.now - 2.days
+      get :past_events
+      assigns(:past_events).should eq [past_event]
+    end
+
+    it 'renders the :past_events view' do
+      get :past_events
+      response.should render_template :past_events
     end
   end
 

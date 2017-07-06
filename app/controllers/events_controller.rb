@@ -2,11 +2,11 @@ class EventsController < InheritedResources::Base
   before_filter :authenticate_user!
 
   def index
-    @events = Event.all.order(start_time: :desc).page(params[:page]).per_page 5
+    @events = Event.where('start_time > ?', Time.now).order(start_time: :desc)
   end
 
-  def all
-    @events = Event.all.order(start_time: :desc)
+  def past_events
+    @past_events = Event.where('start_time < ?', Time.now).order(start_time: :desc).page(params[:page]).per_page 5
   end
 
   def unattend
