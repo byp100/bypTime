@@ -1,23 +1,24 @@
 - provide(:title, "Events")
 .container
-  %h1 Events
-  .standard-pagination
-    = will_paginate @events, previous_label: 'previous page', next_label: 'next page'
-  - @events.each do |event|
-    .panel.panel-default
-      .panel-heading
-        .row
-          %h2.col-md-2= event.start_time.strftime("%b %d, %Y")
-          .col-md-10
-            %h3= link_to event.title, event_path(event)
-            %p.events_header__details
-              = event.start_time.strftime("%l:%M %P")
-              •
-              \#{event.address}
-      .panel-body
-        .row
-          .col-md-2
-          .col-md-10
-            = event.description
-  .standard-pagination
-    = will_paginate @events, previous_label: 'previous page', next_label: 'next page'
+  - unless @events.empty?
+    %h1 Upcoming Events
+    = link_to 'View Past Events', past_events_path
+    - @events.each do |event|
+      .panel.panel-default
+        .panel-heading
+          .row
+            %h2.col-md-2= event.start_time.strftime("%b %d, %Y")
+            .col-md-10
+              %h3= link_to event.title, event_path(event)
+              %p.events_header__details
+                = event.start_time.strftime("%l:%M %P")
+                •
+                \#{event.address}
+        .panel-body
+          .row
+            .col-md-2
+            .col-md-10
+              = event.description
+  - else
+    %h1 No Upcoming Events
+    = link_to 'View Past Events', past_events_path
