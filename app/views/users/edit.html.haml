@@ -5,8 +5,7 @@
   .panel-body
     = render 'form'
   %span.edit_form__actions
-    = link_to 'Profile', admin_user_path(@user), class: 'btn btn-default'
-    = link_to 'Back', admin_users_path, class: 'btn btn-default'
+    = link_to 'Profile', user_path(@user), class: 'btn btn-default'
 
 - if current_user.admin? and current_user != @user
   %br
