@@ -2,7 +2,7 @@ class EventsController < InheritedResources::Base
   before_filter :authenticate_user!
 
   def index
-    @events = Event.where('start_time > ?', Time.now).order(start_time: :desc)
+    @events = Event.where('start_time > ?', Time.now).order(start_time: :asc)
   end
 
   def past_events

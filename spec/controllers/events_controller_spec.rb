@@ -16,6 +16,13 @@ describe EventsController do
       assigns(:events).should eq [event]
     end
 
+    it 'lists events in ascending order' do
+      event_tomorrow = create :event, start_time: Time.now + 1.day
+      event_next_week = create :event, start_time: Time.now + 8.days
+      get :index
+      assigns(:events).should eq [event_tomorrow, event_next_week]
+    end
+
     it 'renders the :index view' do
       get :index
       response.should render_template :index
@@ -28,6 +35,13 @@ describe EventsController do
       past_event = create :event, start_time: Time.now - 2.days
       get :past_events
       assigns(:past_events).should eq [past_event]
+    end
+
+    it 'lists events in descending order' do
+      event_yesterday = create :event, start_time: Time.now - 1.day
+      event_a_week_ago = create :event, start_time: Time.now - 8.days
+      get :past_events
+      assigns(:past_events).should eq [event_yesterday, event_a_week_ago]
     end
 
     it 'renders the :past_events view' do
