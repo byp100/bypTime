@@ -63,7 +63,7 @@ gem 'american_date'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :development, :test do
+group :development do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
@@ -73,7 +73,9 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
   gem 'spring'
+end
 
+group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'

@@ -408,6 +408,3 @@ DEPENDENCIES
   validates_phone_number
   web-console (~> 2.0)
   will_paginate (~> 3.0.6)
-
-BUNDLED WITH
-   1.14.6
