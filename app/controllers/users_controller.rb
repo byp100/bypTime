@@ -91,7 +91,7 @@ class UsersController < InheritedResources::Base
   end
 
   def import
-    User.import params[:user_file]
+    User.import params[:user_file], ActsAsTenant.current_tenant
     redirect_to :admin_dashboard, notice: 'User data has been imported'
   end
 
