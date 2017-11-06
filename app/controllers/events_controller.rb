@@ -18,7 +18,7 @@ class EventsController < InheritedResources::Base
   end
 
   def import_events
-    Event.import params[:event_file]
+    Event.import params[:event_file], ActsAsTenant.current_tenant
     redirect_to :back, notice: 'Event data has been imported'
   end
 

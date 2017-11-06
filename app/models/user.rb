@@ -44,9 +44,10 @@ class User < ActiveRecord::Base
     self.role ||= :guest
   end
 
-  def self.import file
+  def self.import file, chapter
     CSV.foreach(file.path, headers: true) do |row|
-      User.create! row.to_hash
+      user = User.create! row.to_hash
+      Membership.create!(organization_id: chapter.id, member_id: user.id, admin: false)
     end
   end
 
