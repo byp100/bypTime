@@ -7,7 +7,7 @@
   %span.edit_form__actions
     = link_to 'Profile', user_path(@user), class: 'btn btn-default'
 
-- if current_user.admin? and current_user != @user
+- if current_user.super_admin? and current_user != @user
   %br
   .panel.panel-default.edit_form
     .panel-heading

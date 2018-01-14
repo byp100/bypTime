@@ -9,7 +9,7 @@
       .navbar-brand
         = link_to image_tag("byp100_logo.jpg", class: 'navigation__logo'), "/"
         = link_to " #{current_tenant.short_name.capitalize if chapter?}", "/"
-        - if user_signed_in? and current_user.admin?
+        - if user_signed_in? and current_user.super_admin?
           = simple_form_for :organization, url: '/switch_chapter', method: 'post', html:{ id: 'chapter-select', class: 'navbar' } do |f|
             = f.input :chapter, collection: Organization.all, prompt: 'Switch chapter', required: false, label: false, input_html:{ onchange: "$('#chapter-select.navbar').submit();"}
     #navbar-links.collapse.navbar-collapse

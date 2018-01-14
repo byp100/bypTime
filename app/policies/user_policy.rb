@@ -7,31 +7,31 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    @current_user.admin?
+    @current_user.super_admin?
   end
 
   def create?
-    @current_user.admin?
+    @current_user.super_admin?
   end
 
   def show?
-    @current_user.admin? or is_current_user?
+    @current_user.super_admin? or is_current_user?
   end
 
   def edit?
-    @current_user.admin? or is_current_user?
+    @current_user.super_admin? or is_current_user?
   end
 
   def update?
-    @current_user.admin? or is_current_user?
+    @current_user.super_admin? or is_current_user?
   end
 
   def destroy?
-    @current_user.admin? or is_current_user?
+    @current_user.super_admin? or is_current_user?
   end
 
   def update_membership?
-    @current_user.admin?
+    @current_user.super_admin?
   end
 
   private
